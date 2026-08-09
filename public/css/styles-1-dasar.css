@@ -1,0 +1,340 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   GESIT V6.6 — CSS 1/4: FONDASI DESIGN SYSTEM
+   Isi   : Design tokens (warna brand/netral/semantik, permukaan, teks), reset & base, layout app shell (sidebar, topbar, konten)
+   Urutan: file ke-1 dari 4 (urutan wajib dijaga — CSS bersifat cascade)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. DESIGN TOKENS ─────────────────────────────────────────────────────── */
+:root {
+  /* Brand — teal BPJS modern */
+  --brand-50:  #f0fdfa;
+  --brand-100: #ccfbf1;
+  --brand-200: #99f6e4;
+  --brand-300: #5eead4;
+  --brand-400: #2dd4bf;
+  --brand-500: #14b8a6;
+  --brand-600: #0d9488;
+  --brand-700: #0f766e;
+  --brand-800: #115e59;
+  --brand-900: #134e4a;
+
+  /* Netral */
+  --slate-50:  #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+
+  /* Semantik */
+  --success: #16a34a;  --success-bg: #f0fdf4;  --success-bd: #bbf7d0;
+  --warning: #d97706;  --warning-bg: #fffbeb;  --warning-bd: #fde68a;
+  --danger:  #dc2626;  --danger-bg:  #fef2f2;  --danger-bd:  #fecaca;
+  --info:    #2563eb;  --info-bg:    #eff6ff;  --info-bd:    #bfdbfe;
+
+  /* Permukaan */
+  --bg-app: #f1f5f9;
+  --bg-surface: #ffffff;
+  --bg-sidebar: #0c1a2b;
+  --bg-sidebar-hover: rgba(255,255,255,.06);
+  --bg-sidebar-active: rgba(20,184,166,.16);
+
+  /* Teks */
+  --text-primary: var(--slate-800);
+  --text-secondary: var(--slate-500);
+  --text-muted: var(--slate-400);
+  --text-invert: #f8fafc;
+
+  /* Border & shadow */
+  --border: var(--slate-200);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;      /* kartu hero (login) */
+  --radius-control: 10px;  /* tombol, input, item navigasi — langkah de-facto kontrol */
+  --radius-full: 999px;    /* pill — SATU konvensi (bukan 99px/999px campur) */
+
+  /* Alias penyelaras (V6.4) — beberapa bagian (ditulis di waktu berbeda)
+     memakai nama token yang tidak pernah ada, membuat propertinya diam-diam
+     tidak berlaku. Alias ini menghidupkannya kembali & mengunci ke brand: */
+  --primary: var(--brand-600);     /* dulu terlanjur dipakai tour (fallback biru langit!) */
+  --surface: var(--bg-surface);
+  --bg-card: var(--bg-surface);
+  --dur-fast: .15s;
+  --shadow-sm: 0 1px 2px rgba(15,23,42,.06);
+  --shadow-md: 0 4px 12px rgba(15,23,42,.08);
+  --shadow-lg: 0 12px 32px rgba(15,23,42,.14);
+
+  /* Layout */
+  --sidebar-w: 264px;
+  --topbar-h: 64px;
+  --content-max: 1280px;
+
+  /* Motion */
+  --ease: cubic-bezier(.4,0,.2,1);
+  --dur: .2s;
+
+  /* Safe area (perangkat berponi) */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* Tipografi */
+  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ── 2. RESET & BASE ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* V7.4: kunci skema warna TERANG. Tanpa ini, "Auto Dark Theme" Chrome
+     Android/WebView & sebagian browser TV membalik warna halaman secara
+     paksa — latar jadi gelap, token brand teraduk, desain tampak "rusak/
+     tak terdefinisi" padahal CSS-nya utuh. (Padanan meta ada di Index.) */
+  color-scheme: only light;
+  /* AUDIT V7.7: jalur scrollbar dibuat PERMANEN dengan overflow-y: scroll.
+     Patch V7.6 (scrollbar-gutter: stable) terbukti TIDAK berlaku di
+     Chromium ketika halaman memakai gaya ::-webkit-scrollbar kustom
+     (seperti di bawah) — gutter diam-diam diabaikan, sehingga pindah dari
+     halaman tinggi (Dashboard) ke halaman pendek (Pusat Persetujuan,
+     Laporan, Eco Office, Pengaturan, Manajemen User) tetap membuat
+     scrollbar lenyap → konten melebar ±10px → halaman asal & tujuan
+     "berkedip". overflow-y: scroll menjaga jalur scrollbar SELALU ada
+     (track-nya transparan, jadi tak terlihat di halaman pendek) dan
+     didukung semua browser. scrollbar-gutter tetap dibiarkan sebagai
+     lapisan cadangan — tidak berefek samping.
+     PENTING: overflow-x: hidden ikut PINDAH ke sini dari body. Jika
+     dibiarkan di body bersama perubahan ini, body menjadi scroll container
+     sendiri dan topbar position: sticky RUSAK (ikut tergulir). */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: var(--bg-app);
+  -webkit-font-smoothing: antialiased;
+  /* AUDIT V7.7: overflow-x: hidden DIPINDAH ke html (lihat catatan di atas)
+     — di body ia mematikan topbar sticky begitu html diberi overflow-y. */
+}
+
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--brand-600); text-decoration: none; }
+ul { list-style: none; }
+
+::selection { background: var(--brand-200); }
+
+/* Aksesibilitas keyboard (audit V6.9): cincin fokus HANYA saat navigasi
+   keyboard (:focus-visible) — klik mouse/sentuh tidak memunculkannya.
+   Input/select/textarea dikecualikan: sudah punya gaya :focus sendiri. */
+button:focus-visible, a:focus-visible,
+.btn:focus-visible, .tab:focus-visible, .nav-item:focus-visible,
+.user-chip:focus-visible, .modal-close:focus-visible,
+.atk-cat-chip:focus-visible, .atk-qty-btn:focus-visible, .belum-chip:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+}
+
+/* Scrollbar halus */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--slate-300); border-radius: 6px; border: 2px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--slate-400); }
+
+/* ── 3. LAYOUT: APP SHELL ─────────────────────────────────────────────────── */
+.app-shell { display: none; min-height: 100vh; }
+.app-shell.is-visible { display: block; }
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar-w);
+  background: var(--bg-sidebar);
+  color: var(--text-invert);
+  display: flex;
+  flex-direction: column;
+  z-index: 60;
+  transform: translateX(0);
+  transition: transform var(--dur) var(--ease);
+  padding-top: var(--safe-top);
+}
+
+.sidebar-brand {
+  display: flex; align-items: center; gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.sidebar-brand .brand-mark {
+  width: 40px; height: 40px; border-radius: var(--radius-md); flex: none;
+  background: linear-gradient(135deg, var(--brand-400), var(--brand-700));
+  display: grid; place-items: center;
+  font-weight: 800; font-size: 16px; color: #fff;
+  box-shadow: 0 4px 12px rgba(20,184,166,.35);
+}
+.sidebar-brand .brand-name { font-weight: 700; font-size: 15px; letter-spacing: .3px; }
+.sidebar-brand .brand-sub  { font-size: 11px; color: var(--slate-400); }
+
+.sidebar-nav { flex: 1; overflow-y: auto; padding: 12px 12px 20px; }
+.sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.14); }
+
+.nav-section {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .8px;
+  text-transform: uppercase; color: var(--slate-500);
+  padding: 16px 10px 6px;
+}
+
+.nav-item {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%;
+  padding: 10px 12px; margin: 2px 0;
+  border-radius: var(--radius-control);
+  color: var(--slate-300);
+  font-size: 13.5px; font-weight: 500;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+  text-align: left;
+}
+.nav-item .nav-icon { width: 19px; height: 19px; flex: none; opacity: .85; }
+.nav-item:hover { background: var(--bg-sidebar-hover); color: #fff; }
+.nav-item.is-active {
+  background: var(--bg-sidebar-active);
+  color: var(--brand-300);
+  font-weight: 600;
+}
+.nav-item.is-active .nav-icon { opacity: 1; }
+.nav-item.is-locked { opacity: .45; cursor: default; }
+.nav-item .nav-badge {
+  margin-left: auto;
+  font-size: 9.5px; font-weight: 700;
+  padding: 2px 7px; border-radius: var(--radius-full);
+  background: rgba(148,163,184,.18); color: var(--slate-400);
+  letter-spacing: .3px;
+}
+
+.sidebar-footer {
+  padding: 14px 20px calc(14px + var(--safe-bottom));
+  border-top: 1px solid rgba(255,255,255,.08);
+  font-size: 11px; color: var(--slate-500);
+}
+
+/* Overlay mobile untuk sidebar */
+.sidebar-overlay {
+  position: fixed; inset: 0; z-index: 55;
+  background: rgba(15,23,42,.55);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur) var(--ease);
+}
+.sidebar-overlay.is-visible { opacity: 1; pointer-events: auto; }
+
+/* Konten utama */
+.main {
+  margin-left: var(--sidebar-w);
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+/* Topbar */
+.topbar {
+  height: calc(var(--topbar-h) + var(--safe-top));
+  padding-top: var(--safe-top);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 14px;
+  padding-left: 20px; padding-right: 20px;
+  position: sticky; top: 0; z-index: 40;
+}
+.topbar-menu-btn {
+  display: none;
+  width: 40px; height: 40px; border-radius: var(--radius-control);
+  place-items: center; color: var(--slate-600);
+}
+.topbar-menu-btn:hover { background: var(--slate-100); }
+.topbar-title { font-size: 17px; font-weight: 700; }
+.topbar-sub { font-size: 12px; color: var(--text-secondary); }
+.topbar-spacer { flex: 1; }
+
+.topbar-clock {
+  font-size: 12.5px; color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.user-chip {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 12px 6px 6px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  transition: box-shadow var(--dur) var(--ease);
+}
+.user-chip:hover { box-shadow: var(--shadow-sm); }
+.user-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-400), var(--brand-700));
+  color: #fff; font-weight: 700; font-size: 13px;
+  display: grid; place-items: center;
+}
+.user-chip .user-name { font-size: 13px; font-weight: 600; line-height: 1.15; }
+.user-chip .user-role { font-size: 10.5px; color: var(--text-secondary); }
+
+/* Dropdown user */
+.user-menu {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 210px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 6px;
+  opacity: 0; transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.user-menu.is-open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.user-menu .menu-item {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 9px 12px;
+  border-radius: var(--radius-sm); font-size: 13px;
+  color: var(--text-primary); text-align: left;
+}
+.user-menu .menu-item:hover { background: var(--slate-100); }
+.user-menu .menu-item.danger { color: var(--danger); }
+.user-menu .menu-item.danger:hover { background: var(--danger-bg); }
+.user-menu .menu-divider { height: 1px; background: var(--border); margin: 6px 4px; }
+
+/* Area konten */
+.content {
+  flex: 1;
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 24px 20px calc(40px + var(--safe-bottom));
+}
+
+.view { display: none; animation: viewIn .28s var(--ease); }
+.view.is-active { display: block; }
+@keyframes viewIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Header halaman */
+.page-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.page-title { font-size: 21px; font-weight: 800; letter-spacing: -.2px; }
+.page-subtitle { font-size: 13px; color: var(--text-secondary); margin-top: 3px; }
+.page-actions { display: flex; gap: 10px; flex-wrap: wrap; }

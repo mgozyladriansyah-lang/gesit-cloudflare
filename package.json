@@ -1,0 +1,15 @@
+{
+  "name": "gesit-proper-backend-starter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "check": "node --check netlify/functions/api.js && node --check src/actions/index.js && node --check src/actions/auth.js && node --check src/actions/health.js && node --check src/actions/notifications.js && node --check src/actions/users.js && node --check src/lib/security.js && node --check src/lib/supabaseAdmin.js",
+    "hash": "node docs/create-password-hash.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "latest",
+    "bcryptjs": "latest",
+    "jsonwebtoken": "latest"
+  }
+}

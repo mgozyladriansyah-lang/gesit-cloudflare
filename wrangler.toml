@@ -1,0 +1,15 @@
+name = "gesit-cloudflare"
+compatibility_date = "2026-08-09"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "public"
+
+[vars]
+JWT_EXPIRES_IN = "12h"
+JWT_ISSUER = "gesit-api"
+JWT_AUDIENCE = "gesit-pwa"
+SESSION_HOURS = "12"
+ALLOWED_ORIGIN = "*"
+# GAS_WEB_APP_URL = "https://script.google.com/macros/s/xxx/exec"
+# SUPABASE_URL = "https://PROJECT_ID.supabase.co"
+# SUPABASE_SERVICE_ROLE_KEY = "ISI_DI_DASHBOARD_CLOUDFLARE_SEBAGAI_SECRET"
+# JWT_SECRET = "ISI_RANDOM_MINIMAL_32_KARAKTER_SEBAGAI_SECRET"

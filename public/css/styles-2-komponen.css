@@ -1,0 +1,638 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   GESIT V6.6 — CSS 2/4: KOMPONEN DASAR
+   Isi   : Tombol, kartu, form, tabel, badge, modal, toast, state kosong & skeleton, grafik batang CSS
+   Urutan: file ke-2 dari 4 (urutan wajib dijaga — CSS bersifat cascade)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 4. KOMPONEN: TOMBOL ──────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 9px 16px;
+  border-radius: var(--radius-control);
+  font-size: 13.5px; font-weight: 600;
+  border: 1px solid transparent;
+  /* V7.4: 'all' → daftar properti eksplisit. transition:all ikut memantau
+     properti yang tak pernah dianimasikan — boros saat puluhan tombol
+     tampil sekaligus di layar besar/presentasi. */
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease), box-shadow var(--dur) var(--ease),
+    transform var(--dur) var(--ease), filter var(--dur) var(--ease),
+    opacity var(--dur) var(--ease);
+  white-space: nowrap;
+  user-select: none;
+}
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+/* Audit V7 #3 — aksi satu-klik (apiKlikSekali): tombol/elemen yang sedang
+   menunggu jawaban server tampak sibuk & kebal klik/tap ganda. */
+.is-busy { opacity: .55; pointer-events: none; cursor: progress; }
+.btn .btn-icon { width: 16px; height: 16px; }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(13,148,136,.3);
+}
+.btn-primary:hover:not(:disabled) { filter: brightness(1.06); box-shadow: 0 4px 14px rgba(13,148,136,.4); transform: translateY(-1px); }
+.btn-primary:active:not(:disabled) { transform: translateY(0); }
+
+.btn-outline {
+  background: var(--bg-surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+.btn-outline:hover:not(:disabled) { border-color: var(--brand-400); color: var(--brand-700); background: var(--brand-50); }
+
+.btn-ghost { color: var(--text-secondary); }
+.btn-ghost:hover:not(:disabled) { background: var(--slate-100); color: var(--text-primary); }
+
+.btn-success { background: var(--success); color: #fff; }
+.btn-success:hover:not(:disabled) { filter: brightness(1.08); }
+.btn-danger  { background: var(--danger); color: #fff; }
+.btn-danger:hover:not(:disabled) { filter: brightness(1.08); }
+.btn-warning { background: var(--warning); color: #fff; }
+
+.btn-sm { padding: 6px 11px; font-size: 12.5px; border-radius: var(--radius-sm); }
+.btn-sm .btn-icon { width: 14px; height: 14px; }
+.btn-lg { padding: 12px 22px; font-size: 15px; border-radius: var(--radius-md); }
+.btn-block { width: 100%; }
+
+/* Spinner di dalam tombol */
+.btn .spinner { width: 15px; height: 15px; }
+
+.spinner {
+  border: 2px solid rgba(255,255,255,.35);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+.spinner.dark { border-color: var(--slate-300); border-top-color: var(--brand-600); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* V7.4: umpan balik nyata tombol Refresh — begitu ditekan, IKONNYA BERPUTAR
+   selama permintaan data masih berjalan (bukan sekadar ganti warna), lalu
+   berhenti otomatis saat jawaban server tiba. Dipicu global dari Scripts_1
+   (runtime 4b) untuk SEMUA tombol yang memuat ikon refresh — tanpa perlu
+   mengubah tiap modul. */
+.is-refreshing { pointer-events: none; cursor: progress; }
+.is-refreshing svg[data-icon="refresh"] { animation: spin .7s linear infinite; }
+
+/* ── 5. KOMPONEN: KARTU ───────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.card-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.card-title { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 9px; }
+.card-title .card-icon { width: 18px; height: 18px; color: var(--brand-600); }
+.card-body { padding: 20px; }
+.card-body.flush { padding: 0; }
+
+/* Grid kartu statistik */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.stat-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  overflow: hidden;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.stat-card::before {
+  content: '';
+  position: absolute; inset: 0 auto 0 0; width: 4px;
+  background: var(--stat-accent, var(--brand-500));
+}
+.stat-card .stat-icon {
+  width: 40px; height: 40px; border-radius: var(--radius-md);
+  display: grid; place-items: center;
+  background: var(--brand-50); /* fallback WebView lama (tanpa color-mix) */
+  background: color-mix(in srgb, var(--stat-accent, var(--brand-500)) 12%, white);
+  color: var(--stat-accent, var(--brand-600));
+  margin-bottom: 12px;
+}
+.stat-card .stat-icon svg { width: 20px; height: 20px; }
+.stat-card .stat-value {
+  font-size: 27px; font-weight: 800; letter-spacing: -.5px;
+  font-variant-numeric: tabular-nums; line-height: 1.1;
+}
+.stat-card .stat-label { font-size: 12px; color: var(--text-secondary); margin-top: 3px; font-weight: 500; }
+
+.stat-teal   { --stat-accent: var(--brand-500); }
+.stat-blue   { --stat-accent: #3b82f6; }
+.stat-violet { --stat-accent: #8b5cf6; }
+.stat-amber  { --stat-accent: #f59e0b; }
+.stat-rose   { --stat-accent: #f43f5e; }
+.stat-green  { --stat-accent: #22c55e; }
+
+/* ── 6. KOMPONEN: FORM ────────────────────────────────────────────────────── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-grid .full { grid-column: 1 / -1; }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 12.5px; font-weight: 600; color: var(--slate-600); }
+.form-label .req { color: var(--danger); }
+
+.form-control {
+  width: 100%;
+  padding: 10px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--bg-surface);
+  font-size: 13.5px;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.form-control::placeholder { color: var(--text-muted); }
+.form-control:focus {
+  outline: none;
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px rgba(20,184,166,.14);
+}
+.form-control.is-invalid { border-color: var(--danger); }
+textarea.form-control { resize: vertical; min-height: 76px; }
+select.form-control { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+
+.form-hint { font-size: 11.5px; color: var(--text-muted); }
+.form-error { font-size: 11.5px; color: var(--danger); font-weight: 500; }
+
+/* Input dengan ikon */
+.input-icon { position: relative; }
+.input-icon > svg {
+  position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+  width: 16px; height: 16px; color: var(--text-muted); pointer-events: none;
+}
+.input-icon .form-control { padding-left: 38px; }
+
+/* ── 7. KOMPONEN: TABEL ───────────────────────────────────────────────────── */
+.table-wrap { overflow-x: auto; border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+.table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.table thead th {
+  text-align: left;
+  padding: 11px 16px;
+  background: var(--slate-50);
+  color: var(--slate-500);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .6px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--slate-100);
+  vertical-align: middle;
+}
+.table tbody tr { transition: background var(--dur) var(--ease); }
+.table tbody tr:hover { background: var(--brand-50); }
+.table tbody tr:last-child td { border-bottom: none; }
+.table .cell-primary { font-weight: 600; }
+.table .cell-sub { font-size: 11.5px; color: var(--text-secondary); margin-top: 1px; }
+.table .cell-mono { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--brand-700); }
+.table .cell-actions { display: flex; gap: 6px; justify-content: flex-end; }
+
+/* ── 8. KOMPONEN: BADGE ───────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px; font-weight: 700;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.badge-waiting  { background: var(--warning-bg); color: var(--warning); border-color: var(--warning-bd); }
+.badge-serving  { background: var(--info-bg);    color: var(--info);    border-color: var(--info-bd); }
+.badge-done     { background: var(--success-bg); color: var(--success); border-color: var(--success-bd); }
+.badge-cancelled{ background: var(--danger-bg);  color: var(--danger);  border-color: var(--danger-bd); }
+.badge-neutral  { background: var(--slate-100);  color: var(--slate-500); border-color: var(--slate-200); }
+.badge-pending  { background: var(--warning-bg); color: var(--warning); border-color: var(--warning-bd); } /* alias proses/menunggu (V6.4) */
+
+/* ── 9. KOMPONEN: MODAL ───────────────────────────────────────────────────── */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 80;
+  background: rgba(15,23,42,.55);
+  backdrop-filter: blur(3px);
+  /* V7.4: grid→flex. Pada grid, max-height:100% anak diukur terhadap AREA
+     GRID yang ikut membesar bersama konten (jebakan klasik) — pada flex,
+     100% terukur terhadap backdrop itu sendiri (fixed inset:0 = tinggi layar
+     yang benar-benar terlihat). Fondasi perbaikan modal ATK terpotong. */
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur) var(--ease);
+}
+.modal-backdrop.is-open { opacity: 1; pointer-events: auto; }
+
+.modal {
+  width: 100%; max-width: 560px;
+  /* V7.4 (akar "ATK terpotong di HP"): 100vh di ponsel MENYERTAKAN area
+     address-bar tersembunyi → modal yang dipatok 100vh lebih tinggi dari
+     layar nyata dan footernya (bar keranjang + Kirim) terpotong.
+     Kini: 100% dari backdrop (selalu = layar terlihat) DAN var(--vvh)
+     (tinggi visualViewport dari Scripts_1 — ikut menyusut saat keyboard
+     terbuka ketika mengetik pencarian barang). Nilai terkecil yang menang. */
+  max-height: min(100%, calc(var(--vvh, 200vh) - 40px));
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  display: flex; flex-direction: column;
+  transform: translateY(14px) scale(.98);
+  transition: transform .25s var(--ease);
+}
+.modal-backdrop.is-open .modal { transform: translateY(0) scale(1); }
+.modal.modal-sm { max-width: 420px; }
+.modal.modal-lg { max-width: 880px; } /* V7.0: dulu tak terdefinisi — katalog ATK ikut 560px */
+
+/* (V7.0 dvh dihapus di V7.4 — tergantikan max-height:min(100%, --vvh) di atas
+   yang bekerja MERATA termasuk WebView lama tanpa dukungan unit dvh, dan
+   lebih akurat saat keyboard terbuka di Android yang mengabaikan dvh.) */
+
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 9px; }
+.modal-title svg { width: 19px; height: 19px; color: var(--brand-600); }
+.modal-close {
+  width: 32px; height: 32px; border-radius: var(--radius-sm);
+  display: grid; place-items: center; color: var(--slate-500);
+}
+.modal-close:hover { background: var(--slate-100); color: var(--slate-700); }
+.modal-body {
+  padding: 20px 22px; overflow-y: auto;
+  /* PERBAIKAN V7.0 (katalog ATK terpotong di HP): di flex kolom, min-height
+     bawaan = auto sehingga body MENOLAK menyusut mengikuti max-height modal —
+     modal tumbuh melebihi layar dan (karena backdrop place-items:center)
+     terpotong atas-bawah. min-height:0 mengembalikan hak menyusut + scroll. */
+  flex: 1 1 auto; min-height: 0;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain; /* V7.4: gulir katalog tak menyeret halaman di belakang */
+}
+.modal-footer {
+  display: flex; justify-content: flex-end; gap: 10px;
+  padding: 14px 22px 18px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── 10. KOMPONEN: TOAST (V7.4 — desain baru) ─────────────────────────────
+   Kartu notifikasi: chip ikon berlatar lembut senada jenis pesan, judul
+   tegas, BILAH SISA WAKTU di dasar kartu (berjalan mundur; berhenti saat
+   kursor/jari di atas kartu — sinkron dengan timer JS di Scripts_1),
+   tombol aksi & tutup. Tanpa backdrop-filter: ringan di semua perangkat. */
+.toast-stack {
+  position: fixed;
+  top: calc(14px + var(--safe-top)); right: 14px;
+  z-index: 100;
+  display: flex; flex-direction: column; gap: 10px;
+  width: min(384px, calc(100vw - 28px));
+  pointer-events: none; /* area kosong tumpukan tak menghalangi klik halaman */
+}
+.toast {
+  pointer-events: auto;
+  position: relative; overflow: hidden;
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 13px 14px 15px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(15,23,42,.16), 0 2px 6px rgba(15,23,42,.07);
+  animation: toastIn .38s var(--ease-spring, var(--ease));
+}
+.toast.is-leaving { animation: toastOut .22s var(--ease) forwards; }
+@keyframes toastIn  { from { opacity: 0; transform: translateX(28px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes toastOut { to   { opacity: 0; transform: translateX(28px) scale(.98); } }
+
+.toast .toast-chip {
+  flex: none; width: 32px; height: 32px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  background: var(--brand-50); /* fallback WebView lama (tanpa color-mix) */
+  background: color-mix(in srgb, var(--toast-accent, var(--brand-500)) 13%, white);
+  color: var(--toast-accent, var(--brand-600));
+}
+.toast .toast-icon { width: 17px; height: 17px; }
+.toast .toast-body { flex: 1; min-width: 0; padding-top: 1px; }
+.toast .toast-msg { font-size: 13px; font-weight: 700; letter-spacing: .1px; }
+.toast .toast-sub {
+  font-size: 11.5px; color: var(--text-secondary);
+  margin-top: 2px; line-height: 1.45; overflow-wrap: anywhere;
+}
+.toast-success { --toast-accent: var(--success); }
+.toast-error   { --toast-accent: var(--danger); }
+.toast-warning { --toast-accent: var(--warning); }
+.toast-info    { --toast-accent: var(--info); }
+
+.toast .toast-action {
+  display: inline-flex; align-items: center;
+  margin-top: 9px; padding: 5px 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--toast-accent, var(--brand-500));
+  color: var(--toast-accent, var(--brand-600));
+  font-size: 12px; font-weight: 700;
+  transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.toast .toast-action:hover {
+  background: var(--slate-100); /* fallback WebView lama (tanpa color-mix) */
+  background: color-mix(in srgb, var(--toast-accent, var(--brand-500)) 10%, white);
+  transform: translateY(-1px);
+}
+.toast .toast-close {
+  flex: none; width: 24px; height: 24px;
+  margin: -3px -4px 0 0;
+  border-radius: var(--radius-sm);
+  display: grid; place-items: center;
+  color: var(--slate-400);
+}
+.toast .toast-close:hover { background: var(--slate-100); color: var(--slate-600); }
+.toast .toast-close svg { width: 13px; height: 13px; }
+
+/* Bilah sisa waktu — durasinya diisi JS lewat --toast-dur; kelas .is-paused
+   (saat kursor/jari menahan kartu) menghentikan animasinya. */
+.toast .toast-progress {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: var(--toast-accent, var(--brand-500));
+  opacity: .85;
+  transform-origin: left center;
+  animation: toastBar linear forwards;
+  animation-duration: var(--toast-dur, 3500ms);
+}
+@keyframes toastBar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+.toast.is-paused .toast-progress { animation-play-state: paused; }
+
+/* Layar sempit: pindah ke tepi bawah (zona jempol, tak menutup judul
+   halaman); yang terbaru muncul paling dekat dengan jempol. */
+@media (max-width: 560px) {
+  .toast-stack {
+    top: auto; right: 12px; left: 12px;
+    bottom: calc(12px + var(--safe-bottom));
+    width: auto;
+    /* kolom normal + jangkar bawah: elemen TERBARU (appendChild) otomatis
+       jadi yang paling bawah = paling dekat jempol */
+  }
+  @keyframes toastIn  { from { opacity: 0; transform: translateY(16px) scale(.97); } to { opacity: 1; transform: none; } }
+  @keyframes toastOut { to   { opacity: 0; transform: translateY(12px) scale(.98); } }
+}
+
+/* ── 11. KOMPONEN: STATE KOSONG & SKELETON ────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 44px 20px;
+  color: var(--text-secondary);
+}
+.empty-state .empty-icon {
+  width: 52px; height: 52px; margin: 0 auto 14px;
+  border-radius: var(--radius-lg);
+  background: var(--slate-100); color: var(--slate-400);
+  display: grid; place-items: center;
+}
+.empty-state .empty-icon svg { width: 24px; height: 24px; }
+.empty-state .empty-title { font-size: 14.5px; font-weight: 700; color: var(--slate-600); }
+.empty-state .empty-text { font-size: 12.5px; margin-top: 4px; }
+
+.skeleton {
+  background: linear-gradient(90deg, var(--slate-100) 25%, var(--slate-200) 50%, var(--slate-100) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: var(--radius-sm);
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* ── PERF-UX V7.5 ─────────────────────────────────────────────────────────
+   (1) #gesitProgress — bilah kemajuan global di tepi atas layar; JS hanya
+       menampilkannya bila masih ada panggilan API setelah 350 ms (aksi kilat
+       tidak berkedip, aksi lama selalu punya isyarat).
+   (2) .view-loading-strip — pemberitahuan "Memuat data halaman…" pada
+       KUNJUNGAN PERTAMA sebuah view; hilang saat data tiba.
+   (3) .is-auto-busy — spinner kecil pada tombol aksi tulis yang dikunci
+       otomatis oleh API.call (pemanggil yang lupa memasang btnLoading). */
+#gesitProgress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px;
+  z-index: 300; pointer-events: none; overflow: hidden;
+  opacity: 0; transition: opacity .18s var(--ease);
+}
+#gesitProgress.is-on { opacity: 1; }
+#gesitProgress span {
+  display: block; height: 100%; width: 38%;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(90deg, var(--brand-300), var(--brand-600));
+  box-shadow: 0 0 8px rgba(20,184,166,.55);
+  /* AUDIT V7.6: animasi dipindah ke .is-on — dulu terpasang di sini sehingga
+     begitu bar pernah muncul sekali, animasinya berputar SELAMANYA di balik
+     opacity:0 (beban kompositor tak terlihat sepanjang sesi). */
+}
+#gesitProgress.is-on span { animation: gesitProgressSlide 1.15s linear infinite; }
+@keyframes gesitProgressSlide {
+  from { transform: translateX(-105%); }
+  to   { transform: translateX(300%); }
+}
+
+.view-loading-strip {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; margin-bottom: 16px;
+  border: 1px solid var(--brand-200);
+  background: var(--brand-50); color: var(--brand-800);
+  border-radius: var(--radius-md);
+  font-size: 12.5px; font-weight: 600;
+  animation: viewIn .2s var(--ease);
+  /* AUDIT V7.6: dasar utk keruntuhan mulus .is-done di bawah */
+  max-height: 60px; overflow: hidden;
+}
+.view-loading-strip .spinner { width: 15px; height: 15px; flex: none; }
+/* AUDIT V7.6: dulu hanya fade opacity lalu di-remove() — tinggi ±44px runtuh
+   SEKETIKA dan seluruh konten halaman melompat ke atas ("berkedip" pada tiap
+   kunjungan pertama sebuah view). Kini tinggi, padding, margin & border ikut
+   dianimasikan menutup sebelum elemen dilepas JS (260 ms — sudah selaras). */
+.view-loading-strip.is-done {
+  opacity: 0; max-height: 0;
+  padding-top: 0; padding-bottom: 0; margin-bottom: 0;
+  border-top-width: 0; border-bottom-width: 0;
+  transition: opacity .16s var(--ease), max-height .24s var(--ease),
+              padding .24s var(--ease), margin .24s var(--ease),
+              border-width .24s var(--ease);
+}
+
+.btn.is-auto-busy::after {
+  content: ''; display: inline-block;
+  width: 13px; height: 13px; margin-left: 8px; vertical-align: -2px;
+  border: 2px solid currentColor; border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+
+/* ── 12. GRAFIK BATANG CSS (kunjungan 7 hari) ─────────────────────────────── */
+.mini-chart {
+  display: flex; align-items: flex-end; gap: 10px;
+  height: 150px; padding: 8px 4px 0;
+}
+.mini-chart .bar-col {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; gap: 7px; height: 100%;
+  justify-content: flex-end;
+}
+.mini-chart .bar-value { font-size: 11px; font-weight: 700; color: var(--brand-700); }
+.mini-chart .bar {
+  width: 100%; max-width: 42px;
+  background: linear-gradient(180deg, var(--brand-400), var(--brand-600));
+  border-radius: 7px 7px 3px 3px;
+  min-height: 4px;
+  transition: height .5s var(--ease);
+  position: relative;
+}
+.mini-chart .bar:hover { filter: brightness(1.1); }
+.mini-chart .bar-label { font-size: 10.5px; color: var(--text-secondary); white-space: nowrap; }
+
+/* ── SMART ENGINE: panel saran otomatis di form booking kendaraan ──────────── */
+.knd-saran {
+  grid-column: 1 / -1;                 /* selebar form-grid (setara .full) */
+  background: var(--brand-50);
+  border: 1px solid var(--brand-200);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 2px;
+  animation: viewIn .2s var(--ease);
+}
+.knd-saran-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  font-size: 12.5px; font-weight: 700; color: var(--brand-800);
+  margin-bottom: 10px;
+}
+.knd-saran-manual {
+  font-size: 10px; font-weight: 700; letter-spacing: .3px;
+  padding: 2px 8px; border-radius: var(--radius-full);
+  background: var(--warning-bg); color: var(--warning); border: 1px solid var(--warning-bd);
+}
+.knd-saran-row { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--brand-800); }
+.knd-saran-txt { color: var(--slate-600); }
+.knd-saran-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0;
+}
+.knd-saran-item + .knd-saran-item { border-top: 1px dashed var(--brand-200); }
+.knd-saran-ic { font-size: 16px; flex: none; line-height: 1; }
+.knd-saran-body { flex: 1; min-width: 0; }
+.knd-saran-body b { font-size: 13px; color: var(--text-primary); font-weight: 600; }
+.knd-saran-why { font-size: 11.5px; color: var(--text-secondary); margin-top: 1px; }
+.knd-saran-why.is-warn { color: var(--warning); font-weight: 600; }
+.knd-saran-ganti {
+  flex: none;
+  font-size: 12px; font-weight: 600;
+  padding: 6px 14px; border-radius: var(--radius-control);
+  background: var(--bg-surface); color: var(--brand-700);
+  border: 1px solid var(--brand-300);
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.knd-saran-ganti:hover { background: var(--brand-100); border-color: var(--brand-400); }
+.knd-saran-spin {
+  width: 14px; height: 14px; flex: none;
+  border: 2px solid var(--brand-200); border-top-color: var(--brand-600);
+  border-radius: 50%; animation: kndSaranSpin .7s linear infinite;
+}
+@keyframes kndSaranSpin { to { transform: rotate(360deg); } }
+
+/* ── OTOMASI: kartu peringatan dokumen jatuh tempo (STNK/Pajak/SIM) ────────── */
+.dok-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--warning-bd);
+  border-left: 4px solid var(--warning);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.dok-head {
+  display: flex; align-items: center; gap: 9px;
+  padding: 13px 16px;
+  font-size: 14px; font-weight: 700; color: var(--warning);
+  background: var(--warning-bg);
+  border-bottom: 1px solid var(--warning-bd);
+}
+.dok-count {
+  margin-left: auto;
+  font-size: 12px; font-weight: 700;
+  min-width: 22px; text-align: center;
+  padding: 1px 8px; border-radius: var(--radius-full);
+  background: var(--warning); color: #fff;
+}
+.dok-group { padding: 10px 16px; }
+.dok-group + .dok-group { border-top: 1px solid var(--border); }
+.dok-group-title {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .3px;
+  color: var(--text-secondary); margin-bottom: 8px;
+}
+.dok-group.is-lewat .dok-group-title { color: var(--danger); }
+.dok-item {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 8px 0; flex-wrap: wrap;
+}
+.dok-item + .dok-item { border-top: 1px dashed var(--border); }
+.dok-item-main { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.dok-jenis {
+  flex: none;
+  font-size: 10px; font-weight: 800; letter-spacing: .4px;
+  padding: 3px 8px; border-radius: var(--radius-sm);
+  color: #fff;
+}
+.dok-stnk { background: var(--info); }
+.dok-pajak { background: var(--brand-600); }
+.dok-sim { background: var(--slate-600); }
+.dok-subjek { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.dok-item-meta { display: flex; align-items: center; gap: 12px; flex: none; }
+.dok-tgl { font-size: 12px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.dok-sisa {
+  font-size: 11.5px; font-weight: 700;
+  padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--warning-bg); color: var(--warning); border: 1px solid var(--warning-bd);
+  white-space: nowrap;
+}
+.dok-group.is-lewat .dok-sisa {
+  background: var(--danger-bg); color: var(--danger); border-color: var(--danger-bd);
+}
+.dok-foot {
+  padding: 10px 16px;
+  font-size: 11.5px; color: var(--text-secondary);
+  background: var(--slate-50); border-top: 1px solid var(--border);
+}
+
+/* ── OTOMASI C: banner peringatan konflik jadwal di form booking ──────────── */
+.knd-konflik {
+  grid-column: 1 / -1;
+  border-radius: var(--radius-md);
+  padding: 11px 14px;
+  margin-bottom: 2px;
+  animation: viewIn .18s var(--ease);
+}
+.knd-konflik.is-bentrok {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-bd);
+  border-left: 4px solid var(--danger);
+}
+.knd-konflik.is-warn {
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-bd);
+  border-left: 4px solid var(--warning);
+}
+.knd-konflik-head {
+  font-size: 12.5px; font-weight: 700; margin-bottom: 6px;
+}
+.knd-konflik.is-bentrok .knd-konflik-head { color: var(--danger); }
+.knd-konflik.is-warn .knd-konflik-head { color: var(--warning); }
+.knd-konflik-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 12.5px; color: var(--text-primary);
+  padding: 3px 0;
+}
+.knd-konflik-item + .knd-konflik-item { border-top: 1px dashed rgba(0,0,0,.06); }
+.knd-konflik-item span:first-child { flex: none; line-height: 1.3; }
