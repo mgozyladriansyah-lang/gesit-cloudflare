@@ -19,7 +19,19 @@
 .hidden { display: none !important; }
 
 /* ── 18. RESPONSIVE ───────────────────────────────────────────────────────── */
+/* PERBAIKAN (Agu 2026): sidebar & topbar-menu-btn dulu baru melipat di
+   ≤768px, padahal grid konten di bawah ini sudah menyusut ke 1 kolom sejak
+   ≤1024px. Akibatnya di 769–1024px (tablet & jendela browser yang ditarik
+   sempit) sidebar 264px tetap kaku sementara kontennya sudah sesempit ponsel
+   — terasa "patah"/rusak saat ukuran layar berubah. Kini SEMUA aturan
+   pelipatan sidebar disatukan ke ambang 1024px yang sama dengan grid di
+   bawah (lihat juga Sidebar-resize-guard di Scripts_1). Baris .sidebar dkk.
+   di blok @media 768px lama DIHAPUS agar tidak dobel. */
 @media (max-width: 1024px) {
+  .sidebar { transform: translateX(-100%); box-shadow: var(--shadow-lg); }
+  .sidebar.is-open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .topbar-menu-btn { display: grid; }
   .antrian-panel { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
   .grid-3 { grid-template-columns: 1fr; }
@@ -248,10 +260,8 @@
 
 
 @media (max-width: 768px) {
-  .sidebar { transform: translateX(-100%); box-shadow: var(--shadow-lg); }
-  .sidebar.is-open { transform: translateX(0); }
-  .main { margin-left: 0; }
-  .topbar-menu-btn { display: grid; }
+  /* .sidebar / .sidebar.is-open / .main / .topbar-menu-btn kini di blok
+     @media 1024px di atas (Bagian 18) — jangan didefinisikan ulang di sini. */
   .topbar { padding-left: 12px; padding-right: 12px; gap: 10px; }
   .topbar-clock { display: none; }
   .user-chip .user-meta { display: none; }
