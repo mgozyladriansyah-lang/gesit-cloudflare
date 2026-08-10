@@ -394,3 +394,72 @@
 .hidden {
   display: none !important;
 }
+/* HOTFIX V3 GESIT LOGIN STABLE VIEWPORT
+   Menghapus scroll internal pada kartu login.
+   Scroll cukup di halaman login, bukan di dalam login-card.
+*/
+.login-page {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  height: auto !important;
+  padding: 24px 16px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.login-page .login-card {
+  position: relative !important;
+  flex: 0 0 auto !important;
+  box-sizing: border-box !important;
+  width: 400px !important;
+  max-width: calc(100vw - 32px) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 24px auto !important;
+  overflow: visible !important;
+  overflow-y: visible !important;
+  overflow-x: visible !important;
+  background: rgba(13,24,41,.96) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  border-radius: 28px !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+  contain: none !important;
+}
+
+@media (min-height: 760px) and (min-width: 680px) {
+  .login-page {
+    align-items: center !important;
+  }
+
+  .login-page .login-card {
+    margin-top: 24px !important;
+    margin-bottom: 24px !important;
+  }
+}
+
+.login-page::before,
+.login-page::after,
+.login-card::before,
+.login-card::after {
+  display: none !important;
+  content: none !important;
+}
+
+#loginCard:not(.hidden) {
+  display: block !important;
+}
+
+#registerCard.hidden,
+#tgConfirmCard.hidden,
+.login-card.hidden,
+.hidden {
+  display: none !important;
+}
+``
