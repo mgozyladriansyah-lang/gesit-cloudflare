@@ -663,3 +663,241 @@ body,
     width: auto !important;
   }
 }
+
+
+/* ===========================================================================
+   GESIT MOBILE APP SHELL PATCH - bottom navigation, mobile menu sheet,
+   compact topbar, and reduced long-scroll friction.
+   =========================================================================== */
+@media (max-width: 768px) {
+  body.gesit-mobile-shell #appShell.is-visible {
+    padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+  }
+  body.gesit-mobile-shell .content {
+    padding-top: 12px;
+    padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  body.gesit-mobile-shell .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 80;
+    min-height: 56px;
+    padding: calc(6px + env(safe-area-inset-top, 0px)) 12px 8px;
+    gap: 8px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  body.gesit-mobile-shell .topbar-now,
+  body.gesit-mobile-shell .topbar-page-hint,
+  body.gesit-mobile-shell .chip-label,
+  body.gesit-mobile-shell .user-meta,
+  body.gesit-mobile-shell .user-chip > svg[data-icon="chevron"] {
+    display: none !important;
+  }
+  body.gesit-mobile-shell .topbar-context {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  body.gesit-mobile-shell #topbarPageTitle {
+    display: block;
+    max-width: 48vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  body.gesit-mobile-shell .topbar-approval-chip {
+    min-width: 42px;
+    padding: 8px 10px;
+  }
+  body.gesit-mobile-shell .user-chip {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+  }
+  body.gesit-mobile-shell .user-avatar {
+    width: 34px;
+    height: 34px;
+  }
+  body.gesit-mobile-shell .page-header {
+    margin-bottom: 12px;
+  }
+  body.gesit-mobile-shell .page-title {
+    font-size: clamp(20px, 6vw, 26px);
+    line-height: 1.1;
+  }
+  body.gesit-mobile-shell .page-subtitle {
+    font-size: 12.5px;
+    line-height: 1.38;
+  }
+  body.gesit-mobile-shell .stats-grid,
+  body.gesit-mobile-shell .pd-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 390px) {
+  body.gesit-mobile-shell .stats-grid,
+  body.gesit-mobile-shell .pd-kpi-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+.gesit-mobile-bottom-nav {
+  position: fixed;
+  left: 10px;
+  right: 10px;
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  z-index: 11000;
+  display: none;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid rgba(15, 118, 110, .18);
+  border-radius: 24px;
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 18px 50px rgba(15,23,42,.18), inset 0 1px 0 rgba(255,255,255,.7);
+}
+@supports (backdrop-filter: blur(16px)) {
+  .gesit-mobile-bottom-nav {
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}
+@media (max-width: 768px) {
+  body.gesit-mobile-shell #appShell.is-visible .gesit-mobile-bottom-nav {
+    display: grid;
+  }
+}
+.gesit-mobile-nav-btn {
+  appearance: none;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  color: #64748b;
+  min-height: 54px;
+  padding: 6px 4px;
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  font: inherit;
+  font-size: 10.5px;
+  font-weight: 750;
+  letter-spacing: -.1px;
+}
+.gesit-mobile-nav-btn svg {
+  width: 20px;
+  height: 20px;
+}
+.gesit-mobile-nav-btn.is-active {
+  color: #0f766e;
+  background: linear-gradient(135deg, rgba(20,184,166,.14), rgba(13,148,136,.08));
+  box-shadow: inset 0 0 0 1px rgba(20,184,166,.22);
+}
+.gesit-mobile-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10980;
+  display: none;
+  background: rgba(15,23,42,.28);
+}
+.gesit-mobile-sheet-backdrop.is-open {
+  display: block;
+}
+.gesit-mobile-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10990;
+  display: none;
+  max-height: min(78dvh, 620px);
+  padding: 12px 14px calc(94px + env(safe-area-inset-bottom, 0px));
+  border-radius: 28px 28px 0 0;
+  background: #fff;
+  box-shadow: 0 -24px 70px rgba(15,23,42,.22);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.gesit-mobile-sheet.is-open {
+  display: block;
+}
+.gesit-mobile-sheet-head {
+  position: sticky;
+  top: -12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 0 12px;
+  background: #fff;
+}
+.gesit-mobile-sheet-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: #0f172a;
+}
+.gesit-mobile-sheet-sub {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 2px;
+}
+.gesit-mobile-close {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 14px;
+  background: #f1f5f9;
+  color: #334155;
+  display: grid;
+  place-items: center;
+}
+.gesit-mobile-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.gesit-mobile-menu-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #fff;
+  color: #0f172a;
+  padding: 12px;
+  min-height: 78px;
+  text-align: left;
+  display: grid;
+  align-content: space-between;
+  gap: 8px;
+  font: inherit;
+  box-shadow: 0 8px 26px rgba(15,23,42,.05);
+}
+.gesit-mobile-menu-item svg {
+  width: 21px;
+  height: 21px;
+  color: #0d9488;
+}
+.gesit-mobile-menu-item span {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.gesit-mobile-menu-item.is-active {
+  border-color: rgba(13,148,136,.38);
+  background: #f0fdfa;
+}
+@media (max-width: 360px) {
+  .gesit-mobile-menu-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (min-width: 769px) {
+  .gesit-mobile-bottom-nav,
+  .gesit-mobile-sheet,
+  .gesit-mobile-sheet-backdrop {
+    display: none !important;
+  }
+}
