@@ -1,7 +1,7 @@
 /* GESIT Service Worker - versioned update manager */
 'use strict';
 
-const GESIT_PWA_VERSION = '2026.08.11.02';
+const GESIT_PWA_VERSION = '2026.08.11.03';
 const CACHE_STATIC = 'gesit-static-' + GESIT_PWA_VERSION;
 const CACHE_RUNTIME = 'gesit-runtime-' + GESIT_PWA_VERSION;
 const CORE_ASSETS = [
@@ -9,7 +9,7 @@ const CORE_ASSETS = [
   '/pwa-changelog.json?v=' + GESIT_PWA_VERSION,
   '/js/pwa-version.js?v=' + GESIT_PWA_VERSION,
   '/js/pwa-install.js?v=' + GESIT_PWA_VERSION,
-  '/js/mobile-navigation.js?v=5', '/js/pwa-stability.js?v=' + GESIT_PWA_VERSION, '/css/pwa.css',
+  '/js/mobile-navigation.js?v=5', '/js/pwa-stability.js?v=' + GESIT_PWA_VERSION, '/js/notification-center.js?v=' + GESIT_PWA_VERSION, '/css/pwa.css',
   '/notification/notify.mp3', '/notifications/notify.mp3', '/sound/notify.mp3', '/sounds/notify.mp3'
 ];
 
@@ -66,4 +66,38 @@ self.addEventListener('message', function(event) {
   var data = event.data || {};
   if (data.type === 'SKIP_WAITING') self.skipWaiting();
   if (data.type === 'GET_VERSION') event.source && event.source.postMessage({ type: 'PWA_VERSION', version: GESIT_PWA_VERSION });
+});
+
+
+self.addEventListener('notificationclick', function(event) {
+  event.notification.close();
+  var targetUrl = (event.notification.data && event.notification.data.url) || '/';
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function(clientList) {
+      for (var i = 0; i < clientList.length; i++) {
+        var client = clientList[i];
+        if ('focus' in client) {
+          client.focus();
+          if ('navigate' in client && targetUrl) return client.navigate(targetUrl);
+          return client;
+        }
+      }
+      if (clients.openWindow) return clients.openWindow(targetUrl || '/');
+    })
+  );
+});
+
+self.addEventListener('message', function(event) {
+  var data = event.data || {};
+  if (data.type === 'SHOW_NOTIFICATION') {
+    self.registration.showNotification(data.title || 'GESIT', {
+      body: data.body || 'Ada notifikasi baru.',
+      icon: '/icons/icon-192.png',
+      badge: '/icons/icon-192.png',
+      tag: data.tag || 'gesit-notification',
+      renotify: true,
+      data: { url: data.url || '/', type: data.notifType || 'gesit' },
+      vibrate: [80, 40, 80]
+    });
+  }
 });

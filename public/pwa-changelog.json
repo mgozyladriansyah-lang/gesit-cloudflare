@@ -1,9 +1,21 @@
 {
-  "current": "2026.08.11.02",
+  "current": "2026.08.11.03",
   "updated_at": "2026-08-11 00:43 GMT+7",
   "history": [
     {
-      "version": "2026.08.11.02",
+      "version": "2026.08.11.03",
+      "date": "2026-08-11",
+      "title": "In-app notification center and PWA notification tools",
+      "items": [
+        "Menambahkan Pusat Notifikasi langsung di aplikasi tanpa console.",
+        "Menambahkan tombol Aktifkan Notifikasi, Tes Suara, Tes Sistem PWA, Tes Kendaraan, Tes Tamu, dan Tes Layanan.",
+        "Realtime notifikasi dari app_notifications sekarang diarahkan ke Pusat Notifikasi, suara notify.mp3, toast, dan notifikasi sistem jika izin aktif.",
+        "Notifikasi sistem PWA bisa muncul saat aplikasi aktif atau terbuka di background, selama browser mengizinkan notifikasi.",
+        "Service worker menangani klik notifikasi untuk membuka kembali aplikasi."
+      ]
+    },
+    {
+      "version": "2026.08.11.03",
       "date": "2026-08-11",
       "title": "PWA stability, tour overlay, and notification sound hotfix",
       "items": [
@@ -15,7 +27,7 @@
       ]
     },
     {
-      "version": "2026.08.11.02",
+      "version": "2026.08.11.03",
       "date": "2026-08-11",
       "title": "PWA update manager + sound notification",
       "items": [
