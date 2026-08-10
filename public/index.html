@@ -20,7 +20,8 @@
   <link rel="stylesheet" href="/css/styles-4-lanjutan.css">
   <link rel="stylesheet" href="/css/styles-5-registrasi.css">
   <link rel="stylesheet" href="/css/pwa.css">
-  <link rel="stylesheet" href="/css/login-stability-hotfix.css?v=1">
+  <link rel="stylesheet" href="/css/login-final-fix.css">
+ 
   <!-- Gaya pd-* (Pusat Data & panel modul) kini menyatu di Styles_4_Lanjutan â€” satu sumber gaya (V6.4) -->
 </head>
 <body>
@@ -40,9 +41,7 @@
       <p class="login-sub">Gerbang Elektronik Sistem Informasi Terpadu<br>BPJS Kesehatan KC Bengkulu</p>
 
       <div class="login-error" id="loginError"></div>
-      <input class="login-autofill-trap" type="text" name="username" autocomplete="username" tabindex="-1" aria-hidden="true">
-      <input class="login-autofill-trap" type="password" name="password" autocomplete="current-password" tabindex="-1" aria-hidden="true">
-
+  
       <div class="form-group">
         <label class="form-label" for="loginUsername">Username</label>
         <div class="input-icon">
@@ -64,14 +63,14 @@
         <div class="input-icon">
           <svg data-icon="lock"></svg>
           <input type="password" id="loginPassword" class="form-control"
-                 name="gesit_login_password"
-                 placeholder="Masukkan password"
-                 autocomplete="new-password"
-                 autocorrect="off"
-                 autocapitalize="off"
-                 spellcheck="false"
-                 data-lpignore="true"
-                 data-1p-ignore="true">
+              name="gesit_login_password"
+              placeholder="Masukkan password"
+              autocomplete="new-password"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+              data-lpignore="true"
+              data-1p-ignore="true">
           <button type="button" class="pass-toggle" id="passToggle" aria-label="Lihat password">
             <svg data-icon="eye"></svg>
           </button>
@@ -5117,7 +5116,7 @@
   <script src="/js/scripts-6-tour.js"></script>
   <script src="/js/realtime-notifications.js"></script>
   <script src="/js/pwa-install.js"></script>
-  <script src="/js/login-stability-hotfix.js?v=1"></script>
+  <script src="/js/login-final-fix.js"></script>
 
 </body>
 </html>

@@ -1,26 +1,15 @@
-/* GESIT Login Stability Hotfix
-   Tujuan: memperbaiki kartu login yang bergeser/terpotong/tertutup panel putih saat input difokuskan.
-   Akar masalah yang ditangani:
-   1) efek glass/backdrop-filter dan pseudo orb yang memicu repaint/artefak pada viewport desktop lebar,
-   2) scroll internal di .login-card,
-   3) popover/autofill browser yang melebar saat input login difokuskan,
-   4) body background putih yang terlihat saat layout bergeser.
+/* GESIT FINAL LOGIN FIX
+   Single source of truth for login layout. Load this AFTER pwa.css.
+   This file intentionally overrides older login hotfix blocks without relying on them.
 */
 html,
 body {
-  min-height: 100% !important;
   margin: 0 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 100% !important;
   overflow-x: hidden !important;
   background: #0a1628 !important;
-}
-
-body:has(#loginPage:not(.is-hidden)) {
-  min-height: 100vh !important;
-  min-height: 100dvh !important;
-  background:
-    radial-gradient(920px 640px at 88% -12%, rgba(13,148,136,.30), transparent 62%),
-    radial-gradient(780px 560px at -10% 112%, rgba(6,182,212,.22), transparent 58%),
-    linear-gradient(135deg, #0a1628 0%, #0c2a3a 32%, #0d3b3b 54%, #0a2e1f 78%, #0a1628 100%) !important;
 }
 
 #loginPage.login-page {
@@ -30,25 +19,22 @@ body:has(#loginPage:not(.is-hidden)) {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  box-sizing: border-box !important;
   width: 100vw !important;
   height: 100vh !important;
   height: 100dvh !important;
   min-height: 100vh !important;
   min-height: 100dvh !important;
-  padding: 18px 16px !important;
-  overflow-y: auto !important;
+  padding: 24px 16px !important;
   overflow-x: hidden !important;
-  overscroll-behavior: contain !important;
-  -webkit-overflow-scrolling: touch !important;
+  overflow-y: auto !important;
   background:
     radial-gradient(920px 640px at 88% -12%, rgba(13,148,136,.30), transparent 62%),
     radial-gradient(780px 560px at -10% 112%, rgba(6,182,212,.22), transparent 58%),
     linear-gradient(135deg, #0a1628 0%, #0c2a3a 32%, #0d3b3b 54%, #0a2e1f 78%, #0a1628 100%) !important;
 }
 
-#loginPage.login-page.is-hidden {
-  display: none !important;
-}
+#loginPage.login-page.is-hidden { display: none !important; }
 
 #loginPage.login-page::before,
 #loginPage.login-page::after,
@@ -62,27 +48,26 @@ body:has(#loginPage:not(.is-hidden)) {
   position: relative !important;
   flex: 0 0 auto !important;
   box-sizing: border-box !important;
+  display: block !important;
   width: 400px !important;
+  min-width: 0 !important;
   max-width: calc(100vw - 32px) !important;
   height: auto !important;
   min-height: 0 !important;
   max-height: none !important;
   margin: 0 auto !important;
+  padding: 34px 30px 30px !important;
   overflow: visible !important;
-  background: rgba(13,24,41,.97) !important;
+  background: rgba(13, 24, 41, .97) !important;
+  color: #e2e8f0 !important;
   border: 1px solid rgba(255,255,255,.16) !important;
   border-radius: 28px !important;
   box-shadow: 0 24px 60px rgba(2,8,23,.55) !important;
-  color: #e2e8f0 !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   transform: none !important;
   contain: none !important;
   animation: none !important;
-}
-
-#loginPage #loginCard:not(.hidden) {
-  display: block !important;
 }
 
 #loginPage #registerCard.hidden,
@@ -91,51 +76,52 @@ body:has(#loginPage:not(.is-hidden)) {
   display: none !important;
 }
 
-#loginPage .input-icon,
-#loginPage .form-group,
-#loginPage .form-control,
-#loginPage button,
-#loginPage a {
+#loginPage .form-group { margin-bottom: 15px !important; }
+#loginPage .input-icon {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
   transform: none !important;
   contain: none !important;
+  z-index: auto !important;
 }
 
 #loginPage .form-control,
 #loginPage input,
 #loginPage textarea,
 #loginPage select {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 48px !important;
+  max-height: none !important;
   font-size: 16px !important;
+  line-height: 1.4 !important;
   color-scheme: dark !important;
+  color: #e2e8f0 !important;
   background-color: rgba(30,41,59,.72) !important;
   -webkit-text-fill-color: #e2e8f0 !important;
   caret-color: #5eead4 !important;
+  transform: none !important;
+  contain: none !important;
 }
 
 #loginPage input:-webkit-autofill,
 #loginPage input:-webkit-autofill:hover,
 #loginPage input:-webkit-autofill:focus,
 #loginPage input:-webkit-autofill:active {
-  transition: background-color 999999s ease-in-out 0s !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
   box-shadow: 0 0 0 1000px rgba(30,41,59,.86) inset !important;
   -webkit-box-shadow: 0 0 0 1000px rgba(30,41,59,.86) inset !important;
-  -webkit-text-fill-color: #e2e8f0 !important;
+  transition: background-color 999999s ease-in-out 0s !important;
 }
 
-@media (max-height: 720px) {
-  #loginPage.login-page {
-    align-items: flex-start !important;
-    padding-top: 16px !important;
-    padding-bottom: 16px !important;
-  }
-
-  #loginPage .login-card {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
-}
-/* AUTOFILL TRAP
-   Menyerap autofill browser agar popover tidak menempel ke input login utama.
-*/
 #loginPage .login-autofill-trap {
   position: fixed !important;
   left: -10000px !important;
@@ -149,25 +135,11 @@ body:has(#loginPage:not(.is-hidden)) {
   margin: 0 !important;
 }
 
-#loginPage #loginUsername,
-#loginPage #loginPassword {
-  position: relative !important;
-  z-index: 5 !important;
-  width: 100% !important;
-  height: 54px !important;
-  min-height: 54px !important;
-  max-height: 54px !important;
-  transform: none !important;
-  contain: none !important;
-}
-
-#loginPage .input-icon {
-  position: relative !important;
-  z-index: 4 !important;
-  height: 64px !important;
-  min-height: 64px !important;
-  max-height: 64px !important;
-  overflow: hidden !important;
-  transform: none !important;
-  contain: none !important;
+@media (max-height: 720px) {
+  #loginPage.login-page {
+    align-items: flex-start !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+  #loginPage .login-card { margin: 0 auto !important; }
 }
