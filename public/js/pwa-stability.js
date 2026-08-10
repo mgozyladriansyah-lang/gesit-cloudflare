@@ -2,7 +2,7 @@
    Fixes: PWA installed stale UI, bottom safe scroll, tour buttons blocked by bottom nav. */
 (function(){
   'use strict';
-  var VER = (window.GESIT_PWA_VERSION || '2026.08.11.02');
+  var VER = (window.GESIT_PWA_VERSION || '2026.08.11.04');
   function inject(){
     if(document.getElementById('gesit-stability-v5-css')) return;
     var st=document.createElement('style');
@@ -38,8 +38,8 @@ body.gesit-tour-active .tour-blocker{z-index:13000!important;}body.gesit-tour-ac
     }
   }
   function init(){
-    inject(); syncTour(); checkUpdate();
-    if(window.MutationObserver) new MutationObserver(syncTour).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style']});
+    inject(); syncTour(); if(!document.querySelector('.tour-tip,.tour-blocker,.tour-spot,#mobileMenuSheet.is-open,.modal-backdrop.is-open')) document.body.style.overflow=''; checkUpdate();
+    if(window.MutationObserver) new MutationObserver(syncTour).observe(document.body,{childList:true,subtree:true});
     document.addEventListener('click',function(){setTimeout(syncTour,60);},true);
     window.addEventListener('focus',checkUpdate);
     document.addEventListener('visibilitychange',function(){ if(!document.hidden) checkUpdate(); });

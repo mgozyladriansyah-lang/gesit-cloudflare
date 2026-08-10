@@ -300,7 +300,7 @@ body.gesit-tour-active .tour-tip-actions button {
       };
       sync();
       if (window.MutationObserver) {
-        new MutationObserver(sync).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'style'] });
+        new MutationObserver(sync).observe(document.body, { childList: true, subtree: true });
       }
       document.addEventListener('click', function () { setTimeout(sync, 60); }, true);
     },
@@ -486,7 +486,7 @@ body.gesit-tour-active .tour-tip-actions button {
       MobileNav.updateActive();
     },
     openSheet: function () { MobileNav.renderSheet(); if (MobileNav.sheet) MobileNav.sheet.classList.add('is-open'); if (MobileNav.backdrop) MobileNav.backdrop.classList.add('is-open'); document.body.style.overflow = 'hidden'; },
-    closeSheet: function () { if (MobileNav.sheet) MobileNav.sheet.classList.remove('is-open'); if (MobileNav.backdrop) MobileNav.backdrop.classList.remove('is-open'); if (!document.querySelector('.modal-backdrop.is-open')) document.body.style.overflow = ''; },
+    closeSheet: function () { if (MobileNav.sheet) MobileNav.sheet.classList.remove('is-open'); if (MobileNav.backdrop) MobileNav.backdrop.classList.remove('is-open'); if (!document.querySelector('.modal-backdrop.is-open,#mobileMenuSheet.is-open,.tour-tip')) document.body.style.overflow = ''; },
     updateActive: function () {
       var cur = window.Router && Router.current;
       Array.prototype.slice.call(document.querySelectorAll('.gesit-mobile-nav-btn,.gesit-mobile-menu-item')).forEach(function (el) {
