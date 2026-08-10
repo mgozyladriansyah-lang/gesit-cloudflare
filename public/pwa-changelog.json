@@ -1,9 +1,20 @@
 {
-  "current": "2026.08.11.04",
+  "current": "2026.08.11.05",
   "updated_at": "2026-08-11 00:43 GMT+7",
   "history": [
     {
-      "version": "2026.08.11.04",
+      "version": "2026.08.11.05",
+      "date": "2026-08-11",
+      "title": "Root scroll unlock and CSS cache busting",
+      "items": [
+        "Menambahkan folder public/css di patch karena index memakai /css/*.css.",
+        "Menambahkan cache buster ?v=2026.08.11.05 untuk CSS agar PWA tidak memakai CSS lama.",
+        "Memaksa html/body/main/content/view kembali menjadi scrollable jika tidak ada modal, sheet, atau tour aktif.",
+        "Menambahkan window.GESIT_FORCE_UNLOCK_SCROLL() sebagai helper darurat jika diperlukan."
+      ]
+    },
+    {
+      "version": "2026.08.11.05",
       "date": "2026-08-11",
       "title": "Emergency interaction and scroll unlock hotfix",
       "items": [
@@ -14,7 +25,7 @@
       ]
     },
     {
-      "version": "2026.08.11.04",
+      "version": "2026.08.11.05",
       "date": "2026-08-11",
       "title": "In-app notification center and PWA notification tools",
       "items": [
@@ -26,7 +37,7 @@
       ]
     },
     {
-      "version": "2026.08.11.04",
+      "version": "2026.08.11.05",
       "date": "2026-08-11",
       "title": "PWA stability, tour overlay, and notification sound hotfix",
       "items": [
@@ -38,7 +49,7 @@
       ]
     },
     {
-      "version": "2026.08.11.04",
+      "version": "2026.08.11.05",
       "date": "2026-08-11",
       "title": "PWA update manager + sound notification",
       "items": [
