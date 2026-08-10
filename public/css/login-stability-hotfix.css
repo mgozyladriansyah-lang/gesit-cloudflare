@@ -1,0 +1,135 @@
+/* GESIT Login Stability Hotfix
+   Tujuan: memperbaiki kartu login yang bergeser/terpotong/tertutup panel putih saat input difokuskan.
+   Akar masalah yang ditangani:
+   1) efek glass/backdrop-filter dan pseudo orb yang memicu repaint/artefak pada viewport desktop lebar,
+   2) scroll internal di .login-card,
+   3) popover/autofill browser yang melebar saat input login difokuskan,
+   4) body background putih yang terlihat saat layout bergeser.
+*/
+html,
+body {
+  min-height: 100% !important;
+  margin: 0 !important;
+  overflow-x: hidden !important;
+  background: #0a1628 !important;
+}
+
+body:has(#loginPage:not(.is-hidden)) {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  background:
+    radial-gradient(920px 640px at 88% -12%, rgba(13,148,136,.30), transparent 62%),
+    radial-gradient(780px 560px at -10% 112%, rgba(6,182,212,.22), transparent 58%),
+    linear-gradient(135deg, #0a1628 0%, #0c2a3a 32%, #0d3b3b 54%, #0a2e1f 78%, #0a1628 100%) !important;
+}
+
+#loginPage.login-page {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 70 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  padding: 18px 16px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+  background:
+    radial-gradient(920px 640px at 88% -12%, rgba(13,148,136,.30), transparent 62%),
+    radial-gradient(780px 560px at -10% 112%, rgba(6,182,212,.22), transparent 58%),
+    linear-gradient(135deg, #0a1628 0%, #0c2a3a 32%, #0d3b3b 54%, #0a2e1f 78%, #0a1628 100%) !important;
+}
+
+#loginPage.login-page.is-hidden {
+  display: none !important;
+}
+
+#loginPage.login-page::before,
+#loginPage.login-page::after,
+#loginPage .login-card::before,
+#loginPage .login-card::after {
+  display: none !important;
+  content: none !important;
+}
+
+#loginPage .login-card {
+  position: relative !important;
+  flex: 0 0 auto !important;
+  box-sizing: border-box !important;
+  width: 400px !important;
+  max-width: calc(100vw - 32px) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 auto !important;
+  overflow: visible !important;
+  background: rgba(13,24,41,.97) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  border-radius: 28px !important;
+  box-shadow: 0 24px 60px rgba(2,8,23,.55) !important;
+  color: #e2e8f0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+  contain: none !important;
+  animation: none !important;
+}
+
+#loginPage #loginCard:not(.hidden) {
+  display: block !important;
+}
+
+#loginPage #registerCard.hidden,
+#loginPage #tgConfirmCard.hidden,
+#loginPage .login-card.hidden {
+  display: none !important;
+}
+
+#loginPage .input-icon,
+#loginPage .form-group,
+#loginPage .form-control,
+#loginPage button,
+#loginPage a {
+  transform: none !important;
+  contain: none !important;
+}
+
+#loginPage .form-control,
+#loginPage input,
+#loginPage textarea,
+#loginPage select {
+  font-size: 16px !important;
+  color-scheme: dark !important;
+  background-color: rgba(30,41,59,.72) !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+  caret-color: #5eead4 !important;
+}
+
+#loginPage input:-webkit-autofill,
+#loginPage input:-webkit-autofill:hover,
+#loginPage input:-webkit-autofill:focus,
+#loginPage input:-webkit-autofill:active {
+  transition: background-color 999999s ease-in-out 0s !important;
+  box-shadow: 0 0 0 1000px rgba(30,41,59,.86) inset !important;
+  -webkit-box-shadow: 0 0 0 1000px rgba(30,41,59,.86) inset !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+}
+
+@media (max-height: 720px) {
+  #loginPage.login-page {
+    align-items: flex-start !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+
+  #loginPage .login-card {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
