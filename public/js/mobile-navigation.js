@@ -1,13 +1,10 @@
-/* GESIT Mobile App Shell Patch
-   Bottom navigation + mobile menu sheet. Loaded last, after Router/Auth. */
+/* GESIT Mobile App Shell V2
+   Role-aware bottom navigation, mobile sheet menu, fixed-topbar friendly. */
 (function () {
   'use strict';
   var MobileNav = {
-    mq: null,
-    ready: false,
-    nav: null,
-    sheet: null,
-    backdrop: null,
+    mq: null, ready: false, nav: null, sheet: null, backdrop: null,
+    activeTab: '',
     init: function () {
       if (MobileNav.ready) return;
       MobileNav.ready = true;
@@ -16,39 +13,37 @@
       MobileNav.patchRouter();
       MobileNav.bindResize();
       MobileNav.observeMenu();
+      MobileNav.observeTabs();
       MobileNav.refresh();
-      setTimeout(MobileNav.refresh, 400);
+      setTimeout(MobileNav.refresh, 350);
       setTimeout(MobileNav.refresh, 1200);
     },
     ensureDom: function () {
       var shell = document.getElementById('appShell') || document.body;
-      if (!document.getElementById('mobileBottomNav')) {
+      MobileNav.nav = document.getElementById('mobileBottomNav');
+      if (!MobileNav.nav) {
         MobileNav.nav = document.createElement('nav');
         MobileNav.nav.id = 'mobileBottomNav';
         MobileNav.nav.className = 'gesit-mobile-bottom-nav';
         MobileNav.nav.setAttribute('aria-label', 'Navigasi utama mobile');
         shell.appendChild(MobileNav.nav);
-      } else MobileNav.nav = document.getElementById('mobileBottomNav');
-      if (!document.getElementById('mobileMenuBackdrop')) {
+      }
+      MobileNav.backdrop = document.getElementById('mobileMenuBackdrop');
+      if (!MobileNav.backdrop) {
         MobileNav.backdrop = document.createElement('div');
         MobileNav.backdrop.id = 'mobileMenuBackdrop';
         MobileNav.backdrop.className = 'gesit-mobile-sheet-backdrop';
         document.body.appendChild(MobileNav.backdrop);
-      } else MobileNav.backdrop = document.getElementById('mobileMenuBackdrop');
-      if (!document.getElementById('mobileMenuSheet')) {
+      }
+      MobileNav.sheet = document.getElementById('mobileMenuSheet');
+      if (!MobileNav.sheet) {
         MobileNav.sheet = document.createElement('section');
         MobileNav.sheet.id = 'mobileMenuSheet';
         MobileNav.sheet.className = 'gesit-mobile-sheet';
         MobileNav.sheet.setAttribute('aria-label', 'Daftar menu aplikasi');
-        MobileNav.sheet.innerHTML =
-          '<div class="gesit-mobile-sheet-head">' +
-            '<div><div class="gesit-mobile-sheet-title">Menu GESIT</div>' +
-            '<div class="gesit-mobile-sheet-sub">Pilih modul tanpa membuka sidebar panjang.</div></div>' +
-            '<button type="button" class="gesit-mobile-close" id="mobileMenuClose" aria-label="Tutup menu"></button>' +
-          '</div>' +
-          '<div class="gesit-mobile-menu-grid" id="mobileMenuGrid"></div>';
+        MobileNav.sheet.innerHTML = '<div class="gesit-mobile-sheet-head"><div><div class="gesit-mobile-sheet-title">Menu GESIT</div><div class="gesit-mobile-sheet-sub">Pilih modul tanpa membuka sidebar panjang.</div></div><button type="button" class="gesit-mobile-close" id="mobileMenuClose" aria-label="Tutup menu"></button></div><div class="gesit-mobile-menu-grid" id="mobileMenuGrid"></div>';
         document.body.appendChild(MobileNav.sheet);
-      } else MobileNav.sheet = document.getElementById('mobileMenuSheet');
+      }
       MobileNav.backdrop.addEventListener('click', MobileNav.closeSheet);
       var close = document.getElementById('mobileMenuClose');
       if (close) close.addEventListener('click', MobileNav.closeSheet);
@@ -66,23 +61,30 @@
       var nav = document.getElementById('sidebarNav');
       if (!nav || !window.MutationObserver) return;
       var timer = null;
-      var mo = new MutationObserver(function () {
-        clearTimeout(timer);
-        timer = setTimeout(MobileNav.renderSheet, 120);
-      });
-      mo.observe(nav, { attributes: true, subtree: true, childList: true, attributeFilter: ['class', 'style'] });
+      new MutationObserver(function () {
+        clearTimeout(timer); timer = setTimeout(MobileNav.renderSheet, 120);
+      }).observe(nav, { attributes: true, subtree: true, childList: true, attributeFilter: ['class', 'style'] });
+    },
+    observeTabs: function () {
+      document.addEventListener('click', function (e) {
+        var tab = e.target && e.target.closest ? e.target.closest('.tab[data-tab]') : null;
+        if (!tab) return;
+        MobileNav.activeTab = tab.getAttribute('data-tab') || '';
+        setTimeout(MobileNav.updateActive, 30);
+      }, true);
     },
     patchRouter: function () {
-      if (!window.Router || Router.__mobilePatch) return;
+      if (!window.Router || Router.__mobilePatchV2) return;
       var oldGo = Router.go;
       Router.go = function (view) {
         var ret = oldGo.apply(Router, arguments);
         MobileNav.closeSheet();
+        MobileNav.activeTab = '';
         setTimeout(MobileNav.updateActive, 0);
         setTimeout(MobileNav.renderSheet, 80);
         return ret;
       };
-      Router.__mobilePatch = true;
+      Router.__mobilePatchV2 = true;
     },
     applyMode: function () {
       var active = !!(MobileNav.mq ? MobileNav.mq.matches : window.innerWidth <= 768);
@@ -94,139 +96,125 @@
       MobileNav.renderBottom();
       MobileNav.renderSheet();
       MobileNav.updateActive();
-      if (typeof renderIcons === 'function') {
-        renderIcons(MobileNav.nav);
-        renderIcons(MobileNav.sheet);
-      }
+      if (typeof renderIcons === 'function') { renderIcons(MobileNav.nav); renderIcons(MobileNav.sheet); }
     },
-    role: function () {
-      return String(window.Auth && Auth.user && Auth.user.role || '').toLowerCase();
-    },
+    role: function () { return String(window.Auth && Auth.user && Auth.user.role || '').toLowerCase(); },
+    can: function (view) { return !!(window.Router && Router.canOpen && Router.canOpen(view)); },
     landing: function () {
       var role = MobileNav.role();
       if (window.ROLE_SCOPE && ROLE_SCOPE[role] && ROLE_SCOPE[role].landing) return ROLE_SCOPE[role].landing;
       if (window.Router && Router.allowed && Router.allowed.length) return Router.allowed[0];
       return 'dashboard';
     },
-    labelFor: function (view) {
-      var meta = window.VIEW_META && VIEW_META[view];
-      return (meta && meta.title) || view;
-    },
+    labelFor: function (view) { var meta = window.VIEW_META && VIEW_META[view]; return (meta && meta.title) || view; },
     iconFor: function (view) {
-      var map = {
-        dashboard: 'dashboard', digitamu: 'users', kendaraan: 'car', ruangan: 'door', atk: 'box',
-        approval: 'inbox', magang: 'grad', 'magang-self': 'grad', tad: 'clock', 'tad-self': 'clock',
-        security: 'shield', agenda: 'calendar', budaya: 'star', sosmed: 'megaphone', berita: 'news',
-        eco: 'leaf', laporan: 'chart', users: 'usercog', pengaturan: 'settings'
-      };
+      var map = { dashboard:'dashboard', digitamu:'users', kendaraan:'car', ruangan:'door', atk:'box', approval:'inbox', magang:'grad', 'magang-self':'grad', tad:'clock', 'tad-self':'clock', security:'shield', agenda:'calendar', budaya:'star', sosmed:'megaphone', berita:'news', eco:'leaf', laporan:'chart', users:'usercog', pengaturan:'settings' };
       return map[view] || 'info';
     },
-    can: function (view) {
-      return !!(window.Router && Router.canOpen && Router.canOpen(view));
-    },
-    secondaryView: function () {
+    bottomItems: function () {
       var role = MobileNav.role();
-      if (role === 'magang' && MobileNav.can('eco')) return 'eco';
-      if ((role === 'driver' || role === 'cso' || role === 'tad') && MobileNav.can('eco')) return 'eco';
-      if (role === 'security' && MobileNav.can('digitamu')) return 'digitamu';
-      if (MobileNav.can('approval')) return 'approval';
-      if (MobileNav.can('digitamu')) return 'digitamu';
-      if (MobileNav.can('eco')) return 'eco';
-      return null;
+      if (role === 'magang') {
+        return [
+          { type:'tab', view:'magang-self', tab:'presensi', label:'Presensi', icon:'clock' },
+          { type:'tab', view:'magang-self', tab:'logbook', label:'Logbook', icon:'clipboard' },
+          { type:'tab', view:'magang-self', tab:'tugas', label:'Tugas', icon:'star' },
+          { type:'tab', view:'magang-self', tab:'profil', label:'Data Saya', icon:'user' }
+        ];
+      }
+      if (role === 'driver' || role === 'cso' || role === 'tad') {
+        return [
+          { type:'tab', view:'tad-self', tab:'presensi', label:'Presensi', icon:'clock' },
+          { type:'tab', view:'tad-self', tab:'izin', label:'Izin', icon:'calendar' },
+          { type:'view', view:'eco', label:'Eco', icon:'leaf' },
+          { type:'tab', view:'tad-self', tab:'profil', label:'Data Saya', icon:'user' }
+        ];
+      }
+      if (role === 'security') {
+        return [
+          { type:'view', view:'security', label:'Security', icon:'shield' },
+          { type:'view', view:'digitamu', label:'Tamu', icon:'users' },
+          { type:'view', view:'eco', label:'Eco', icon:'leaf' },
+          { type:'profile', label:'Profil', icon:'user' }
+        ];
+      }
+      var items = [
+        { type:'view', view:'dashboard', label:'Beranda', icon:'dashboard' },
+        { type:'sheet', label:'Layanan', icon:'menu' }
+      ];
+      if (MobileNav.can('approval')) items.push({ type:'view', view:'approval', label:'Approval', icon:'inbox' });
+      else if (MobileNav.can('digitamu')) items.push({ type:'view', view:'digitamu', label:'Tamu', icon:'users' });
+      else items.push({ type:'view', view:MobileNav.landing(), label:'Portal', icon:MobileNav.iconFor(MobileNav.landing()) });
+      items.push({ type:'profile', label:'Profil', icon:'user' });
+      return items.filter(function (it) { return !it.view || MobileNav.can(it.view); }).slice(0,4);
     },
     renderBottom: function () {
       if (!MobileNav.nav) return;
-      var home = MobileNav.landing();
-      var second = MobileNav.secondaryView();
-      var items = [
-        { type: 'view', view: home, label: home === 'dashboard' ? 'Beranda' : 'Portal', icon: MobileNav.iconFor(home) },
-        { type: 'sheet', label: 'Layanan', icon: 'menu' }
-      ];
-      if (second) items.push({ type: 'view', view: second, label: second === 'approval' ? 'Approval' : MobileNav.shortLabel(second), icon: MobileNav.iconFor(second) });
-      items.push({ type: 'profile', label: 'Profil', icon: 'user' });
+      var items = MobileNav.bottomItems();
       MobileNav.nav.innerHTML = items.map(function (it) {
-        var attr = it.view ? ' data-view="' + it.view + '"' : '';
-        return '<button type="button" class="gesit-mobile-nav-btn" data-mnav="' + it.type + '"' + attr + '>' +
-          (typeof iconSvg === 'function' ? iconSvg(it.icon) : '') + '<span>' + MobileNav.escape(it.label) + '</span></button>';
+        var a = it.view ? ' data-view="' + it.view + '"' : '';
+        var t = it.tab ? ' data-tab-target="' + it.tab + '"' : '';
+        return '<button type="button" class="gesit-mobile-nav-btn" data-mnav="' + it.type + '"' + a + t + '>' + (typeof iconSvg === 'function' ? iconSvg(it.icon) : '') + '<span>' + MobileNav.escape(it.label) + '</span></button>';
       }).join('');
       Array.prototype.slice.call(MobileNav.nav.querySelectorAll('button')).forEach(function (btn) {
         btn.addEventListener('click', function () {
           var type = btn.getAttribute('data-mnav');
           if (type === 'view') MobileNav.go(btn.getAttribute('data-view'));
+          else if (type === 'tab') MobileNav.goTab(btn.getAttribute('data-view'), btn.getAttribute('data-tab-target'));
           else if (type === 'sheet') MobileNav.openSheet();
           else if (type === 'profile') MobileNav.openProfile();
         });
       });
       if (typeof renderIcons === 'function') renderIcons(MobileNav.nav);
     },
-    shortLabel: function (view) {
-      var label = MobileNav.labelFor(view);
-      return label.replace('Pusat ', '').replace('Tenaga Alih Daya', 'TAD').replace('Kendaraan & BBM', 'Kendaraan').replace('Portal ', '');
+    go: function (view) { if (view && window.Router && Router.go) Router.go(view); },
+    goTab: function (view, tab) {
+      if (!view) return;
+      MobileNav.go(view);
+      MobileNav.activeTab = tab || '';
+      setTimeout(function () {
+        var panel = document.querySelector('[data-view-panel="' + view + '"]');
+        var btn = panel && panel.querySelector('.tabs .tab[data-tab="' + tab + '"]');
+        if (btn) btn.click();
+        MobileNav.updateActive();
+      }, 120);
     },
     renderSheet: function () {
-      var grid = document.getElementById('mobileMenuGrid');
-      if (!grid) return;
+      var grid = document.getElementById('mobileMenuGrid'); if (!grid) return;
       var src = Array.prototype.slice.call(document.querySelectorAll('#sidebarNav .nav-item[data-view]'));
-      var seen = {};
-      var rows = [];
+      var seen = {}, rows = [];
       src.forEach(function (node) {
         var view = node.getAttribute('data-view');
         if (!view || seen[view] || view === 'coming-soon') return;
         if (node.classList.contains('hidden') || node.classList.contains('is-locked')) return;
         if (!MobileNav.can(view)) return;
         seen[view] = true;
-        var textEl = node.querySelector('span');
-        var label = textEl ? textEl.textContent : MobileNav.labelFor(view);
-        rows.push({ view: view, label: label, icon: MobileNav.iconFor(view) });
+        var span = node.querySelector('span');
+        rows.push({ view:view, label: span ? span.textContent : MobileNav.labelFor(view), icon:MobileNav.iconFor(view) });
       });
-      if (!rows.length) {
-        var home = MobileNav.landing();
-        rows.push({ view: home, label: MobileNav.labelFor(home), icon: MobileNav.iconFor(home) });
-      }
       grid.innerHTML = rows.map(function (r) {
-        return '<button type="button" class="gesit-mobile-menu-item" data-mview="' + MobileNav.escapeAttr(r.view) + '">' +
-          (typeof iconSvg === 'function' ? iconSvg(r.icon) : '') + '<span>' + MobileNav.escape(r.label) + '</span></button>';
+        return '<button type="button" class="gesit-mobile-menu-item" data-mview="' + MobileNav.escapeAttr(r.view) + '">' + (typeof iconSvg === 'function' ? iconSvg(r.icon) : '') + '<span>' + MobileNav.escape(r.label) + '</span></button>';
       }).join('');
-      Array.prototype.slice.call(grid.querySelectorAll('[data-mview]')).forEach(function (btn) {
-        btn.addEventListener('click', function () { MobileNav.go(btn.getAttribute('data-mview')); });
-      });
+      Array.prototype.slice.call(grid.querySelectorAll('[data-mview]')).forEach(function (btn) { btn.addEventListener('click', function () { MobileNav.go(btn.getAttribute('data-mview')); }); });
       if (typeof renderIcons === 'function') renderIcons(grid);
       MobileNav.updateActive();
     },
-    go: function (view) {
-      if (!view || !window.Router || !Router.go) return;
-      Router.go(view);
-    },
-    openProfile: function () {
-      var chip = document.getElementById('userChip');
-      if (chip) chip.click();
-    },
-    openSheet: function () {
-      MobileNav.renderSheet();
-      if (MobileNav.sheet) MobileNav.sheet.classList.add('is-open');
-      if (MobileNav.backdrop) MobileNav.backdrop.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    },
-    closeSheet: function () {
-      if (MobileNav.sheet) MobileNav.sheet.classList.remove('is-open');
-      if (MobileNav.backdrop) MobileNav.backdrop.classList.remove('is-open');
-      if (!document.querySelector('.modal-backdrop.is-open')) document.body.style.overflow = '';
-    },
+    openProfile: function () { var chip = document.getElementById('userChip'); if (chip) chip.click(); },
+    openSheet: function () { MobileNav.renderSheet(); if (MobileNav.sheet) MobileNav.sheet.classList.add('is-open'); if (MobileNav.backdrop) MobileNav.backdrop.classList.add('is-open'); document.body.style.overflow = 'hidden'; },
+    closeSheet: function () { if (MobileNav.sheet) MobileNav.sheet.classList.remove('is-open'); if (MobileNav.backdrop) MobileNav.backdrop.classList.remove('is-open'); if (!document.querySelector('.modal-backdrop.is-open')) document.body.style.overflow = ''; },
     updateActive: function () {
       var cur = window.Router && Router.current;
-      Array.prototype.slice.call(document.querySelectorAll('[data-view], [data-mview]')).forEach(function (el) {
+      Array.prototype.slice.call(document.querySelectorAll('.gesit-mobile-nav-btn, .gesit-mobile-menu-item')).forEach(function (el) {
         var v = el.getAttribute('data-view') || el.getAttribute('data-mview');
-        if (el.classList.contains('gesit-mobile-nav-btn') || el.classList.contains('gesit-mobile-menu-item')) {
-          el.classList.toggle('is-active', v === cur);
-        }
+        var tab = el.getAttribute('data-tab-target') || '';
+        var on = v === cur && (!tab || tab === MobileNav.activeTab || MobileNav.activeTab === '');
+        if (el.getAttribute('data-mnav') === 'sheet') on = false;
+        if (el.getAttribute('data-mnav') === 'profile') on = false;
+        el.classList.toggle('is-active', !!on);
       });
     },
-    escape: function (s) {
-      return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    },
+    escape: function (s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); },
     escapeAttr: function (s) { return MobileNav.escape(s); }
   };
   window.GESITMobileNav = MobileNav;
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', MobileNav.init);
-  else MobileNav.init();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', MobileNav.init); else MobileNav.init();
 })();
