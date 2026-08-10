@@ -280,3 +280,68 @@
     transform: none !important;
   }
 }
+
+/* HOTFIX GESIT LOGIN RENDERING
+   Mengatasi artefak kotak besar/gelap yang menutup form login pada Chrome/Edge.
+   Penyebab paling mungkin: rendering backdrop-filter/glassmorphism pada login-card.
+*/
+.login-page {
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  padding: 18px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.login-page::before,
+.login-page::after {
+  display: none !important;
+  content: none !important;
+}
+
+
+@'
+
+/* HOTFIX GESIT LOGIN RENDERING
+   Mengatasi artefak kotak besar/gelap yang menutup form login pada Chrome/Edge.
+   Penyebab paling mungkin: rendering backdrop-filter/glassmorphism pada login-card.
+*/
+.login-page {
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  padding: 18px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.login-page::before,
+.login-page::after {
+  display: none !important;
+  content: none !important;
+}
+
+.login-card {
+  width: min(100%, 400px) !important;
+  max-width: 400px !important;
+  margin: auto !important;
+  background: rgba(13,24,41,.94) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+  contain: layout paint !important;
+}
+
+#registerCard.hidden,
+#tgConfirmCard.hidden,
+.hidden {
+  display: none !important;
+}
+
+git config --global user.name "M. Gozi Ladriansyah"
+``
+git config --global user.email "mgozyladriansyah@gmail.com"
