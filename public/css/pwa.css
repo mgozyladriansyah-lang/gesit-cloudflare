@@ -280,3 +280,218 @@
     transform: none !important;
   }
 }
+
+
+/* ===========================================================================
+   GESIT PWA RESPONSIVE HARDENING V2
+   Tujuan: PWA tidak lebih buruk dibanding browser, tabel fit layar, modal
+   konfirmasi logout selalu terlihat, tour tetap presisi, tanpa CSS login-final
+   atau login-stability eksperimental.
+   =========================================================================== */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.app-shell,
+.main,
+.content,
+.view,
+.card,
+.card-body,
+.page-header,
+.page-actions,
+.topbar,
+.topbar-context {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (display-mode: standalone) {
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    overscroll-behavior-y: none;
+  }
+
+  .app-shell,
+  .main {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .content {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Tabel selalu berada di dalam viewport, bukan melebar membuat halaman rusak. */
+.table-wrap,
+.pd-table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.table,
+.pd-table {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .table,
+  .pd-table {
+    min-width: 720px;
+  }
+
+  .card-header {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .card-header > .input-icon,
+  .card-header > div[style*="display:flex"] {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Page action di mobile/PWA dibuat konsisten dan tidak saling menabrak. */
+@media (max-width: 768px) {
+  .page-header {
+    align-items: stretch;
+  }
+
+  .page-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 8px;
+  }
+
+  .page-actions .btn {
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  .page-actions .btn:only-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 420px) {
+  .page-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Fix spesifik bug logout: backdrop muncul tetapi dialog konfirmasi tidak terlihat
+   pada viewport kecil/device toolbar/PWA. Konfirmasi harus selalu center-fit. */
+#modalConfirm.modal-backdrop.is-open {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
+  z-index: 12000 !important;
+}
+
+#modalConfirm.modal-backdrop.is-open .modal {
+  display: flex !important;
+  width: min(420px, calc(100vw - 32px)) !important;
+  max-width: calc(100vw - 32px) !important;
+  max-height: calc(100dvh - 32px) !important;
+  margin: 0 auto !important;
+  border-radius: var(--radius-xl) !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+#modalConfirm .modal-body {
+  overflow: visible !important;
+}
+
+#modalConfirm .modal-footer {
+  display: flex !important;
+  gap: 10px !important;
+  flex-direction: row !important;
+  justify-content: flex-end !important;
+}
+
+#modalConfirm .modal-footer .btn {
+  width: auto !important;
+  min-width: 110px;
+}
+
+@media (max-width: 420px) {
+  #modalConfirm .modal-footer {
+    flex-direction: column-reverse !important;
+  }
+
+  #modalConfirm .modal-footer .btn {
+    width: 100% !important;
+  }
+}
+
+/* User menu tidak boleh tertinggal di balik overlay. */
+.user-menu.is-open {
+  z-index: 12001;
+}
+
+.sidebar-overlay.is-visible {
+  z-index: 58;
+}
+
+.sidebar.is-open {
+  z-index: 60;
+}
+
+/* Tour: posisi tetap safe-area dan tidak keluar layar pada PWA/mobile. */
+.tour-tip {
+  max-width: calc(100vw - 28px);
+  max-height: calc(100dvh - 28px - env(safe-area-inset-bottom, 0px));
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tour-spot {
+  max-width: calc(100vw - 8px);
+  max-height: calc(100dvh - 8px);
+}
+
+@media (max-width: 640px), (display-mode: standalone) and (max-width: 768px) {
+  .tour-tip.is-sheet,
+  .tour-tip {
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+  }
+}
+
+/* Modal umum tetap fit layar PWA. Modal khusus confirm diatur lebih spesifik di atas. */
+.modal-backdrop.is-open:not(#modalConfirm) {
+  max-width: 100vw;
+  max-height: 100dvh;
+}
+
+.modal-backdrop.is-open:not(#modalConfirm) .modal {
+  max-width: min(100%, calc(100vw - 16px));
+  max-height: min(calc(100dvh - 16px), calc(var(--vvh, 100vh) - 16px));
+}
+
+/* Kurangi artefak PWA/DevTools device mode saat viewport berubah. */
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .topbar,
+  .card,
+  .stat-card,
+  .pd-kpi,
+  .modal,
+  .tour-tip {
+    will-change: auto;
+  }
+}
