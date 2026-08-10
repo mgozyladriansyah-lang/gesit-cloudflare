@@ -1,146 +1,23 @@
 (function () {
   'use strict';
-
-  var deferredPrompt = null;
-  var installBtn = null;
-  var refreshing = false;
-  var updateCheckTimer = null;
-
-  function appBasePath() {
-    var p = window.location.pathname || '/';
-    p = p.replace(/\/index\.html$/i, '/');
-    if (p.charAt(p.length - 1) !== '/') p += '/';
-    return p;
-  }
-
-  function assetUrl(path) {
-    if (/^https?:\/\//i.test(path)) return path;
-    if (path.charAt(0) === '/') return path;
-    return appBasePath() + path;
-  }
-
-  function isStandalone() {
-    return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
-  }
-
-  function toastInfo(title, msg) {
-    if (window.Toast && Toast.info) Toast.info(title, msg);
-    else alert(title + (msg ? '\n' + msg : ''));
-  }
-
-  function setButtonState() {
-    installBtn = document.getElementById('pwaInstallBtn');
-    if (!installBtn) return;
-    if (isStandalone()) installBtn.classList.add('hidden');
-    else installBtn.classList.remove('hidden');
-  }
-
-  function svgIcon(name) {
-    if (window.iconSvg) return iconSvg(name, 'pwa-update-icon');
-    return '';
-  }
-
-  function ensureUpdateBanner() {
-    var old = document.getElementById('pwaUpdateBanner');
-    if (old) return old;
-    var el = document.createElement('div');
-    el.id = 'pwaUpdateBanner';
-    el.className = 'pwa-update-banner hidden';
-    el.innerHTML = '' +
-      '<div class="pwa-update-card">' +
-        '<div class="pwa-update-mark">' + svgIcon('refresh') + '</div>' +
-        '<div>' +
-          '<div class="pwa-update-title">Versi baru tersedia</div>' +
-          '<div class="pwa-update-text">Perbarui GESIT untuk memakai tampilan dan perbaikan terbaru.</div>' +
-        '</div>' +
-        '<button type="button" class="btn btn-primary btn-sm" id="pwaUpdateNow">Perbarui Sekarang</button>' +
-        '<button type="button" class="btn btn-ghost btn-sm" id="pwaUpdateLater">Nanti</button>' +
-      '</div>';
-    document.body.appendChild(el);
-    var later = document.getElementById('pwaUpdateLater');
-    if (later) later.addEventListener('click', function () { el.classList.add('hidden'); });
-    return el;
-  }
-
-  function showUpdateBanner(worker) {
-    var el = ensureUpdateBanner();
-    el.classList.remove('hidden');
-    var now = document.getElementById('pwaUpdateNow');
-    if (now) {
-      now.onclick = function () {
-        now.disabled = true;
-        now.textContent = 'Memperbarui...';
-        if (worker) worker.postMessage({ type: 'SKIP_WAITING' });
-        else window.location.reload();
-      };
-    }
-  }
-
-  function watchRegistration(reg) {
-    if (reg.waiting && navigator.serviceWorker.controller) showUpdateBanner(reg.waiting);
-    reg.addEventListener('updatefound', function () {
-      var newWorker = reg.installing;
-      if (!newWorker) return;
-      newWorker.addEventListener('statechange', function () {
-        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) showUpdateBanner(newWorker);
-      });
-    });
-  }
-
-  function registerServiceWorker() {
-    if (!('serviceWorker' in navigator)) return;
-    navigator.serviceWorker.register(assetUrl('service-worker.js')).then(function (reg) {
-      watchRegistration(reg);
-      if (updateCheckTimer) clearInterval(updateCheckTimer);
-      updateCheckTimer = setInterval(function () { reg.update().catch(function () {}); }, 30 * 60 * 1000);
-    }).catch(function (err) {
-      console.warn('[PWA] Service worker gagal didaftarkan:', err && err.message);
-    });
-    navigator.serviceWorker.addEventListener('controllerchange', function () {
-      if (refreshing) return;
-      refreshing = true;
-      window.location.reload();
-    });
-  }
-
-  window.addEventListener('beforeinstallprompt', function (event) {
-    event.preventDefault();
-    deferredPrompt = event;
-    setButtonState();
-  });
-
-  window.addEventListener('appinstalled', function () {
-    deferredPrompt = null;
-    if (installBtn) installBtn.classList.add('hidden');
-    toastInfo('GESIT terpasang', 'Aplikasi sudah bisa dibuka dari layar utama/perangkat Anda.');
-  });
-
-  function init() {
-    installBtn = document.getElementById('pwaInstallBtn');
-    setButtonState();
-    if (document.readyState === 'complete') registerServiceWorker();
-    else window.addEventListener('load', registerServiceWorker, { once: true });
-
-    if (!installBtn) return;
-    installBtn.addEventListener('click', function () {
-      if (isStandalone()) {
-        toastInfo('Aplikasi sudah terpasang', 'Buka GESIT dari ikon aplikasi di perangkat Anda.');
-        return;
-      }
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(function () {
-          deferredPrompt = null;
-          setButtonState();
-        });
-        return;
-      }
-      var isiOS = /iphone|ipad|ipod/i.test(navigator.userAgent || '');
-      if (isiOS) toastInfo('Pasang dari Safari', 'Ketuk tombol Bagikan, lalu pilih Tambahkan ke Layar Utama.');
-      else toastInfo('Install belum tersedia', 'Buka menu browser lalu pilih Install app atau Tambahkan ke layar utama. Pastikan situs dibuka lewat HTTPS.');
-    });
-  }
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  var deferredPrompt = null, installBtn = null, swRegistration = null, refreshing = false, updateCheckTimer = null;
+  var APP_VERSION = window.GESIT_PWA_VERSION || 'dev';
+  var CHANGELOG_URL = window.GESIT_PWA_CHANGELOG_URL || ('/pwa-changelog.json?v=' + APP_VERSION);
+  function isStandalone(){return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;}
+  function toast(t,m,type){ if(window.Toast && Toast[type||'info']) Toast[type||'info'](t,m); else console.info(t,m||''); }
+  function setButtonState(){ installBtn=document.getElementById('pwaInstallBtn'); if(!installBtn)return; if(isStandalone()) installBtn.classList.add('hidden'); else installBtn.classList.remove('hidden'); }
+  function icon(n){ return window.iconSvg ? iconSvg(n,'pwa-update-icon') : '<span>↻</span>'; }
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+  function styles(){ if(document.getElementById('pwaVersionStyles'))return; var st=document.createElement('style'); st.id='pwaVersionStyles'; st.textContent='.pwa-version-box{position:fixed;right:14px;bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:12000;max-width:min(420px,calc(100vw - 28px));background:#fff;border:1px solid #dbeafe;border-radius:20px;box-shadow:0 18px 55px rgba(15,23,42,.18);padding:14px}.pwa-version-head{display:flex;gap:10px;align-items:center;font-weight:900;color:#0f172a}.pwa-version-list{margin:10px 0 0;padding-left:18px;color:#475569;font-size:12.5px;line-height:1.45}.pwa-version-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}.pwa-version-pill{display:inline-flex;border-radius:999px;background:#ecfeff;color:#0f766e;font-size:11px;font-weight:800;padding:5px 8px}.hidden{display:none!important}@media(max-width:768px){.pwa-version-box{left:10px;right:10px;bottom:calc(104px + env(safe-area-inset-bottom,0px))}}'; document.head.appendChild(st); }
+  function fetchChangelog(){ return fetch(CHANGELOG_URL,{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}); }
+  function ensureBanner(){ styles(); var el=document.getElementById('pwaUpdateBanner'); if(el)return el; el=document.createElement('div'); el.id='pwaUpdateBanner'; el.className='pwa-version-box hidden'; el.innerHTML='<div class="pwa-version-head"><span>'+icon('refresh')+'</span><div><div>Versi baru GESIT tersedia</div><span class="pwa-version-pill" id="pwaUpdateVersion">PWA</span></div></div><ul class="pwa-version-list" id="pwaUpdateNotes"><li>Perbarui aplikasi untuk memakai tampilan dan perbaikan terbaru.</li></ul><div class="pwa-version-actions"><button type="button" class="btn btn-ghost btn-sm" id="pwaVersionHistory">Riwayat</button><button type="button" class="btn btn-outline btn-sm" id="pwaUpdateLater">Nanti</button><button type="button" class="btn btn-primary btn-sm" id="pwaUpdateNow">Perbarui</button></div>'; document.body.appendChild(el); document.getElementById('pwaUpdateLater').onclick=function(){el.classList.add('hidden');}; document.getElementById('pwaVersionHistory').onclick=showVersionHistory; return el; }
+  function showUpdateBanner(worker){ var el=ensureBanner(); fetchChangelog().then(function(d){ if(d&&d.current){ var v=document.getElementById('pwaUpdateVersion'); if(v)v.textContent='v'+d.current; var latest=d.history&&d.history[0], notes=document.getElementById('pwaUpdateNotes'); if(latest&&notes) notes.innerHTML=(latest.items||[]).slice(0,4).map(function(x){return '<li>'+esc(x)+'</li>';}).join(''); }}); el.classList.remove('hidden'); var now=document.getElementById('pwaUpdateNow'); now.onclick=function(){ now.disabled=true; now.textContent='Memperbarui...'; if(worker) worker.postMessage({type:'SKIP_WAITING'}); else location.reload(); }; }
+  function showVersionHistory(){ styles(); fetchChangelog().then(function(d){ if(!d||!d.history){toast('Riwayat PWA belum tersedia','File pwa-changelog.json belum ditemukan.');return;} var old=document.getElementById('pwaHistoryBox'); if(old)old.remove(); var el=document.createElement('div'); el.id='pwaHistoryBox'; el.className='pwa-version-box'; el.innerHTML='<div class="pwa-version-head"><span>'+icon('info')+'</span><div><div>Riwayat versi PWA</div><span class="pwa-version-pill">Aktif v'+esc(d.current)+'</span></div></div>'+d.history.slice(0,6).map(function(h){return '<div style="margin-top:12px"><b style="font-size:13px;color:#0f172a">v'+esc(h.version)+' · '+esc(h.title)+'</b><div style="font-size:11px;color:#64748b">'+esc(h.date)+'</div><ul class="pwa-version-list">'+(h.items||[]).slice(0,5).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';}).join('')+'<div class="pwa-version-actions"><button type="button" class="btn btn-primary btn-sm" id="pwaHistoryClose">Tutup</button></div>'; document.body.appendChild(el); document.getElementById('pwaHistoryClose').onclick=function(){el.remove();}; }); }
+  function checkInstalledVersion(){ fetchChangelog().then(function(d){ if(!d||!d.current)return; var last=null; try{last=localStorage.getItem('gesit_pwa_current_version');}catch(e){} if(last&&last!==d.current) toast('GESIT diperbarui ke v'+d.current,'Buka Riwayat versi PWA untuk melihat perubahan.','success'); try{localStorage.setItem('gesit_pwa_current_version',d.current);}catch(e){} window.GESIT_PWA_ACTIVE_VERSION=d.current; }); }
+  function watchRegistration(reg){ swRegistration=reg; if(reg.waiting&&navigator.serviceWorker.controller) showUpdateBanner(reg.waiting); reg.addEventListener('updatefound',function(){ var nw=reg.installing; if(!nw)return; nw.addEventListener('statechange',function(){ if(nw.state==='installed'&&navigator.serviceWorker.controller) showUpdateBanner(nw); }); }); }
+  function checkForUpdates(){ if(!swRegistration)return; swRegistration.update().catch(function(){}); fetchChangelog().then(function(d){ if(d&&d.current&&d.current!==APP_VERSION) showUpdateBanner(swRegistration.waiting||null); }); }
+  function registerServiceWorker(){ if(!('serviceWorker' in navigator))return; navigator.serviceWorker.register('/service-worker.js?v='+encodeURIComponent(APP_VERSION),{updateViaCache:'none'}).then(function(reg){watchRegistration(reg);checkInstalledVersion(); if(updateCheckTimer)clearInterval(updateCheckTimer); updateCheckTimer=setInterval(checkForUpdates,5*60*1000);}).catch(function(err){console.warn('[PWA] Service worker gagal didaftarkan:',err&&err.message);}); navigator.serviceWorker.addEventListener('controllerchange',function(){ if(refreshing)return; refreshing=true; location.reload(); }); }
+  window.GESIT_PWA={version:APP_VERSION,checkForUpdates:checkForUpdates,showVersionHistory:showVersionHistory};
+  addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;setButtonState();}); addEventListener('appinstalled',function(){deferredPrompt=null;if(installBtn)installBtn.classList.add('hidden');toast('GESIT terpasang','Aplikasi sudah bisa dibuka dari layar utama/perangkat Anda.');}); addEventListener('focus',checkForUpdates); document.addEventListener('visibilitychange',function(){if(!document.hidden)checkForUpdates();});
+  document.addEventListener('DOMContentLoaded',function(){installBtn=document.getElementById('pwaInstallBtn');setButtonState();addEventListener('load',registerServiceWorker);checkInstalledVersion(); if(!installBtn)return; installBtn.addEventListener('click',function(){ if(isStandalone()){showVersionHistory();return;} if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(){deferredPrompt=null;setButtonState();});return;} showVersionHistory(); });});
 })();

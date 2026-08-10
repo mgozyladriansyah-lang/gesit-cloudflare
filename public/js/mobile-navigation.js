@@ -1,4 +1,4 @@
-/* GESIT Mobile App Shell V4 UX
+/* GESIT Mobile App Shell V5 UX
    - Critical CSS injected from JS to avoid HP cache/CSS mismatch.
    - Mobile topbar has brand/greeting before scroll, then switches to page title on scroll.
    - Role-aware bottom nav with stronger pressed/active feedback.
@@ -121,6 +121,63 @@
 #mobileMenuSheet .gesit-mobile-menu-item span { display:block; font-size:12.5px; font-weight:800; line-height:1.2; position:relative; z-index:1; }
 #mobileMenuSheet .gesit-mobile-menu-item.is-active { border-color:rgba(13,148,136,.38) !important; background:#f0fdfa !important; }
 @media (min-width: 769px) { #mobileBottomNav, #mobileMenuSheet, #mobileMenuBackdrop { display:none !important; } }
+
+/* V5: mobile scroll and guided tour compatibility */
+@media (max-width: 768px) {
+  html, body.gesit-mobile-shell {
+    min-height: 100% !important;
+    height: auto !important;
+    overflow-y: auto !important;
+    overscroll-behavior-y: contain;
+  }
+  body.gesit-mobile-shell .main,
+  body.gesit-mobile-shell .content,
+  body.gesit-mobile-shell .view.is-active {
+    min-height: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  body.gesit-mobile-shell .view.is-active {
+    padding-bottom: calc(138px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+body.gesit-tour-active #mobileBottomNav,
+body.gesit-tour-active #mobileMenuSheet,
+body.gesit-tour-active #mobileMenuBackdrop {
+  display: none !important;
+  pointer-events: none !important;
+}
+body.gesit-tour-active .topbar {
+  z-index: 9000 !important;
+}
+body.gesit-tour-active .tour-blocker { z-index: 13000 !important; }
+body.gesit-tour-active .tour-spot { z-index: 13001 !important; }
+body.gesit-tour-active .tour-tip {
+  z-index: 13002 !important;
+  max-height: calc(100dvh - 28px - env(safe-area-inset-bottom, 0px)) !important;
+  overflow: auto !important;
+}
+body.gesit-tour-active .tour-tip-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+body.gesit-tour-active .tour-tip-actions button {
+  min-height: 42px !important;
+  touch-action: manipulation !important;
+}
+@media (max-width: 768px) {
+  body.gesit-tour-active .tour-tip {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+    top: auto !important;
+    width: auto !important;
+    max-width: none !important;
+    padding-bottom: 14px !important;
+  }
+}
+
 `;
     var st = document.createElement('style');
     st.id = 'gesit-mobile-shell-critical-css-v4';
@@ -140,6 +197,7 @@
       MobileNav.patchAuthReady();
       MobileNav.bindResize();
       MobileNav.bindScroll();
+      MobileNav.observeTour();
       MobileNav.observeMenu();
       MobileNav.observeTabs();
       MobileNav.refresh();
@@ -232,6 +290,19 @@
     bindScroll: function () {
       window.addEventListener('scroll', MobileNav.updateTopbarBrand, { passive: true });
       document.addEventListener('scroll', MobileNav.updateTopbarBrand, { passive: true });
+    },
+
+    observeTour: function () {
+      var sync = function () {
+        var active = !!document.querySelector('.tour-tip, .tour-blocker, .tour-spot');
+        document.body.classList.toggle('gesit-tour-active', active);
+        if (active) MobileNav.closeSheet();
+      };
+      sync();
+      if (window.MutationObserver) {
+        new MutationObserver(sync).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'style'] });
+      }
+      document.addEventListener('click', function () { setTimeout(sync, 60); }, true);
     },
     observeMenu: function () {
       var nav = document.getElementById('sidebarNav');

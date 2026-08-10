@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-title" content="GESIT">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="apple-touch-icon" href="/icons/icon-192.png">
-  <title>GESIT � BPJS Kesehatan KC Bengkulu</title>
+  <title>GESIT — BPJS Kesehatan KC Bengkulu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,18 +20,18 @@
   <link rel="stylesheet" href="/css/styles-4-lanjutan.css">
   <link rel="stylesheet" href="/css/styles-5-registrasi.css">
   <link rel="stylesheet" href="/css/pwa.css">
-  <!-- Gaya pd-* (Pusat Data & panel modul) kini menyatu di Styles_4_Lanjutan � satu sumber gaya (V6.4) -->
+  <!-- Gaya pd-* (Pusat Data & panel modul) kini menyatu di Styles_4_Lanjutan — satu sumber gaya (V6.4) -->
 </head>
 <body>
 
-  <!-- --- LAYAR LOADING AWAL --- -->
+  <!-- ═══ LAYAR LOADING AWAL ═══ -->
   <div class="app-loading" id="appLoading">
     <div class="load-logo">SG</div>
     <div class="spinner"></div>
-    <div class="load-text">Menyiapkan GESIT�</div>
+    <div class="load-text">Menyiapkan GESIT…</div>
   </div>
 
-  <!-- --- HALAMAN LOGIN (GLASSMORPHISM) --- -->
+  <!-- ═══ HALAMAN LOGIN (GLASSMORPHISM) ═══ -->
   <div class="login-page is-hidden" id="loginPage">
     <div class="login-card" id="loginCard">
       <div class="login-logo">GS</div>
@@ -77,15 +77,15 @@
       </div>
 
       <div class="login-footer">
-        GESIT V6.6 � Gerbang Elektronik Sistem Informasi Terpadu<br>� BPJS Kesehatan KC Bengkulu
+        GESIT V6.6 — Gerbang Elektronik Sistem Informasi Terpadu<br>© BPJS Kesehatan KC Bengkulu
       </div>
     </div>
 
-    <!-- --- KARTU: DAFTAR AKUN BARU (FASE 5.1) --- -->
+    <!-- ═══ KARTU: DAFTAR AKUN BARU (FASE 5.1) ═══ -->
     <div class="login-card hidden" id="registerCard">
-      <button type="button" class="login-back" id="btnBackLogin">� Kembali ke login</button>
+      <button type="button" class="login-back" id="btnBackLogin">‹ Kembali ke login</button>
       <h1 class="login-title">Daftar Akun Baru</h1>
-      <p class="login-sub">Isi data di bawah � akun aktif setelah<br>konfirmasi Telegram.</p>
+      <p class="login-sub">Isi data di bawah — akun aktif setelah<br>konfirmasi Telegram.</p>
 
       <div class="login-error" id="regError"></div>
 
@@ -140,9 +140,9 @@
       </button>
     </div>
 
-    <!-- --- KARTU: KONFIRMASI TELEGRAM (FASE 5.1) --- -->
+    <!-- ═══ KARTU: KONFIRMASI TELEGRAM (FASE 5.1) ═══ -->
     <div class="login-card hidden" id="tgConfirmCard">
-      <div class="tg-hero">??</div>
+      <div class="tg-hero">✈️</div>
       <h1 class="login-title" id="tgConfTitle">Satu Langkah Lagi</h1>
       <p class="login-sub" id="tgConfText">Hubungkan Telegram Anda untuk mengaktifkan akun.</p>
 
@@ -150,12 +150,12 @@
         Buka Telegram &amp; Tekan START
       </a>
       <div class="text-center" style="font-size:11.5px;color:rgba(226,232,240,.55);margin-top:9px">
-        Bot: <span id="tgBotName">�</span> � Tautan berlaku 24 jam
+        Bot: <span id="tgBotName">—</span> · Tautan berlaku 24 jam
       </div>
 
       <div class="tg-status" id="tgStatusRow">
         <span class="spinner dark" style="width:14px;height:14px"></span>
-        <span id="tgStatusText">Menunggu konfirmasi dari Telegram�</span>
+        <span id="tgStatusText">Menunggu konfirmasi dari Telegram…</span>
       </div>
       <button class="btn btn-outline btn-block mt-2 hidden" id="tgRetryBtn" type="button"
               style="border-color:rgba(255,255,255,.25);color:var(--border,#e2e8f0);background:transparent">
@@ -169,18 +169,18 @@
       </div>
 
       <div class="text-center mt-3">
-        <button type="button" class="login-link" id="tgBackLogin">� Kembali ke halaman login</button>
+        <button type="button" class="login-link" id="tgBackLogin">‹ Kembali ke halaman login</button>
       </div>
     </div>
   </div>
 
-  <!-- --- SHELL APLIKASI --- -->
+  <!-- ═══ SHELL APLIKASI ═══ -->
   <div class="app-shell" id="appShell">
 
     <!-- Overlay sidebar (mobile) -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- --- SIDEBAR --- -->
+    <!-- ─── SIDEBAR ─── -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-brand">
         <div class="brand-mark">GS</div>
@@ -262,11 +262,11 @@
       </nav>
 
       <div class="sidebar-footer">
-        V6.9 � GESIT &nbsp;�&nbsp; <span id="sidebarClockDate"></span>
+        V6.9 · GESIT &nbsp;·&nbsp; <span id="sidebarClockDate"></span>
       </div>
     </aside>
 
-    <!-- --- AREA UTAMA --- -->
+    <!-- ─── AREA UTAMA ─── -->
     <div class="main">
 
       <!-- Topbar -->
@@ -276,15 +276,15 @@
         </button>
         <div class="topbar-context" id="topbarContext">
           <div class="topbar-now">
-            <span class="topbar-date" id="topbarDate">�</span>
+            <span class="topbar-date" id="topbarDate">—</span>
             <div class="topbar-clock">
               <svg data-icon="clock" style="width:14px;height:14px"></svg>
-              <span id="topbarClock">�</span>
+              <span id="topbarClock">—</span>
             </div>
           </div>
           <div class="topbar-page">
             <span class="topbar-page-hint">Halaman</span>
-            <span id="topbarPageTitle">�</span>
+            <span id="topbarPageTitle">—</span>
           </div>
         </div>
         <button class="topbar-approval-chip hidden" id="topbarApprovalChip" data-approver="true" style="display:none" title="Buka Pusat Persetujuan">
@@ -299,8 +299,8 @@
           <button class="user-chip" id="userChip">
             <div class="user-avatar" id="userAvatar">?</div>
             <div class="user-meta">
-              <div class="user-name" id="userName">�</div>
-              <div class="user-role" id="userRole">�</div>
+              <div class="user-name" id="userName">…</div>
+              <div class="user-role" id="userRole">…</div>
             </div>
             <svg data-icon="chevron" style="width:14px;height:14px;color:var(--slate-400)"></svg>
           </button>
@@ -329,12 +329,12 @@
       <!-- Konten -->
       <main class="content">
 
-        <!-- --- VIEW: PUSAT DATA (DASHBOARD) --- -->
+        <!-- ═══ VIEW: PUSAT DATA (DASHBOARD) ═══ -->
         <section class="view" data-view-panel="dashboard">
           <div class="page-header">
             <div>
               <h1 class="page-title">Pusat Data</h1>
-              <p class="page-subtitle">Halo, <span id="dashGreetName">�</span> � <span id="dashDate">�</span></p>
+              <p class="page-subtitle">Halo, <span id="dashGreetName">—</span> · <span id="dashDate">—</span></p>
             </div>
             <div class="page-actions">
               <button class="btn btn-outline" data-publink="dashboard">
@@ -370,7 +370,7 @@
               <div class="card-header">
                 <div class="card-title">
                   <svg class="card-icon" data-icon="users"></svg>
-                  Tamu per Bagian � Bulan Ini
+                  Tamu per Bagian · Bulan Ini
                 </div>
               </div>
               <div class="card-body">
@@ -389,7 +389,7 @@
               </div>
               <div class="card-body">
                 <div id="pdEfektif"></div>
-                <div class="pd-footnote">Garis yang menurun berarti keputusan &amp; pelayanan makin cepat � bukti dampak positif penggunaan aplikasi.</div>
+                <div class="pd-footnote">Garis yang menurun berarti keputusan &amp; pelayanan makin cepat — bukti dampak positif penggunaan aplikasi.</div>
               </div>
             </div>
 
@@ -397,7 +397,7 @@
               <div class="card-header">
                 <div class="card-title">
                   <svg class="card-icon" data-icon="inbox"></svg>
-                  Persetujuan &amp; Sumber Daya � Bulan Ini
+                  Persetujuan &amp; Sumber Daya · Bulan Ini
                 </div>
               </div>
               <div class="card-body">
@@ -412,7 +412,7 @@
               <div class="card-header">
                 <div class="card-title">
                   <svg class="card-icon" data-icon="clipboard"></svg>
-                  Ringkasan Modul � Bulan Ini vs Bulan Lalu
+                  Ringkasan Modul · Bulan Ini vs Bulan Lalu
                 </div>
               </div>
               <div class="card-body flush">
@@ -450,7 +450,7 @@
           </div>
         </section>
 
-        <!-- --- VIEW: DIGITAMU --- -->
+        <!-- ═══ VIEW: DIGITAMU ═══ -->
         <section class="view" data-view-panel="digitamu">
           <div class="page-header">
             <div>
@@ -511,7 +511,7 @@
               <div class="input-icon" style="width:230px;max-width:45vw">
                 <svg data-icon="search"></svg>
                 <input type="search" class="form-control" id="tamuSearch"
-                       placeholder="Cari nama / instansi�" style="padding-top:8px;padding-bottom:8px">
+                       placeholder="Cari nama / instansi…" style="padding-top:8px;padding-bottom:8px">
               </div>
             </div>
             <div class="card-body flush">
@@ -535,7 +535,7 @@
           </div>
         </section>
 
-        <!-- --- VIEW: KENDARAAN & BBM --- -->
+        <!-- ═══ VIEW: KENDARAAN & BBM ═══ -->
         <section class="view" data-view-panel="kendaraan">
           <div class="page-header">
             <div>
@@ -609,14 +609,14 @@
                   <div class="budget-head">
                     <div>
                       <div class="text-muted" style="font-size:12px">Anggaran BBM bulan ini</div>
-                      <div id="bbmBudgetVal" style="font-size:22px;font-weight:800;color:var(--text-primary)">�</div>
+                      <div id="bbmBudgetVal" style="font-size:22px;font-weight:800;color:var(--text-primary)">—</div>
                     </div>
-                    <span class="badge" id="bbmBudgetBadge">�</span>
+                    <span class="badge" id="bbmBudgetBadge">—</span>
                   </div>
                   <div class="progress" style="margin-top:12px">
                     <div class="progress-bar" id="bbmBudgetBar" style="width:0%"></div>
                   </div>
-                  <div class="text-muted" style="font-size:11.5px;margin-top:8px" id="bbmBudgetSub">�</div>
+                  <div class="text-muted" style="font-size:11.5px;margin-top:8px" id="bbmBudgetSub">—</div>
                 </div>
               </div>
               <div class="card">
@@ -683,7 +683,7 @@
             </div>
             <p class="text-muted" style="font-size:11.5px;margin-top:10px">
               KM saat ini dirakit otomatis dari laporan driver: <b>Trip / KM</b> peminjaman, <b>odometer</b> saat isi BBM,
-              dan KM master kendaraan � angka terbesar yang dipakai. Interval bisa diubah lewat Settings key
+              dan KM master kendaraan — angka terbesar yang dipakai. Interval bisa diubah lewat Settings key
               <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">servis_interval_km</span> &amp;
               <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">servis_interval_bulan</span>.
             </p>
@@ -691,7 +691,7 @@
 
         </section>
 
-        <!-- --- VIEW: BOOKING RUANGAN --- -->
+        <!-- ═══ VIEW: BOOKING RUANGAN ═══ -->
         <section class="view" data-view-panel="ruangan">
           <div class="page-header">
             <div>
@@ -759,7 +759,7 @@
           </div>
         </section>
 
-        <!-- --- VIEW: ATK --- -->
+        <!-- ═══ VIEW: ATK ═══ -->
         <section class="view" data-view-panel="atk">
           <div class="page-header">
             <div>
@@ -792,7 +792,7 @@
                 <div style="display:flex;gap:8px;align-items:center">
                   <div class="input-icon" style="width:200px;max-width:45vw">
                     <svg data-icon="search"></svg>
-                    <input type="search" class="form-control" id="atkSearch" placeholder="Cari barang�"
+                    <input type="search" class="form-control" id="atkSearch" placeholder="Cari barang…"
                            style="padding-top:8px;padding-bottom:8px">
                   </div>
                   <button class="btn btn-outline btn-sm hidden" id="atkAddStockBtn" data-admin="true">
@@ -873,14 +873,14 @@
                 </div>
                 <div class="card-body">
                   <div class="mini-chart" id="atkAnChartNilai"></div>
-                  <p class="form-hint text-center mt-1">Kuantitas diminta � harga satuan barang (Rp ribu)</p>
+                  <p class="form-hint text-center mt-1">Kuantitas diminta × harga satuan barang (Rp ribu)</p>
                 </div>
               </div>
             </div>
             <div class="card mt-3">
               <div class="card-header">
                 <div class="card-title"><svg class="card-icon" data-icon="star"></svg> Klasifikasi Kebutuhan (Analisis ABC)</div>
-                <span class="form-hint">Primer = 70% volume teratas � Sekunder = 70�90% � Tersier = sisanya</span>
+                <span class="form-hint">Primer = 70% volume teratas · Sekunder = 70–90% · Tersier = sisanya</span>
               </div>
               <div class="card-body flush">
                 <div class="table-wrap">
@@ -904,7 +904,7 @@
           </div>
         </section>
 
-        <!-- --- VIEW: PUSAT PERSETUJUAN --- -->
+        <!-- ═══ VIEW: PUSAT PERSETUJUAN ═══ -->
         <section class="view" data-view-panel="approval">
           <div class="page-header">
             <div>
@@ -912,7 +912,7 @@
               <p class="page-subtitle">Semua pengajuan yang menunggu keputusan Anda</p>
             </div>
             <div class="page-actions">
-              <button class="btn btn-outline" id="apvPesanBtn" title="Kirim pesan bebas ke grup / user / email � di luar konteks keputusan">
+              <button class="btn btn-outline" id="apvPesanBtn" title="Kirim pesan bebas ke grup / user / email — di luar konteks keputusan">
                 <svg class="btn-icon" data-icon="send"></svg> Kirim Pesan
               </button>
               <button class="btn btn-outline" id="apvRefreshBtn">
@@ -930,7 +930,7 @@
         </section>
 
 
-        <!-- --- VIEW: MAGANG (FASE 3) --- -->
+        <!-- ═══ VIEW: MAGANG (FASE 3) ═══ -->
         <section class="view" data-view-panel="magang">
           <div class="page-header">
             <div>
@@ -971,7 +971,7 @@
                 <div style="display:flex;gap:8px;align-items:center">
                   <div class="input-icon" style="width:190px;max-width:42vw">
                     <svg data-icon="search"></svg>
-                    <input type="search" class="form-control" id="mgSearch" placeholder="Cari nama / kampus�"
+                    <input type="search" class="form-control" id="mgSearch" placeholder="Cari nama / kampus…"
                            style="padding-top:8px;padding-bottom:8px">
                   </div>
                   <select class="form-control" id="mgFilterStatus" style="width:auto">
@@ -1002,7 +1002,7 @@
             </div>
           </div>
 
-          <!-- Panel: Lamaran Masuk (V6.8) � UI review utk backend getLamaranMagang -->
+          <!-- Panel: Lamaran Masuk (V6.8) — UI review utk backend getLamaranMagang -->
           <div class="tab-panel" data-tab-panel="lamaran">
             <div class="card">
               <div class="card-header">
@@ -1089,14 +1089,14 @@
             <p class="text-muted" style="font-size:12px;margin-top:10px">
               Halaman publik magang kini menjadi <b>Form Lamaran + upload CV</b>:
               <span class="cell-mono">?page=lamaran-magang</span>
-              (alias lama <span class="cell-mono">?page=checkin-magang</span> tetap berfungsi) �
+              (alias lama <span class="cell-mono">?page=checkin-magang</span> tetap berfungsi) —
               cocok dibagikan ke kampus/sekolah atau dijadikan QR code. Lamaran masuk tersimpan di
               sheet <span class="cell-mono">Magang_Lamaran</span> + notifikasi Telegram ke grup admin.
               Presensi harian peserta dilakukan lewat akun login (role magang).
             </p>
           </div>
 
-          <!-- Panel: Rekap Bulanan Presensi (V6.9) � bahan penilaian pembimbing -->
+          <!-- Panel: Rekap Bulanan Presensi (V6.9) — bahan penilaian pembimbing -->
           <div class="tab-panel" data-tab-panel="rekap">
             <div class="card">
               <div class="card-header">
@@ -1239,7 +1239,7 @@
             <p class="text-muted" style="font-size:12px;margin-top:10px">
               Peserta mengajukan lewat <b>Portal Magang</b> (akun role magang).
               Saat pengajuan <b>disetujui</b>, presensi peserta pada rentang tanggal itu
-              otomatis terisi berstatus sesuai jenisnya (izin/sakit) � tanpa menimpa
+              otomatis terisi berstatus sesuai jenisnya (izin/sakit) — tanpa menimpa
               presensi yang sudah ada.
             </p>
           </div>
@@ -1251,7 +1251,7 @@
                 <div class="card-title"><svg class="card-icon" data-icon="award"></svg> Alumni Magang BPJS Kesehatan KC Bengkulu</div>
                 <div class="input-icon" style="width:200px;max-width:44vw">
                   <svg data-icon="search"></svg>
-                  <input type="search" class="form-control" id="mgAlumniSearch" placeholder="Cari alumni�"
+                  <input type="search" class="form-control" id="mgAlumniSearch" placeholder="Cari alumni…"
                          style="padding-top:8px;padding-bottom:8px">
                 </div>
               </div>
@@ -1275,12 +1275,12 @@
             </div>
             <p class="text-muted" style="font-size:12px;margin-top:10px">
               Peserta otomatis pindah ke daftar alumni saat periode magangnya berakhir.
-              Sertifikat diterbitkan sebagai PDF resmi bernomor dan tersimpan rapi di Google Drive �
+              Sertifikat diterbitkan sebagai PDF resmi bernomor dan tersimpan rapi di Google Drive —
               lengkapi nama Kepala Cabang di <b>Pengaturan Aplikasi</b> sebelum menerbitkan.
             </p>
           </div>
         </section>
-        <!-- --- VIEW: PORTAL MAGANG (role magang) --- -->
+        <!-- ═══ VIEW: PORTAL MAGANG (role magang) ═══ -->
         <section class="view" data-view-panel="magang-self">
           <div class="page-header">
             <div>
@@ -1294,13 +1294,13 @@
             </div>
           </div>
 
-          <!-- V7.1: panel info ringkas � identitas + fakta kunci (periode, bagian,
+          <!-- V7.1: panel info ringkas — identitas + fakta kunci (periode, bagian,
                pembimbing, kampus) dalam SATU kartu padat, terlihat di semua tab -->
           <div class="card" style="margin-bottom:16px">
             <div class="info-strip">
               <div class="user-avatar info-avatar" id="msAvatar">M</div>
               <div class="info-ident">
-                <div class="info-nama" id="msNama">Memuat�</div>
+                <div class="info-nama" id="msNama">Memuat…</div>
                 <div class="info-meta" id="msMeta"></div>
               </div>
               <div id="msStatusChip"></div>
@@ -1308,7 +1308,7 @@
             <div class="info-grid" id="msInfoGrid"></div>
           </div>
 
-          <!-- V7.7: pengumuman pengelola (patch komunikasi) � tersembunyi bila kosong/patch absen -->
+          <!-- V7.7: pengumuman pengelola (patch komunikasi) — tersembunyi bila kosong/patch absen -->
           <div class="card hidden" style="margin-bottom:16px" id="msPengumumanCard">
             <div class="card-header"><div class="card-title"><svg class="card-icon" data-icon="megaphone"></svg> Pengumuman Pengelola</div></div>
             <div class="card-body" id="msPengumumanList" style="padding-top:6px"></div>
@@ -1329,7 +1329,7 @@
               <div class="card" id="msForm">
                 <div class="card-header"><div class="card-title"><svg class="card-icon" data-icon="clock"></svg> Absen Hari Ini</div></div>
                 <div class="card-body">
-                  <div class="alert alert-info" id="msToday" style="margin-bottom:14px">Memuat status�</div>
+                  <div class="alert alert-info" id="msToday" style="margin-bottom:14px">Memuat status…</div>
                   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
                     <button type="button" class="btn btn-primary" id="msMasukBtn">Check-in Masuk</button>
                     <button type="button" class="btn btn-outline" id="msPulangBtn">Check-out Pulang</button>
@@ -1341,7 +1341,7 @@
                   </div>
                   <div class="form-group" style="margin-bottom:14px">
                     <label class="form-label">Lokasi</label>
-                    <div class="alert" id="msLokBox"><span id="msLokText">Mendeteksi lokasi�</span></div>
+                    <div class="alert" id="msLokBox"><span id="msLokText">Mendeteksi lokasi…</span></div>
                   </div>
                   <button class="btn btn-primary btn-block" id="msSubmit">Check-in Masuk</button>
                 </div>
@@ -1364,7 +1364,7 @@
             </div>
           </div>
 
-          <!-- Panel: Logbook harian (V7.1 � backend sudah lama ada, kini tampil di portal) -->
+          <!-- Panel: Logbook harian (V7.1 — backend sudah lama ada, kini tampil di portal) -->
           <div class="tab-panel" data-tab-panel="logbook">
             <div class="card">
               <div class="card-header">
@@ -1390,7 +1390,7 @@
               </div>
             </div>
             <p class="text-muted" style="font-size:12px;margin-top:10px">
-              Isi logbook setiap hari kerja � pembimbing mereview menjadi <b>Approved</b> atau
+              Isi logbook setiap hari kerja — pembimbing mereview menjadi <b>Approved</b> atau
               <b>Revisi</b>. Entri berstatus Revisi dapat diperbaiki dengan mengirim entri baru
               pada tanggal yang sama.
             </p>
@@ -1401,7 +1401,7 @@
             <div id="msProfilBox">
               <div class="empty-state">
                 <div class="empty-icon"><svg data-icon="user" style="width:24px;height:24px"></svg></div>
-                <div class="empty-title">Memuat data profil�</div>
+                <div class="empty-title">Memuat data profil…</div>
               </div>
             </div>
           </div>
@@ -1431,7 +1431,7 @@
               </div>
             </div>
             <p class="text-muted" style="font-size:12px;margin-top:10px">
-              Tekan <b>Kumpulkan</b> untuk mengirim hasil/tautan pekerjaan (bisa lampirkan foto) �
+              Tekan <b>Kumpulkan</b> untuk mengirim hasil/tautan pekerjaan (bisa lampirkan foto) —
               pembimbing akan menilai setelahnya.
             </p>
           </div>
@@ -1475,19 +1475,19 @@
               <div class="card-body" id="msSertBox">
                 <div class="empty-state">
                   <div class="empty-icon"><svg data-icon="award" style="width:24px;height:24px"></svg></div>
-                  <div class="empty-title">Memuat status sertifikat�</div>
+                  <div class="empty-title">Memuat status sertifikat…</div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- --- VIEW: PRESENSI TAD (FASE 3) --- -->
+        <!-- ═══ VIEW: PRESENSI TAD (FASE 3) ═══ -->
         <section class="view" data-view-panel="tad">
           <div class="page-header">
             <div>
               <h1 class="page-title">Tenaga Alih Daya</h1>
-              <p class="page-subtitle">Tenaga alih daya: Security � Driver � Cleaning Service</p>
+              <p class="page-subtitle">Tenaga alih daya: Security · Driver · Cleaning Service</p>
             </div>
             <div class="page-actions">
               <button class="btn btn-outline" data-publink="tad">
@@ -1543,7 +1543,7 @@
             </div>
             <p class="text-muted" style="font-size:12px;margin-top:10px">
               Presensi mandiri TAD (selfie + lokasi): URL aplikasi +
-              <span class="cell-mono">?page=checkin-tad</span> � satu tombol otomatis
+              <span class="cell-mono">?page=checkin-tad</span> — satu tombol otomatis
               mencatat masuk lalu pulang.
             </p>
           </div>
@@ -1576,7 +1576,7 @@
           <div class="tab-panel" data-tab-panel="izin">
             <div class="card">
               <div class="card-header">
-                <div class="card-title"><svg class="card-icon" data-icon="calendar"></svg> Pengajuan Izin � Sakit � Cuti TAD</div>
+                <div class="card-title"><svg class="card-icon" data-icon="calendar"></svg> Pengajuan Izin · Sakit · Cuti TAD</div>
                 <select class="form-control" id="tadIzinFilter" style="width:auto">
                   <option value="">Semua status</option>
                   <option value="pending">Menunggu</option>
@@ -1600,7 +1600,7 @@
             </div>
             <p class="text-muted" style="font-size:12px;margin-top:10px">
               Personel mengajukan lewat <b>Portal TAD</b>. Bila <b>disetujui</b>, presensi Driver/CSO pada
-              rentang tanggal itu otomatis terisi sesuai jenisnya � pengajuan <b>Security</b> hanya tercatat
+              rentang tanggal itu otomatis terisi sesuai jenisnya — pengajuan <b>Security</b> hanya tercatat
               sebagai keputusan (presensi shift Security dikelola di panel Security).
             </p>
           </div>
@@ -1622,8 +1622,8 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th>Diajukan</th><th>Nama</th><th>Jenis</th><th>Tanggal � Jam</th>
-                        <th>Uraian</th><th>Lampiran � Bukti</th><th>Status</th><th style="text-align:right">Aksi</th>
+                        <th>Diajukan</th><th>Nama</th><th>Jenis</th><th>Tanggal · Jam</th>
+                        <th>Uraian</th><th>Lampiran · Bukti</th><th>Status</th><th style="text-align:right">Aksi</th>
                       </tr>
                     </thead>
                     <tbody id="tadLemburBody"></tbody>
@@ -1657,14 +1657,14 @@
               </div>
             </div>
             <p class="text-muted" style="font-size:12px;margin-top:10px">
-              Data gabungan sheet <b>Drivers � Security � Cleaning</b>. Isi kolom <b>email</b> pada sheet
-              (samakan dengan email akun user) agar personel otomatis tertaut ke <b>Portal TAD</b> �
+              Data gabungan sheet <b>Drivers · Security · Cleaning</b>. Isi kolom <b>email</b> pada sheet
+              (samakan dengan email akun user) agar personel otomatis tertaut ke <b>Portal TAD</b> —
               tanpa email, penautan jatuh ke pencocokan nama persis.
             </p>
           </div>
         </section>
 
-        <!-- --- VIEW: PORTAL TAD (layanan mandiri driver/cso/security) --- -->
+        <!-- ═══ VIEW: PORTAL TAD (layanan mandiri driver/cso/security) ═══ -->
         <section class="view" data-view-panel="tad-self">
           <div class="page-header">
             <div>
@@ -1682,14 +1682,14 @@
             <div class="card-body" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
               <div class="user-avatar" style="width:46px;height:46px;font-size:17px" id="tsAvatar">?</div>
               <div style="flex:1;min-width:180px">
-                <div style="font-weight:800;font-size:16px" id="tsNama">Memuat�</div>
-                <div class="text-muted" style="font-size:12.5px" id="tsMeta">�</div>
+                <div style="font-weight:800;font-size:16px" id="tsNama">Memuat…</div>
+                <div class="text-muted" style="font-size:12.5px" id="tsMeta">—</div>
               </div>
               <div id="tsStatusChip"></div>
             </div>
           </div>
 
-          <!-- V7.7: pengumuman pengelola (patch komunikasi) � tersembunyi bila kosong/patch absen -->
+          <!-- V7.7: pengumuman pengelola (patch komunikasi) — tersembunyi bila kosong/patch absen -->
           <div class="card mb-3 hidden" id="tsPengumumanCard">
             <div class="card-header"><div class="card-title"><svg class="card-icon" data-icon="megaphone"></svg> Pengumuman Pengelola</div></div>
             <div class="card-body" id="tsPengumumanList" style="padding-top:6px"></div>
@@ -1702,23 +1702,23 @@
             <button class="tab" data-tab="profil">Data Saya</button>
           </div>
 
-          <!-- Panel: Presensi (driver & CSO � security pakai panel presensi shift sendiri) -->
+          <!-- Panel: Presensi (driver & CSO — security pakai panel presensi shift sendiri) -->
           <div class="tab-panel is-active" data-tab-panel="presensi">
             <div class="grid-2">
               <div class="card">
                 <div class="card-header"><div class="card-title"><svg class="card-icon" data-icon="clock"></svg> Presensi Hari Ini</div></div>
                 <div class="card-body">
-                  <p class="text-muted" style="font-size:12.5px" id="tsToday">Memuat�</p>
+                  <p class="text-muted" style="font-size:12.5px" id="tsToday">Memuat…</p>
                   <div class="form-group mb-2 mt-2">
                     <label class="form-label">Foto Selfie (opsional)</label>
                     <input type="file" accept="image/*" capture="user" class="form-control" id="tsFoto">
                     <div class="file-preview" id="tsFotoPrev"><img id="tsFotoPrevImg" alt="Pratinjau"></div>
                   </div>
-                  <div class="form-hint mb-2" id="tsLokText">Lokasi: mendeteksi�</div>
+                  <div class="form-hint mb-2" id="tsLokText">Lokasi: mendeteksi…</div>
                   <button class="btn btn-primary btn-lg btn-block" id="tsPresensiBtn">
                     <span id="tsPresensiBtnText">Presensi Sekarang</span>
                   </button>
-                  <p class="form-hint mt-1">Satu tombol: belum ada presensi ? tercatat <b>MASUK</b>; sudah masuk ? tercatat <b>PULANG</b>.</p>
+                  <p class="form-hint mt-1">Satu tombol: belum ada presensi → tercatat <b>MASUK</b>; sudah masuk → tercatat <b>PULANG</b>.</p>
                 </div>
               </div>
               <div class="card">
@@ -1732,7 +1732,7 @@
                   </div>
                 </div>
                 <p class="text-muted" style="font-size:11px;padding:8px 14px 12px;margin:0">
-                  Riwayat tersinkron kalender kerja: hari kerja Senin�Jumat; Sabtu, Minggu,
+                  Riwayat tersinkron kalender kerja: hari kerja Senin–Jumat; Sabtu, Minggu,
                   libur nasional &amp; cuti bersama tampil sebagai <b>Libur</b>. Presensi pada hari libur ditandai (lembur/piket).
                 </p>
               </div>
@@ -1743,7 +1743,7 @@
           <div class="tab-panel" data-tab-panel="izin">
             <div class="card">
               <div class="card-header">
-                <div class="card-title"><svg class="card-icon" data-icon="calendar"></svg> Pengajuan Izin � Sakit � Cuti</div>
+                <div class="card-title"><svg class="card-icon" data-icon="calendar"></svg> Pengajuan Izin · Sakit · Cuti</div>
                 <button class="btn btn-primary btn-sm" id="tsIzinAddBtn"><svg class="btn-icon" data-icon="plus"></svg> Ajukan</button>
               </div>
               <div class="card-body flush">
@@ -1770,7 +1770,7 @@
               <div class="card-body flush">
                 <div class="table-wrap">
                   <table class="table">
-                    <thead><tr><th>Diajukan</th><th>Jenis</th><th>Tanggal � Jam</th><th>Uraian</th><th>Status</th><th>Catatan</th><th style="text-align:right">Surat � Bukti</th></tr></thead>
+                    <thead><tr><th>Diajukan</th><th>Jenis</th><th>Tanggal · Jam</th><th>Uraian</th><th>Status</th><th>Catatan</th><th style="text-align:right">Surat · Bukti</th></tr></thead>
                     <tbody id="tsLemburBody"></tbody>
                   </table>
                 </div>
@@ -1783,13 +1783,13 @@
             <div id="tsProfilBox">
               <div class="empty-state">
                 <div class="empty-icon"><svg data-icon="user" style="width:24px;height:24px"></svg></div>
-                <div class="empty-title">Memuat data profil�</div>
+                <div class="empty-title">Memuat data profil…</div>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- --- VIEW: SECURITY (FASE 3) --- -->
+        <!-- ═══ VIEW: SECURITY (FASE 3) ═══ -->
         <section class="view" data-view-panel="security">
           <div class="page-header">
             <div>
@@ -1926,7 +1926,7 @@
           </div>
         </section>
 
-        <!-- --- VIEW: AGENDA PIMPINAN (FASE 4) --- -->
+        <!-- ═══ VIEW: AGENDA PIMPINAN (FASE 4) ═══ -->
         <section class="view" data-view-panel="agenda">
           <div class="page-header">
             <div>
@@ -1998,7 +1998,7 @@
           </div>
         </section>
 
-        <!-- --- VIEW: KALENDER BUDAYA (FASE 4) --- -->
+        <!-- ═══ VIEW: KALENDER BUDAYA (FASE 4) ═══ -->
         <section class="view" data-view-panel="budaya">
           <div class="page-header">
             <div>
@@ -2029,7 +2029,7 @@
                 <p class="text-muted" style="font-size:11.5px;margin-top:10px">
                   Kalender menggabungkan <span class="cal-ev" style="display:inline">kegiatan budaya</span>
                   dan <span class="cal-ev ev-blue" style="display:inline">agenda pimpinan</span>.
-                  Kegiatan harian tampil pada hari kerja (Senin�Jumat).
+                  Kegiatan harian tampil pada hari kerja (Senin–Jumat).
                 </p>
               </div>
             </div>
@@ -2061,7 +2061,7 @@
           </div>
         </section>
 
-        <!-- --- VIEW: KONTEN SOSMED (FASE 4) --- -->
+        <!-- ═══ VIEW: KONTEN SOSMED (FASE 4) ═══ -->
         <section class="view" data-view-panel="sosmed">
           <div class="page-header">
             <div>
@@ -2137,7 +2137,7 @@
           </div>
         </section>
 
-        <!-- --- VIEW: MONITORING BERITA (FASE 4) --- -->
+        <!-- ═══ VIEW: MONITORING BERITA (FASE 4) ═══ -->
         <section class="view" data-view-panel="berita">
           <div class="page-header">
             <div>
@@ -2192,12 +2192,12 @@
           </div>
         </section>
 
-        <!-- --- VIEW: ECO OFFICE (FASE 4) --- -->
+        <!-- ═══ VIEW: ECO OFFICE (FASE 4) ═══ -->
         <section class="view" data-view-panel="eco">
           <div class="page-header">
             <div>
               <h1 class="page-title">Eco Office</h1>
-              <p class="page-subtitle">Checklist harian hemat energi &amp; kerapian kantor � 20 item per shift</p>
+              <p class="page-subtitle">Checklist harian hemat energi &amp; kerapian kantor — 20 item per shift</p>
             </div>
             <div class="page-actions">
               <button class="btn btn-outline" id="ecoRefreshBtn">
@@ -2239,12 +2239,12 @@
                   </div>
                   <div class="form-group" style="text-align:left;margin-top:16px">
                     <label class="form-label">Catatan (opsional)</label>
-                    <textarea class="form-control" id="ecoCatatan" rows="2" placeholder="Temuan / tindak lanjut�"></textarea>
+                    <textarea class="form-control" id="ecoCatatan" rows="2" placeholder="Temuan / tindak lanjut…"></textarea>
                   </div>
                   <button class="btn btn-primary btn-block" id="ecoSubmit" style="width:100%">
                     <span id="ecoSubmitText">Simpan Checklist</span>
                   </button>
-                  <p class="text-muted" style="font-size:11px;margin-top:9px">Satu checklist per shift per hari � atas nama Anda.</p>
+                  <p class="text-muted" style="font-size:11px;margin-top:9px">Satu checklist per shift per hari — atas nama Anda.</p>
                 </div>
               </div>
             </div>
@@ -2279,14 +2279,14 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title"><svg class="card-icon" data-icon="alert"></svg> Temuan Terbuka &amp; Riwayat</div>
-                <span class="text-muted" style="font-size:12px">Item checklist yang terlewat otomatis menjadi temuan � tuntaskan lalu tandai beres</span>
+                <span class="text-muted" style="font-size:12px">Item checklist yang terlewat otomatis menjadi temuan — tuntaskan lalu tandai beres</span>
               </div>
               <div class="card-body flush">
                 <div class="table-wrap">
                   <table class="table">
                     <thead>
                       <tr>
-                        <th>Tanggal � Shift</th>
+                        <th>Tanggal · Shift</th>
                         <th>Item</th>
                         <th>Pelapor</th>
                         <th>Status / Tindak Lanjut</th>
@@ -2313,12 +2313,12 @@
           </div>
         </section>
 
-        <!-- --- VIEW: LAPORAN & EXPORT (FASE 4) --- -->
+        <!-- ═══ VIEW: LAPORAN & EXPORT (FASE 4) ═══ -->
         <section class="view" data-view-panel="laporan">
           <div class="page-header">
             <div>
               <h1 class="page-title">Laporan &amp; Export</h1>
-              <p class="page-subtitle">Tarik data lintas modul � pratinjau, unduh CSV (Excel), atau cetak</p>
+              <p class="page-subtitle">Tarik data lintas modul — pratinjau, unduh CSV (Excel), atau cetak</p>
             </div>
           </div>
 
@@ -2375,7 +2375,7 @@
           </div>
         </section>
 
-        <!-- --- VIEW: MANAJEMEN USER (ADMIN) --- -->
+        <!-- ═══ VIEW: MANAJEMEN USER (ADMIN) ═══ -->
         <section class="view" data-view-panel="users">
           <div class="page-header">
             <div>
@@ -2409,12 +2409,12 @@
           </div>
         </section>
 
-        <!-- --- VIEW: PENGATURAN APLIKASI (HALAMAN PENUH, ADMIN) --- -->
+        <!-- ═══ VIEW: PENGATURAN APLIKASI (HALAMAN PENUH, ADMIN) ═══ -->
         <section class="view" data-view-panel="pengaturan">
           <div class="page-header">
             <div>
               <h1 class="page-title">Pengaturan Aplikasi</h1>
-              <p class="page-subtitle">Telegram, email, geofence presensi, kalender, registrasi, komunikasi magang/TAD &amp; dokumen � hanya untuk Admin</p>
+              <p class="page-subtitle">Telegram, email, geofence presensi, kalender, registrasi, komunikasi magang/TAD &amp; dokumen — hanya untuk Admin</p>
             </div>
             <div class="page-actions">
               <button class="btn btn-outline" id="setReloadBtn">
@@ -2428,7 +2428,7 @@
 
           <div class="alert alert-info" style="font-size:12.5px" id="setInfoBar">
             Perubahan berlaku ke seluruh aplikasi setelah <b>Simpan</b>. Nilai yang formatnya salah
-            <b>ditolak dengan pesan jelas</b> � tidak akan tersimpan diam-diam lalu membuat error di pengguna lain.
+            <b>ditolak dengan pesan jelas</b> — tidak akan tersimpan diam-diam lalu membuat error di pengguna lain.
           </div>
 
           <div class="tabs" id="setTabs" style="margin-top:14px">
@@ -2452,12 +2452,12 @@
                   <div class="form-group full">
                     <label class="form-label">Bot Token</label>
                     <div style="display:flex;gap:8px">
-                      <input type="password" class="form-control" id="setBotToken" placeholder="123456:ABC-DEF� (dari @BotFather)" autocomplete="new-password" style="flex:1">
+                      <input type="password" class="form-control" id="setBotToken" placeholder="123456:ABC-DEF… (dari @BotFather)" autocomplete="new-password" style="flex:1">
                       <button class="btn btn-outline btn-sm" type="button" id="setTokenLihat" title="Tampilkan/sembunyikan ketikan">Lihat</button>
                       <button class="btn btn-outline btn-sm" type="button" id="setTokenHapus" title="Hapus token tersimpan">Hapus</button>
                     </div>
                     <div class="form-hint" id="setTokenHint">Buat bot lewat @BotFather di Telegram lalu salin token ke sini.
-                      <b>Demi keamanan, token tersimpan tidak pernah ditampilkan kembali</b> � kosongkan kolom ini untuk tetap memakai token lama.</div>
+                      <b>Demi keamanan, token tersimpan tidak pernah ditampilkan kembali</b> — kosongkan kolom ini untuk tetap memakai token lama.</div>
                   </div>
                   <div class="form-group full">
                     <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -2472,9 +2472,9 @@
                       </button>
                     </div>
                     <div class="alert alert-info hidden mt-1" id="setBotStatus" style="font-size:12px"></div>
-                    <div class="form-hint"><b>Aktifkan Bot (otomatis)</b> memilih sendiri jalur terbaik: webhook (instan) � atau, bila Telegram
+                    <div class="form-hint"><b>Aktifkan Bot (otomatis)</b> memilih sendiri jalur terbaik: webhook (instan) — atau, bila Telegram
                       menolak respons Apps Script (error 302), otomatis beralih ke <b>polling berkala (tiap 1 menit)</b> yang kebal masalah itu, membuang antrean lama,
-                      dan mengingat pilihannya 7 hari. Bila bot bisu terhadap <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">/start</span>, tekan <b>Diagnosa Lengkap</b> �
+                      dan mengingat pilihannya 7 hari. Bila bot bisu terhadap <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">/start</span>, tekan <b>Diagnosa Lengkap</b> —
                       setiap butir masalah ditampilkan bersama solusinya. Penjaga harian juga memeriksa &amp; memperbaiki jalur ini otomatis, lalu melapor ke email admin.</div>
                   </div>
                 </div>
@@ -2515,10 +2515,10 @@
                   </div>
                 </div>
                 <p class="text-muted" style="font-size:11.5px;margin-top:6px">
-                  Cara mendapat Chat ID grup: masukkan bot ke grup ? ketik
-                  <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">/id</span> di grup ? bot membalas Chat ID-nya
+                  Cara mendapat Chat ID grup: masukkan bot ke grup → ketik
+                  <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">/id</span> di grup → bot membalas Chat ID-nya
                   (tombol "Aktifkan Bot" harus sudah ditekan). Tombol <b>Tes</b> menyimpan pengaturan
-                  terlebih dahulu lalu mengirim pesan percobaan � bila gagal, penyebab &amp; solusinya ditampilkan.
+                  terlebih dahulu lalu mengirim pesan percobaan — bila gagal, penyebab &amp; solusinya ditampilkan.
                 </p>
               </div>
             </div>
@@ -2547,8 +2547,8 @@
                   </div>
                 </div>
                 <div class="alert alert-warning" style="font-size:12px;margin-top:10px">
-                  Bila muncul error izin <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">MailApp</span>: buka editor Apps Script ?
-                  jalankan fungsi <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">tesEmail()</span> sekali ? setujui izin ?
+                  Bila muncul error izin <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">MailApp</span>: buka editor Apps Script →
+                  jalankan fungsi <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">tesEmail()</span> sekali → setujui izin →
                   Deploy ulang versi baru. Setelah itu email berfungsi untuk semua pengguna.
                 </div>
               </div>
@@ -2602,8 +2602,8 @@
                       </button>
                       <a class="btn btn-outline btn-sm hidden" id="setLihatPeta" href="#" target="_blank" rel="noopener">Lihat Titik di Google Maps</a>
                     </div>
-                    <div class="form-hint">Berdiri di tengah gedung kantor lalu klik tombol ini � koordinat GPS terisi otomatis.
-                      Atau di Google Maps: klik kanan pada gedung ? klik angka lat, lng untuk menyalin.
+                    <div class="form-hint">Berdiri di tengah gedung kantor lalu klik tombol ini — koordinat GPS terisi otomatis.
+                      Atau di Google Maps: klik kanan pada gedung → klik angka lat, lng untuk menyalin.
                       Kosongkan Latitude/Longitude untuk mematikan pembatasan.</div>
                   </div>
                 </div>
@@ -2620,7 +2620,7 @@
                   <label class="form-label">Daftar Libur Tambahan</label>
                   <textarea class="form-control" id="setHariLibur" rows="4" style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px"
                     placeholder="2026-08-17:HUT RI;2026-09-01:Cuti Bersama"></textarea>
-                  <div class="form-hint">Format: <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">yyyy-MM-dd:Keterangan</span> � pisahkan
+                  <div class="form-hint">Format: <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">yyyy-MM-dd:Keterangan</span> — pisahkan
                     beberapa tanggal dengan titik-koma (<span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">;</span>). Kalender libur nasional
                     bawaan sudah tertanam; kolom ini untuk koreksi/penambahan (cuti bersama susulan, libur daerah).
                     Berpengaruh ke riwayat presensi, kepatuhan jadwal &amp; status lembur security.</div>
@@ -2647,8 +2647,8 @@
                   <div class="form-group">
                     <label class="form-label">Akun Baru Perlu Persetujuan Admin</label>
                     <select class="form-control" id="setRegistrasiApproval">
-                      <option value="0">Tidak � langsung aktif</option>
-                      <option value="1">Ya � admin aktifkan manual</option>
+                      <option value="0">Tidak — langsung aktif</option>
+                      <option value="1">Ya — admin aktifkan manual</option>
                     </select>
                     <div class="form-hint">Berlaku setelah pendaftar mengonfirmasi Telegram.</div>
                   </div>
@@ -2661,11 +2661,11 @@
                       <option value="security">Security</option>
                       <option value="cso">CSO</option>
                     </select>
-                    <div class="form-hint">Role awal setiap pendaftar mandiri. Pendaftar tetap dapat memilih jabatan pada form � nilai ini dipakai bila pilihan tidak valid. Maksimal setingkat staf (dikunci backend).</div>
+                    <div class="form-hint">Role awal setiap pendaftar mandiri. Pendaftar tetap dapat memilih jabatan pada form — nilai ini dipakai bila pilihan tidak valid. Maksimal setingkat staf (dikunci backend).</div>
                   </div>
                   <div class="form-group full">
                     <label class="form-label">Penerimaan Lamaran Magang</label>
-                    <div class="form-hint">Saklar buka/tutup form lamaran pindah ke tab <b>Halaman Publik</b> �
+                    <div class="form-hint">Saklar buka/tutup form lamaran pindah ke tab <b>Halaman Publik</b> —
                       satu tempat bersama saklar halaman publik lainnya (check-in tamu, BBM, presensi TAD).</div>
                   </div>
                 </div>
@@ -2673,7 +2673,7 @@
             </div>
           </div>
 
-          <!-- Panel: Halaman Publik (V6.8) � saklar buka/tutup + alasan tiap halaman tanpa login -->
+          <!-- Panel: Halaman Publik (V6.8) — saklar buka/tutup + alasan tiap halaman tanpa login -->
           <div class="tab-panel" data-tab-panel="halaman">
             <div class="card">
               <div class="card-header">
@@ -2694,11 +2694,11 @@
                       <option value="1">Aktif</option>
                       <option value="0">Nonaktif</option>
                     </select>
-                    <div class="form-hint"><span class="cell-mono">?page=checkin</span> � form registrasi mandiri tamu.</div>
+                    <div class="form-hint"><span class="cell-mono">?page=checkin</span> — form registrasi mandiri tamu.</div>
                   </div>
                   <div class="form-group">
-                    <label class="form-label">Alasan Penutupan � Check-in Tamu</label>
-                    <input type="text" class="form-control" id="setHalCheckinAlasan" placeholder="mis. Sedang perawatan � silakan lapor ke resepsionis">
+                    <label class="form-label">Alasan Penutupan — Check-in Tamu</label>
+                    <input type="text" class="form-control" id="setHalCheckinAlasan" placeholder="mis. Sedang perawatan — silakan lapor ke resepsionis">
                   </div>
                   <div class="form-group">
                     <label class="form-label">Input BBM Driver</label>
@@ -2706,10 +2706,10 @@
                       <option value="1">Aktif</option>
                       <option value="0">Nonaktif</option>
                     </select>
-                    <div class="form-hint"><span class="cell-mono">?page=checkin-bbm</span> � input pengisian BBM tanpa login.</div>
+                    <div class="form-hint"><span class="cell-mono">?page=checkin-bbm</span> — input pengisian BBM tanpa login.</div>
                   </div>
                   <div class="form-group">
-                    <label class="form-label">Alasan Penutupan � Input BBM</label>
+                    <label class="form-label">Alasan Penutupan — Input BBM</label>
                     <input type="text" class="form-control" id="setHalBbmAlasan" placeholder="mis. Input BBM sementara lewat admin">
                   </div>
                   <div class="form-group">
@@ -2718,10 +2718,10 @@
                       <option value="1">Aktif</option>
                       <option value="0">Nonaktif</option>
                     </select>
-                    <div class="form-hint"><span class="cell-mono">?page=checkin-tad</span> � absen tenaga alih daya.</div>
+                    <div class="form-hint"><span class="cell-mono">?page=checkin-tad</span> — absen tenaga alih daya.</div>
                   </div>
                   <div class="form-group">
-                    <label class="form-label">Alasan Penutupan � Presensi TAD</label>
+                    <label class="form-label">Alasan Penutupan — Presensi TAD</label>
                     <input type="text" class="form-control" id="setHalTadAlasan" placeholder="mis. Presensi dialihkan ke akun login">
                   </div>
                   <div class="form-group">
@@ -2730,10 +2730,10 @@
                       <option value="1">Aktif</option>
                       <option value="0">Nonaktif</option>
                     </select>
-                    <div class="form-hint"><span class="cell-mono">?page=presensi-magang</span> � absen peserta magang tanpa login. Jalur utama tetap portal login (role magang).</div>
+                    <div class="form-hint"><span class="cell-mono">?page=presensi-magang</span> — absen peserta magang tanpa login. Jalur utama tetap portal login (role magang).</div>
                   </div>
                   <div class="form-group">
-                    <label class="form-label">Alasan Penutupan � Presensi Magang</label>
+                    <label class="form-label">Alasan Penutupan — Presensi Magang</label>
                     <input type="text" class="form-control" id="setHalPresMagangAlasan" placeholder="mis. Gunakan Portal Magang di akun login Anda">
                   </div>
                   <div class="form-group">
@@ -2742,10 +2742,10 @@
                       <option value="1">Aktif (dibuka)</option>
                       <option value="0">Nonaktif (ditutup)</option>
                     </select>
-                    <div class="form-hint"><span class="cell-mono">?page=lamaran-magang</span> � form lamaran + unggah CV.</div>
+                    <div class="form-hint"><span class="cell-mono">?page=lamaran-magang</span> — form lamaran + unggah CV.</div>
                   </div>
                   <div class="form-group">
-                    <label class="form-label">Alasan Penutupan � Lamaran Magang</label>
+                    <label class="form-label">Alasan Penutupan — Lamaran Magang</label>
                     <input type="text" class="form-control" id="setLamaranAlasan" placeholder="mis. Kuota periode ini sudah penuh, buka kembali bulan depan">
                   </div>
                 </div>
@@ -2778,8 +2778,8 @@
                     <div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap">
                       <div style="flex:1;min-width:220px">
                         <input type="file" accept="image/png,image/jpeg,image/webp" class="form-control" id="setLogoFile">
-                        <input type="text" class="form-control" id="setLogoUrl" placeholder="�atau tempel URL Drive logo di sini" style="margin-top:8px">
-                        <div class="form-hint">Cara termudah: <b>pilih berkas</b> � logo langsung terunggah &amp; tersimpan.
+                        <input type="text" class="form-control" id="setLogoUrl" placeholder="…atau tempel URL Drive logo di sini" style="margin-top:8px">
+                        <div class="form-hint">Cara termudah: <b>pilih berkas</b> — logo langsung terunggah &amp; tersimpan.
                           Tampil di atas judul <b>SERTIFIKAT</b> (menggantikan teks kop) dan dokumen resmi lain.</div>
                       </div>
                       <div class="file-preview" id="setLogoPrev" style="width:120px;margin-top:0"><img id="setLogoPrevImg" alt="Logo"></div>
@@ -2802,7 +2802,7 @@
             </div>
           </div>
 
-          <!-- Panel: Komunikasi Magang/TAD (V7.7 � butuh Patch_Server_Komunikasi.gs) -->
+          <!-- Panel: Komunikasi Magang/TAD (V7.7 — butuh Patch_Server_Komunikasi.gs) -->
           <div class="tab-panel" data-tab-panel="komunikasi">
             <div class="alert alert-info" style="font-size:12.5px">
               Kanal komunikasi V7.7: peserta magang/TAD mengirim laporan lewat perintah bot <b>/lapor</b>,
@@ -2826,9 +2826,9 @@
                   </div>
                   <div class="form-group full">
                     <label class="form-label">Isi Pengumuman</label>
-                    <textarea class="form-control" id="komTeks" rows="4" maxlength="1000" placeholder="Tulis pengumuman (10�1.000 karakter)�"></textarea>
+                    <textarea class="form-control" id="komTeks" rows="4" maxlength="1000" placeholder="Tulis pengumuman (10–1.000 karakter)…"></textarea>
                     <div class="form-hint">Dikirim ke Telegram penerima yang tertaut (email menjadi cadangan bila belum tertaut).
-                      Batas server: <b>3 broadcast per jam</b> &amp; maksimum <b>80 penerima per kirim</b> � bila daftar terpotong, kirim ulang untuk sisanya.</div>
+                      Batas server: <b>3 broadcast per jam</b> &amp; maksimum <b>80 penerima per kirim</b> — bila daftar terpotong, kirim ulang untuk sisanya.</div>
                   </div>
                   <div class="form-group full">
                     <button class="btn btn-primary" id="komKirimBtn">
@@ -2873,7 +2873,7 @@
               <div class="card-body">
                 <div id="setDiagnosaHasil" class="text-muted" style="font-size:13px">
                   Klik <b>Jalankan Diagnosa</b> untuk memeriksa token bot, webhook, kelengkapan grup,
-                  kuota email, dan kegagalan pengiriman 7 hari terakhir � sebelum error sampai ke pengguna.
+                  kuota email, dan kegagalan pengiriman 7 hari terakhir — sebelum error sampai ke pengguna.
                 </div>
               </div>
             </div>
@@ -2899,7 +2899,7 @@
           </div>
         </section>
 
-        <!-- --- VIEW: PLACEHOLDER MODUL FASE BERIKUTNYA --- -->
+        <!-- ═══ VIEW: PLACEHOLDER MODUL FASE BERIKUTNYA ═══ -->
         <section class="view" data-view-panel="coming-soon">
           <div class="coming-soon">
             <div class="cs-icon"><svg data-icon="rocket"></svg></div>
@@ -2917,7 +2917,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: DAFTARKAN TAMU --- -->
+  <!-- ═══ MODAL: DAFTARKAN TAMU ═══ -->
   <div class="modal-backdrop" id="modalTamu">
     <div class="modal">
       <div class="modal-header">
@@ -2936,7 +2936,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">No. HP</label>
-            <input type="tel" class="form-control" id="fHp" inputmode="tel" placeholder="08xx�">
+            <input type="tel" class="form-control" id="fHp" inputmode="tel" placeholder="08xx…">
           </div>
           <div class="form-group full">
             <label class="form-label">Instansi / Asal</label>
@@ -2965,7 +2965,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: NOMOR ANTRIAN BERHASIL --- -->
+  <!-- ═══ MODAL: NOMOR ANTRIAN BERHASIL ═══ -->
   <div class="modal-backdrop" id="modalAntrianOk">
     <div class="modal modal-sm">
       <div class="modal-body text-center" style="padding:34px 26px">
@@ -2981,7 +2981,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: GANTI PASSWORD --- -->
+  <!-- ═══ MODAL: GANTI PASSWORD ═══ -->
   <div class="modal-backdrop" id="modalPass">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -3010,7 +3010,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: TAMBAH USER (ADMIN) --- -->
+  <!-- ═══ MODAL: TAMBAH USER (ADMIN) ═══ -->
   <div class="modal-backdrop" id="modalUser">
     <div class="modal">
       <div class="modal-header">
@@ -3065,7 +3065,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: AJUKAN KENDARAAN --- -->
+  <!-- ═══ MODAL: AJUKAN KENDARAAN ═══ -->
   <div class="modal-backdrop" id="modalKendaraan">
     <div class="modal">
       <div class="modal-header">
@@ -3081,7 +3081,7 @@
           <div class="form-group">
             <label class="form-label">Sampai Tanggal</label>
             <input type="date" class="form-control" id="kndFTanggalSelesai">
-            <span class="form-hint">Kosongkan bila hanya 1 hari. Maks 14 hari � satu pengajuan cukup untuk seluruh rentang.</span>
+            <span class="form-hint">Kosongkan bila hanya 1 hari. Maks 14 hari — satu pengajuan cukup untuk seluruh rentang.</span>
           </div>
           <div class="form-group">
             <label class="form-label">Jumlah Penumpang</label>
@@ -3108,12 +3108,12 @@
           </div>
           <div class="form-group">
             <label class="form-label">Kendaraan</label>
-            <select class="form-control" id="kndFKendaraan"><option value="">� Pilih kendaraan �</option></select>
+            <select class="form-control" id="kndFKendaraan"><option value="">— Pilih kendaraan —</option></select>
             <span class="form-hint">Hanya armada &amp; driver <b>operasional</b> yang dapat dibooking (mobil Kacab, BPJS Keliling, dan operasional Kakab dikelola terpisah). Kosongkan bila menyerahkan pilihan ke pengelola.</span>
           </div>
           <div class="form-group">
             <label class="form-label">Driver</label>
-            <select class="form-control" id="kndFDriver"><option value="">� Tanpa driver �</option></select>
+            <select class="form-control" id="kndFDriver"><option value="">— Tanpa driver —</option></select>
           </div>
           <div class="form-group full">
             <label class="form-label">Keperluan</label>
@@ -3132,7 +3132,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: TRIP LOG (KM) --- -->
+  <!-- ═══ MODAL: TRIP LOG (KM) ═══ -->
   <div class="modal-backdrop" id="modalTripLog">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -3141,7 +3141,7 @@
       </div>
       <div class="modal-body">
         <div class="mini-item" style="border:1px solid var(--border);border-radius:10px;margin-bottom:14px">
-          <div><div class="mini-main" id="tripInfoTujuan">�</div><div class="mini-sub" id="tripInfoMeta">�</div></div>
+          <div><div class="mini-main" id="tripInfoTujuan">—</div><div class="mini-sub" id="tripInfoMeta">—</div></div>
         </div>
         <input type="hidden" id="tripId">
         <!-- V7.8: pemohon yang perjalanannya memakai driver hanya melihat info di bawah
@@ -3155,7 +3155,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">KM Kembali</label>
-          <input type="number" class="form-control" id="tripKmKembali" min="0" placeholder="Isi saat kembali ? booking selesai">
+          <input type="number" class="form-control" id="tripKmKembali" min="0" placeholder="Isi saat kembali → booking selesai">
           <span class="form-hint">Mengisi KM kembali akan menyelesaikan booking &amp; memperbarui odometer kendaraan.</span>
         </div>
         </div>
@@ -3167,7 +3167,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: CATAT PENGISIAN BBM --- -->
+  <!-- ═══ MODAL: CATAT PENGISIAN BBM ═══ -->
   <div class="modal-backdrop" id="modalBBM">
     <div class="modal">
       <div class="modal-header">
@@ -3178,11 +3178,11 @@
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label">Kendaraan <span class="req">*</span></label>
-            <select class="form-control" id="bbmFKendaraan"><option value="">� Pilih kendaraan �</option></select>
+            <select class="form-control" id="bbmFKendaraan"><option value="">— Pilih kendaraan —</option></select>
           </div>
           <div class="form-group">
             <label class="form-label">Driver</label>
-            <select class="form-control" id="bbmFDriver"><option value="">� Tanpa driver �</option></select>
+            <select class="form-control" id="bbmFDriver"><option value="">— Tanpa driver —</option></select>
           </div>
           <div class="form-group">
             <label class="form-label">Tanggal</label>
@@ -3202,7 +3202,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">Total Biaya</label>
-            <input type="number" class="form-control" id="bbmFTotal" min="0" placeholder="Otomatis dari liter � harga">
+            <input type="number" class="form-control" id="bbmFTotal" min="0" placeholder="Otomatis dari liter × harga">
             <span class="form-hint">Terisi otomatis, boleh disesuaikan dengan struk.</span>
           </div>
           <div class="form-group">
@@ -3234,7 +3234,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: AJUKAN RUANGAN --- -->
+  <!-- ═══ MODAL: AJUKAN RUANGAN ═══ -->
   <div class="modal-backdrop" id="modalRuangan">
     <div class="modal">
       <div class="modal-header">
@@ -3245,7 +3245,7 @@
         <div class="form-grid">
           <div class="form-group full">
             <label class="form-label">Ruangan <span class="req">*</span></label>
-            <select class="form-control" id="rgnFRuangan"><option value="">� Pilih ruangan �</option></select>
+            <select class="form-control" id="rgnFRuangan"><option value="">— Pilih ruangan —</option></select>
           </div>
           <div class="form-group">
             <label class="form-label">Tanggal <span class="req">*</span></label>
@@ -3269,11 +3269,11 @@
           </div>
           <div class="form-group">
             <label class="form-label">Peralatan</label>
-            <input type="text" class="form-control" id="rgnFPeralatan" placeholder="Proyektor, sound�">
+            <input type="text" class="form-control" id="rgnFPeralatan" placeholder="Proyektor, sound…">
           </div>
           <div class="form-group">
             <label class="form-label">Konsumsi</label>
-            <input type="text" class="form-control" id="rgnFKonsumsi" placeholder="Snack / makan siang�">
+            <input type="text" class="form-control" id="rgnFKonsumsi" placeholder="Snack / makan siang…">
           </div>
           <div class="form-group full">
             <label class="form-label">Catatan</label>
@@ -3288,7 +3288,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: MINTA BARANG ATK (V6.9 � katalog gaya belanja daring) --- -->
+  <!-- ═══ MODAL: MINTA BARANG ATK (V6.9 — katalog gaya belanja daring) ═══ -->
   <div class="modal-backdrop" id="modalAtkRequest">
     <div class="modal modal-lg">
       <div class="modal-header">
@@ -3300,7 +3300,7 @@
         <div id="atkShopStep1">
           <div class="input-icon" style="margin-bottom:10px">
             <svg data-icon="search"></svg>
-            <input type="search" class="form-control" id="atkShopSearch" placeholder="Cari nama / kode barang�">
+            <input type="search" class="form-control" id="atkShopSearch" placeholder="Cari nama / kode barang…">
           </div>
           <div class="atk-shop-cats" id="atkShopCats"></div>
           <div class="atk-shop-grid" id="atkShopGrid"></div>
@@ -3308,7 +3308,7 @@
         <!-- Langkah 2: keranjang & keperluan -->
         <div id="atkShopStep2" class="hidden">
           <p class="text-muted" style="font-size:12.5px;margin-bottom:10px">
-            Periksa kembali jumlah tiap barang � Anda masih bisa menambah/mengurangi di sini.
+            Periksa kembali jumlah tiap barang — Anda masih bisa menambah/mengurangi di sini.
           </p>
           <div id="atkCartList"></div>
           <div class="form-group" style="margin-top:14px">
@@ -3333,7 +3333,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: TAMBAH/EDIT BARANG ATK (ADMIN) --- -->
+  <!-- ═══ MODAL: TAMBAH/EDIT BARANG ATK (ADMIN) ═══ -->
   <div class="modal-backdrop" id="modalAtkStock">
     <div class="modal">
       <div class="modal-header">
@@ -3361,7 +3361,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">Lokasi Simpan</label>
-            <input type="text" class="form-control" id="asFLokasi" placeholder="Gudang / Lemari�">
+            <input type="text" class="form-control" id="asFLokasi" placeholder="Gudang / Lemari…">
           </div>
           <div class="form-group">
             <label class="form-label">Stok Saat Ini</label>
@@ -3379,11 +3379,11 @@
             <label class="form-label">Foto Barang</label>
             <input type="file" class="form-control" id="asFFoto" accept="image/*">
             <div class="file-preview" id="asFotoPrev"><img id="asFotoPrevImg" alt="Pratinjau foto barang"></div>
-            <span class="form-hint">Opsional � tampil di katalog permintaan barang. Dikompres otomatis.</span>
+            <span class="form-hint">Opsional — tampil di katalog permintaan barang. Dikompres otomatis.</span>
           </div>
           <div class="form-group full">
             <label class="form-label">Deskripsi Singkat</label>
-            <textarea class="form-control" id="asFCatatan" rows="2" placeholder="Mis. isi 12 pcs per box � tinta hitam � ukuran A4"></textarea>
+            <textarea class="form-control" id="asFCatatan" rows="2" placeholder="Mis. isi 12 pcs per box · tinta hitam · ukuran A4"></textarea>
           </div>
         </div>
       </div>
@@ -3394,7 +3394,7 @@
     </div>
   </div>
 
-    <!-- --- MODAL: DETAIL PENGAJUAN (GENERIK) --- -->
+    <!-- ═══ MODAL: DETAIL PENGAJUAN (GENERIK) ═══ -->
   <div class="modal-backdrop" id="modalDetail">
     <div class="modal">
       <div class="modal-header">
@@ -3408,7 +3408,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: FORM MAGANG --- -->
+  <!-- ═══ MODAL: FORM MAGANG ═══ -->
   <div class="modal-backdrop" id="modalMagang">
     <div class="modal">
       <div class="modal-header">
@@ -3483,7 +3483,7 @@
             <label class="form-label">Foto Profil Peserta</label>
             <input type="file" class="form-control" id="mgFFoto" accept="image/*">
             <div class="file-preview" id="mgFFotoPreview"><img id="mgFFotoImg" alt="Pratinjau foto"></div>
-            <div class="form-hint">Opsional � tampil sebagai avatar di tabel peserta &amp; portal magang. Dikompres otomatis agar ringan.</div>
+            <div class="form-hint">Opsional — tampil sebagai avatar di tabel peserta &amp; portal magang. Dikompres otomatis agar ringan.</div>
           </div>
         </div>
       </div>
@@ -3494,7 +3494,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: PRESENSI MAGANG MANUAL --- -->
+  <!-- ═══ MODAL: PRESENSI MAGANG MANUAL ═══ -->
   <div class="modal-backdrop" id="modalPresMagang">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -3504,7 +3504,7 @@
       <div class="modal-body">
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Magang <span class="req">*</span></label>
-          <select class="form-control" id="pmFMagang"><option value="">� Pilih magang �</option></select>
+          <select class="form-control" id="pmFMagang"><option value="">— Pilih magang —</option></select>
         </div>
         <div class="form-grid">
           <div class="form-group">
@@ -3541,7 +3541,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: TULIS LOGBOOK --- -->
+  <!-- ═══ MODAL: TULIS LOGBOOK ═══ -->
   <div class="modal-backdrop" id="modalLogbook">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -3551,7 +3551,7 @@
       <div class="modal-body">
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Magang <span class="req">*</span></label>
-          <select class="form-control" id="lbFMagang"><option value="">� Pilih magang �</option></select>
+          <select class="form-control" id="lbFMagang"><option value="">— Pilih magang —</option></select>
         </div>
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Tanggal Kegiatan</label>
@@ -3578,7 +3578,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: REVIEW LOGBOOK --- -->
+  <!-- ═══ MODAL: REVIEW LOGBOOK ═══ -->
   <div class="modal-backdrop" id="modalLogbookReview">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -3588,7 +3588,7 @@
       <div class="modal-body">
         <input type="hidden" id="lbrId">
         <div class="mini-item" style="border:1px solid var(--border);border-radius:10px;margin-bottom:14px">
-          <div style="min-width:0"><div class="mini-main" id="lbrNama">�</div><div class="mini-sub" id="lbrKegiatan" style="white-space:normal">�</div></div>
+          <div style="min-width:0"><div class="mini-main" id="lbrNama">—</div><div class="mini-sub" id="lbrKegiatan" style="white-space:normal">—</div></div>
         </div>
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Hasil Review</label>
@@ -3609,7 +3609,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: BERI / EDIT TUGAS --- -->
+  <!-- ═══ MODAL: BERI / EDIT TUGAS ═══ -->
   <div class="modal-backdrop" id="modalTugas">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -3620,7 +3620,7 @@
         <input type="hidden" id="tgFId">
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Magang <span class="req">*</span></label>
-          <select class="form-control" id="tgFMagang"><option value="">� Pilih magang �</option></select>
+          <select class="form-control" id="tgFMagang"><option value="">— Pilih magang —</option></select>
         </div>
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Judul Tugas <span class="req">*</span></label>
@@ -3652,7 +3652,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: KUMPUL HASIL TUGAS --- -->
+  <!-- ═══ MODAL: KUMPUL HASIL TUGAS ═══ -->
   <div class="modal-backdrop" id="modalTugasSubmit">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -3662,7 +3662,7 @@
       <div class="modal-body">
         <input type="hidden" id="thId">
         <div class="mini-item" style="border:1px solid var(--border);border-radius:10px;margin-bottom:14px">
-          <div><div class="mini-main" id="thJudul">�</div><div class="mini-sub" id="thMeta">�</div></div>
+          <div><div class="mini-main" id="thJudul">—</div><div class="mini-sub" id="thMeta">—</div></div>
         </div>
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Hasil / Tautan Pekerjaan <span class="req">*</span></label>
@@ -3681,7 +3681,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: AJUKAN IZIN/SAKIT (portal magang) --- -->
+  <!-- ═══ MODAL: AJUKAN IZIN/SAKIT (portal magang) ═══ -->
   <div class="modal-backdrop" id="modalIzinMagang">
     <div class="modal">
       <div class="modal-header">
@@ -3693,7 +3693,7 @@
           <div class="form-group full">
             <label class="form-label">Jenis Pengajuan <span class="req">*</span></label>
             <select class="form-control" id="izFJenis">
-              <option value="izin">Izin � keperluan pribadi / kampus</option>
+              <option value="izin">Izin — keperluan pribadi / kampus</option>
               <option value="sakit">Sakit</option>
             </select>
           </div>
@@ -3715,7 +3715,7 @@
             <label class="form-label">Eviden Pendukung <span class="req">*</span></label>
             <input type="file" class="form-control" id="izFLampiran" accept="image/*,application/pdf">
             <div class="form-hint">
-              <b>Wajib dilampirkan</b> � surat sakit (dokter/puskesmas), surat pernyataan,
+              <b>Wajib dilampirkan</b> — surat sakit (dokter/puskesmas), surat pernyataan,
               undangan/SK kampus, atau bukti relevan lainnya. PDF/JPG/PNG maks 5 MB.
             </div>
             <div class="form-error hidden" id="izFLampiranErr"></div>
@@ -3740,7 +3740,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: TULIS LOGBOOK MAGANG (portal peserta, V7.1) --- -->
+  <!-- ═══ MODAL: TULIS LOGBOOK MAGANG (portal peserta, V7.1) ═══ -->
   <div class="modal-backdrop" id="modalLogbookMagang">
     <div class="modal">
       <div class="modal-header">
@@ -3752,12 +3752,12 @@
           <div class="form-group">
             <label class="form-label">Tanggal Kegiatan <span class="req">*</span></label>
             <input type="date" class="form-control" id="mlbTanggal">
-            <div class="form-hint">Maksimal hari ini � logbook tidak bisa untuk tanggal yang akan datang.</div>
+            <div class="form-hint">Maksimal hari ini — logbook tidak bisa untuk tanggal yang akan datang.</div>
           </div>
           <div class="form-group full">
             <label class="form-label">Uraian Kegiatan <span class="req">*</span></label>
             <textarea class="form-control" id="mlbKegiatan" rows="3" maxlength="1000"
-              placeholder="Contoh: membantu rekap data peserta, mengikuti rapat koordinasi bagian umum�"></textarea>
+              placeholder="Contoh: membantu rekap data peserta, mengikuti rapat koordinasi bagian umum…"></textarea>
           </div>
           <div class="form-group full">
             <label class="form-label">Hasil / Output</label>
@@ -3772,7 +3772,7 @@
         </div>
         <div class="alert alert-info mt-2">
           Logbook masuk antrian review pembimbing. Entri yang sudah dikirim tidak dapat
-          diedit � pastikan uraian sudah benar sebelum menyimpan.
+          diedit — pastikan uraian sudah benar sebelum menyimpan.
         </div>
       </div>
       <div class="modal-footer">
@@ -3782,7 +3782,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: PROSES IZIN MAGANG (kabag/admin) --- -->
+  <!-- ═══ MODAL: PROSES IZIN MAGANG (kabag/admin) ═══ -->
   <div class="modal-backdrop" id="modalIzinProses">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -3793,8 +3793,8 @@
         <input type="hidden" id="izpId">
         <input type="hidden" id="izpStatus">
         <div style="border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px">
-          <div style="font-weight:600;font-size:13px" id="izpInfo">�</div>
-          <div style="font-size:12px;color:var(--text-secondary);margin-top:3px" id="izpSub">�</div>
+          <div style="font-weight:600;font-size:13px" id="izpInfo">—</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:3px" id="izpSub">—</div>
         </div>
         <!-- Eviden peserta ditampilkan agar admin dapat verifikasi sebelum menyetujui -->
         <div id="izpEvidenBox" class="hidden" style="margin-bottom:14px">
@@ -3819,7 +3819,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: AJUKAN IZIN/SAKIT/CUTI TAD --- -->
+  <!-- ═══ MODAL: AJUKAN IZIN/SAKIT/CUTI TAD ═══ -->
   <div class="modal-backdrop" id="modalIzinTad">
     <div class="modal">
       <div class="modal-header">
@@ -3831,7 +3831,7 @@
           <div class="form-group full">
             <label class="form-label">Jenis Pengajuan <span class="req">*</span></label>
             <select class="form-control" id="tizJenis">
-              <option value="izin">Izin � keperluan pribadi/keluarga</option>
+              <option value="izin">Izin — keperluan pribadi/keluarga</option>
               <option value="sakit">Sakit</option>
               <option value="cuti">Cuti</option>
             </select>
@@ -3853,7 +3853,7 @@
           <div class="form-group full">
             <label class="form-label">Eviden Pendukung <span class="req">*</span></label>
             <input type="file" class="form-control" id="tizLampiran" accept="image/*,application/pdf">
-            <div class="form-hint"><b>Wajib</b> � surat dokter (sakit), formulir/persetujuan cuti,
+            <div class="form-hint"><b>Wajib</b> — surat dokter (sakit), formulir/persetujuan cuti,
               surat pernyataan, atau bukti relevan lain. PDF/JPG/PNG maks 5 MB.</div>
             <div class="form-error hidden" id="tizLampiranErr"></div>
             <div class="file-preview hidden" id="tizPreview" style="margin-top:8px">
@@ -3873,7 +3873,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: AJUKAN LEMBUR/SKPD TAD --- -->
+  <!-- ═══ MODAL: AJUKAN LEMBUR/SKPD TAD ═══ -->
   <div class="modal-backdrop" id="modalLemburTad">
     <div class="modal">
       <div class="modal-header">
@@ -3886,7 +3886,7 @@
             <label class="form-label">Jenis <span class="req">*</span></label>
             <select class="form-control" id="tlbJenis">
               <option value="lembur">Lembur</option>
-              <option value="skpd">SKPD � dinas luar</option>
+              <option value="skpd">SKPD — dinas luar</option>
             </select>
           </div>
           <div class="form-group">
@@ -3896,10 +3896,10 @@
           <div class="form-group">
             <label class="form-label">Sampai Tanggal</label>
             <input type="date" class="form-control" id="tlbTanggalSelesai">
-            <div class="form-hint">Kosongkan bila hanya 1 hari. Penugasan bisa beberapa hari kerja � maks 14 hari.</div>
+            <div class="form-hint">Kosongkan bila hanya 1 hari. Penugasan bisa beberapa hari kerja — maks 14 hari.</div>
           </div>
           <div class="form-group full">
-            <label class="form-label">Jam Mulai � Selesai (per hari)</label>
+            <label class="form-label">Jam Mulai – Selesai (per hari)</label>
             <div style="display:flex;gap:8px;max-width:320px">
               <input type="time" class="form-control" id="tlbJamMulai">
               <input type="time" class="form-control" id="tlbJamSelesai">
@@ -3913,7 +3913,7 @@
           <div class="form-group full">
             <label class="form-label">Dokumen Pendukung (opsional)</label>
             <input type="file" class="form-control" id="tlbLampiran" accept="image/*,application/pdf">
-            <div class="form-hint">Tidak wajib � <b>Surat Tugas digital diterbitkan otomatis</b> oleh sistem setelah disetujui kabag (ber-tanda tangan digital). Bukti <b>foto kegiatan</b> diunggah SETELAH pelaksanaan lewat tombol �Unggah Bukti�. PDF/JPG/PNG maks 5 MB.</div>
+            <div class="form-hint">Tidak wajib — <b>Surat Tugas digital diterbitkan otomatis</b> oleh sistem setelah disetujui kabag (ber-tanda tangan digital). Bukti <b>foto kegiatan</b> diunggah SETELAH pelaksanaan lewat tombol “Unggah Bukti”. PDF/JPG/PNG maks 5 MB.</div>
             <div class="form-error hidden" id="tlbLampiranErr"></div>
             <div class="file-preview hidden" id="tlbPreview" style="margin-top:8px">
               <img id="tlbPreviewImg" alt="Pratinjau" style="max-height:140px;border-radius:8px;border:1px solid var(--border)">
@@ -3932,7 +3932,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: PROSES PENGAJUAN TAD (kabag/admin � izin & lembur) --- -->
+  <!-- ═══ MODAL: PROSES PENGAJUAN TAD (kabag/admin — izin & lembur) ═══ -->
   <div class="modal-backdrop" id="modalTadProses">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -3944,8 +3944,8 @@
         <input type="hidden" id="tdpTipe">
         <input type="hidden" id="tdpStatus">
         <div style="border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px">
-          <div style="font-weight:600;font-size:13px" id="tdpInfo">�</div>
-          <div style="font-size:12px;color:var(--text-secondary);margin-top:3px" id="tdpSub">�</div>
+          <div style="font-weight:600;font-size:13px" id="tdpInfo">—</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:3px" id="tdpSub">—</div>
         </div>
         <div id="tdpEvidenBox" class="hidden" style="margin-bottom:14px">
           <div style="font-size:11.5px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Eviden Pendukung</div>
@@ -3959,7 +3959,7 @@
           <label class="form-label">Catatan untuk personel (opsional)</label>
           <textarea class="form-control" id="tdpCatatan" rows="2" maxlength="300"></textarea>
         </div>
-        <!-- Tanda tangan digital � tampil saat MENYETUJUI lembur/SKPD (menerbitkan Surat Tugas) -->
+        <!-- Tanda tangan digital — tampil saat MENYETUJUI lembur/SKPD (menerbitkan Surat Tugas) -->
         <div id="tdpTtdBlock" class="hidden">
           <label class="form-label">Tanda Tangan Digital <span class="req">*</span></label>
           <div style="border:1.5px dashed var(--border);border-radius:10px;background:#fff;overflow:hidden">
@@ -3967,7 +3967,7 @@
               style="width:100%;height:150px;display:block;touch-action:none;cursor:crosshair"></canvas>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px">
-            <span class="form-hint" style="margin:0">Gambar tanda tangan Anda � dicetak pada Surat Tugas digital bernomor otomatis.</span>
+            <span class="form-hint" style="margin:0">Gambar tanda tangan Anda — dicetak pada Surat Tugas digital bernomor otomatis.</span>
             <button type="button" class="btn btn-ghost btn-sm" id="tdpTtdClear" style="flex:none">Bersihkan</button>
           </div>
         </div>
@@ -3979,7 +3979,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: SURAT TUGAS DIGITAL (lembur/SKPD TAD) --- -->
+  <!-- ═══ MODAL: SURAT TUGAS DIGITAL (lembur/SKPD TAD) ═══ -->
   <div class="modal-backdrop" id="modalSuratTad">
     <div class="modal" style="max-width:680px">
       <div class="modal-header">
@@ -3996,7 +3996,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: UNGGAH BUKTI FOTO KEGIATAN (lembur/SKPD TAD) --- -->
+  <!-- ═══ MODAL: UNGGAH BUKTI FOTO KEGIATAN (lembur/SKPD TAD) ═══ -->
   <div class="modal-backdrop" id="modalBuktiLembur">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -4006,8 +4006,8 @@
       <div class="modal-body">
         <input type="hidden" id="bktId">
         <div style="border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px">
-          <div style="font-weight:600;font-size:13px" id="bktInfo">�</div>
-          <div style="font-size:12px;color:var(--text-secondary);margin-top:3px" id="bktSub">�</div>
+          <div style="font-weight:600;font-size:13px" id="bktInfo">—</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:3px" id="bktSub">—</div>
         </div>
         <div class="form-group">
           <label class="form-label">Foto Kegiatan <span class="req">*</span></label>
@@ -4026,7 +4026,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: LIHAT FOTO (arsip data-URI di sel) --- -->
+  <!-- ═══ MODAL: LIHAT FOTO (arsip data-URI di sel) ═══ -->
   <div class="modal-backdrop" id="modalFoto">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -4036,7 +4036,7 @@
       <div class="modal-body" style="padding:0">
         <img id="fotoViewImg" alt="Foto" style="display:block;width:100%;max-height:70vh;object-fit:contain;background:var(--slate-900)">
         <div class="alert alert-warning hidden" id="fotoViewErr" style="margin:12px;font-size:12px">
-          Pratinjau tidak dapat dimuat � kemungkinan berkas lama yang belum dibuka aksesnya.
+          Pratinjau tidak dapat dimuat — kemungkinan berkas lama yang belum dibuka aksesnya.
           Gunakan tombol di bawah untuk membukanya langsung di Drive; admin dapat menjalankan menu
           spreadsheet <b>"Perbaiki Akses Foto Lama"</b> agar seluruh foto lama tampil di aplikasi.
         </div>
@@ -4047,7 +4047,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: NILAI TUGAS --- -->
+  <!-- ═══ MODAL: NILAI TUGAS ═══ -->
   <div class="modal-backdrop" id="modalNilai">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -4057,10 +4057,10 @@
       <div class="modal-body">
         <input type="hidden" id="niId">
         <div class="mini-item" style="border:1px solid var(--border);border-radius:10px;margin-bottom:14px">
-          <div style="min-width:0"><div class="mini-main" id="niJudul">�</div><div class="mini-sub" id="niHasil" style="white-space:normal">�</div></div>
+          <div style="min-width:0"><div class="mini-main" id="niJudul">—</div><div class="mini-sub" id="niHasil" style="white-space:normal">—</div></div>
         </div>
         <div class="form-group" style="margin-bottom:12px">
-          <label class="form-label">Nilai (0�100) <span class="req">*</span></label>
+          <label class="form-label">Nilai (0–100) <span class="req">*</span></label>
           <input type="number" class="form-control" id="niNilai" min="0" max="100" placeholder="85">
         </div>
         <div class="form-group">
@@ -4075,7 +4075,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: PRESENSI MASUK SECURITY --- -->
+  <!-- ═══ MODAL: PRESENSI MASUK SECURITY ═══ -->
   <div class="modal-backdrop" id="modalPresensiSec">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -4085,20 +4085,20 @@
       <div class="modal-body">
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Personel <span class="req">*</span></label>
-          <select class="form-control" id="psSecurity"><option value="">� Pilih personel �</option></select>
+          <select class="form-control" id="psSecurity"><option value="">— Pilih personel —</option></select>
         </div>
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Shift <span class="req">*</span></label>
           <select class="form-control" id="psShift">
-            <option value="pagi">Pagi (07.00�15.00)</option>
-            <option value="siang">Sore (15.00�23.00)</option>
-            <option value="malam">Malam (23.00�07.00)</option>
+            <option value="pagi">Pagi (07.00–15.00)</option>
+            <option value="siang">Sore (15.00–23.00)</option>
+            <option value="malam">Malam (23.00–07.00)</option>
           </select>
         </div>
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Foto Eviden <span class="req">*</span></label>
           <input type="file" class="form-control" id="psFoto" accept="image/*" capture="environment">
-          <div class="form-hint">Selfie / foto pos saat mulai shift � dikirim otomatis ke grup Telegram security beserta titik lokasi.</div>
+          <div class="form-hint">Selfie / foto pos saat mulai shift — dikirim otomatis ke grup Telegram security beserta titik lokasi.</div>
           <div id="psFotoPrev" class="hidden" style="margin-top:8px">
             <img id="psFotoPrevImg" alt="Pratinjau" style="max-width:100%;max-height:180px;border-radius:10px;border:1px solid var(--border)">
           </div>
@@ -4108,7 +4108,7 @@
           <input type="text" class="form-control" id="psKeterangan" placeholder="Opsional">
         </div>
         <p class="text-muted" style="font-size:11.5px;margin-top:10px" id="psGeoHint">
-          Presensi hanya dapat dilakukan <b>di area kantor</b> � pastikan izin lokasi (GPS) aktif.
+          Presensi hanya dapat dilakukan <b>di area kantor</b> — pastikan izin lokasi (GPS) aktif.
         </p>
       </div>
       <div class="modal-footer">
@@ -4118,7 +4118,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: PRESENSI KELUAR + SERAH TERIMA --- -->
+  <!-- ═══ MODAL: PRESENSI KELUAR + SERAH TERIMA ═══ -->
   <div class="modal-backdrop" id="modalPresensiSecOut">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -4128,17 +4128,17 @@
       <div class="modal-body">
         <input type="hidden" id="psoId">
         <div class="mini-item" style="border:1px solid var(--border);border-radius:10px;margin-bottom:14px">
-          <div><div class="mini-main" id="psoNama">�</div><div class="mini-sub" id="psoMeta">�</div></div>
+          <div><div class="mini-main" id="psoNama">—</div><div class="mini-sub" id="psoMeta">—</div></div>
         </div>
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Catatan Serah Terima Shift</label>
           <textarea class="form-control" id="psoCatatan" rows="3"
-            placeholder="Kondisi terakhir, hal yang perlu perhatian shift berikutnya�"></textarea>
+            placeholder="Kondisi terakhir, hal yang perlu perhatian shift berikutnya…"></textarea>
         </div>
         <div class="form-group">
           <label class="form-label">Foto Serah Terima</label>
           <input type="file" class="form-control" id="psoFoto" accept="image/*" capture="environment">
-          <div class="form-hint">Opsional � ikut terkirim ke grup Telegram security.</div>
+          <div class="form-hint">Opsional — ikut terkirim ke grup Telegram security.</div>
           <div id="psoFotoPrev" class="hidden" style="margin-top:8px">
             <img id="psoFotoPrevImg" alt="Pratinjau" style="max-width:100%;max-height:180px;border-radius:10px;border:1px solid var(--border)">
           </div>
@@ -4154,7 +4154,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: SUSUN JADWAL SHIFT MINGGUAN --- -->
+  <!-- ═══ MODAL: SUSUN JADWAL SHIFT MINGGUAN ═══ -->
   <div class="modal-backdrop" id="modalJadwalShift">
     <div class="modal">
       <div class="modal-header">
@@ -4174,7 +4174,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: LAPOR INSIDEN --- -->
+  <!-- ═══ MODAL: LAPOR INSIDEN ═══ -->
   <div class="modal-backdrop" id="modalInsiden">
     <div class="modal">
       <div class="modal-header">
@@ -4185,7 +4185,7 @@
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label">Jenis Insiden <span class="req">*</span></label>
-            <select class="form-control" id="inJenis"><option value="">� Pilih jenis �</option></select>
+            <select class="form-control" id="inJenis"><option value="">— Pilih jenis —</option></select>
           </div>
           <div class="form-group">
             <label class="form-label">Lokasi</label>
@@ -4193,7 +4193,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">Pelapor (Security)</label>
-            <select class="form-control" id="inSecurity"><option value="">� Sesuai akun login �</option></select>
+            <select class="form-control" id="inSecurity"><option value="">— Sesuai akun login —</option></select>
           </div>
           <div class="form-group">
             <label class="form-label">Saksi</label>
@@ -4224,7 +4224,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: TINDAK LANJUT INSIDEN --- -->
+  <!-- ═══ MODAL: TINDAK LANJUT INSIDEN ═══ -->
   <div class="modal-backdrop" id="modalInsidenStatus">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -4234,7 +4234,7 @@
       <div class="modal-body">
         <input type="hidden" id="insId">
         <div class="mini-item" style="border:1px solid var(--border);border-radius:10px;margin-bottom:14px">
-          <div style="min-width:0"><div class="mini-main" id="insJudul">�</div><div class="mini-sub" id="insDesk" style="white-space:normal">�</div></div>
+          <div style="min-width:0"><div class="mini-main" id="insJudul">—</div><div class="mini-sub" id="insDesk" style="white-space:normal">—</div></div>
         </div>
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Status</label>
@@ -4256,7 +4256,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: CATAT PATROLI --- -->
+  <!-- ═══ MODAL: CATAT PATROLI ═══ -->
   <div class="modal-backdrop" id="modalPatroli">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -4266,19 +4266,19 @@
       <div class="modal-body">
         <div class="form-group" style="margin-bottom:12px">
           <label class="form-label">Checkpoint <span class="req">*</span></label>
-          <select class="form-control" id="ptCheckpoint"><option value="">� Pilih checkpoint �</option></select>
+          <select class="form-control" id="ptCheckpoint"><option value="">— Pilih checkpoint —</option></select>
         </div>
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label">Petugas</label>
-            <select class="form-control" id="ptSecurity"><option value="">� Sesuai akun login �</option></select>
+            <select class="form-control" id="ptSecurity"><option value="">— Sesuai akun login —</option></select>
           </div>
           <div class="form-group">
             <label class="form-label">Shift</label>
             <select class="form-control" id="ptShift">
-              <option value="pagi">Pagi (07.00�15.00)</option>
-              <option value="siang">Sore (15.00�23.00)</option>
-              <option value="malam">Malam (23.00�07.00)</option>
+              <option value="pagi">Pagi (07.00–15.00)</option>
+              <option value="siang">Sore (15.00–23.00)</option>
+              <option value="malam">Malam (23.00–07.00)</option>
             </select>
           </div>
           <div class="form-group full">
@@ -4310,7 +4310,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: TAMBAH CHECKPOINT --- -->
+  <!-- ═══ MODAL: TAMBAH CHECKPOINT ═══ -->
   <div class="modal-backdrop" id="modalCheckpoint">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -4344,7 +4344,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: TAMBAH/EDIT AGENDA PIMPINAN (FASE 4) --- -->
+  <!-- ═══ MODAL: TAMBAH/EDIT AGENDA PIMPINAN (FASE 4) ═══ -->
   <div class="modal-backdrop" id="modalAgenda">
     <div class="modal">
       <div class="modal-header">
@@ -4355,19 +4355,19 @@
         <input type="hidden" id="agdId">
         <div class="form-grid">
           <div class="form-group full">
-            <label class="form-label">Pimpinan � boleh lebih dari satu <span class="req">*</span></label>
+            <label class="form-label">Pimpinan — boleh lebih dari satu <span class="req">*</span></label>
             <div id="agdPimpinanBox" style="max-height:160px;overflow-y:auto;border:1.5px solid var(--border);border-radius:var(--radius-control);padding:6px 8px;background:var(--bg-surface)"></div>
-            <div class="form-hint">Centang semua yang hadir � mis. Kepala Cabang beserta kepala bagian pendamping. Deteksi bentrok berlaku untuk tiap pimpinan terpilih.</div>
+            <div class="form-hint">Centang semua yang hadir — mis. Kepala Cabang beserta kepala bagian pendamping. Deteksi bentrok berlaku untuk tiap pimpinan terpilih.</div>
           </div>
           <div class="form-group full">
             <label class="form-label">Nama Kegiatan <span class="req">*</span></label>
-            <input type="text" class="form-control" id="agdKegiatan" placeholder="Rapat koordinasi, audiensi, kunjungan�">
+            <input type="text" class="form-control" id="agdKegiatan" placeholder="Rapat koordinasi, audiensi, kunjungan…">
           </div>
           <div class="form-group">
             <label class="form-label">Tanggal <span class="req">*</span></label>
             <input type="date" class="form-control" id="agdTanggal">
           </div>
-          <!-- V7.8: agenda multi-hari � satu isian menjadi satu agenda per hari -->
+          <!-- V7.8: agenda multi-hari — satu isian menjadi satu agenda per hari -->
           <div class="form-group" id="agdTanggalSelesaiWrap">
             <label class="form-label">Sampai Tanggal</label>
             <input type="date" class="form-control" id="agdTanggalSelesai">
@@ -4415,7 +4415,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: KELOLA PIMPINAN (FASE 4, ADMIN) --- -->
+  <!-- ═══ MODAL: KELOLA PIMPINAN (FASE 4, ADMIN) ═══ -->
   <div class="modal-backdrop" id="modalPimpinan">
     <div class="modal">
       <div class="modal-header">
@@ -4447,9 +4447,9 @@
             </div>
             <div class="form-group">
               <label class="form-label">No. HP</label>
-              <input type="text" class="form-control" id="pmpNoHp" placeholder="08�">
+              <input type="text" class="form-control" id="pmpNoHp" placeholder="08…">
             </div>
-            <p class="form-hint" style="grid-column:1/-1">Pengingat agenda dikirim ke <b>Telegram pribadi</b> pimpinan (bila akunnya tertaut lewat menu profil) � bila tidak, jatuh ke <b>email</b> di atas.</p>
+            <p class="form-hint" style="grid-column:1/-1">Pengingat agenda dikirim ke <b>Telegram pribadi</b> pimpinan (bila akunnya tertaut lewat menu profil) — bila tidak, jatuh ke <b>email</b> di atas.</p>
           </div>
         </div>
       </div>
@@ -4460,7 +4460,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: KEGIATAN BUDAYA (FASE 4) --- -->
+  <!-- ═══ MODAL: KEGIATAN BUDAYA (FASE 4) ═══ -->
   <div class="modal-backdrop" id="modalBudaya">
     <div class="modal">
       <div class="modal-header">
@@ -4472,7 +4472,7 @@
         <div class="form-grid">
           <div class="form-group full">
             <label class="form-label">Nama Kegiatan <span class="req">*</span></label>
-            <input type="text" class="form-control" id="bdyKegiatan" placeholder="Doa pagi, senam bersama, upacara, briefing�">
+            <input type="text" class="form-control" id="bdyKegiatan" placeholder="Doa pagi, senam bersama, upacara, briefing…">
           </div>
           <div class="form-group">
             <label class="form-label">Pola Pengulangan <span class="req">*</span></label>
@@ -4491,7 +4491,7 @@
             </select>
           </div>
           <div class="form-group" id="bdyTglBulananWrap" style="display:none">
-            <label class="form-label">Tanggal (1�31)</label>
+            <label class="form-label">Tanggal (1–31)</label>
             <input type="number" class="form-control" id="bdyTglBulanan" min="1" max="31" placeholder="mis. 17">
           </div>
           <div class="form-group" id="bdyTglWrap" style="display:none">
@@ -4513,7 +4513,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">Lokasi</label>
-            <input type="text" class="form-control" id="bdyLokasi" placeholder="Halaman kantor / aula �">
+            <input type="text" class="form-control" id="bdyLokasi" placeholder="Halaman kantor / aula …">
           </div>
           <div class="form-group">
             <label class="form-label">Penanggung Jawab</label>
@@ -4532,7 +4532,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: RENCANA KONTEN SOSMED (FASE 4) --- -->
+  <!-- ═══ MODAL: RENCANA KONTEN SOSMED (FASE 4) ═══ -->
   <div class="modal-backdrop" id="modalKonten">
     <div class="modal">
       <div class="modal-header">
@@ -4566,11 +4566,11 @@
           </div>
           <div class="form-group full">
             <label class="form-label">Judul / Caption <span class="req">*</span></label>
-            <textarea class="form-control" id="ktnCaption" rows="3" placeholder="Ide atau naskah caption�"></textarea>
+            <textarea class="form-control" id="ktnCaption" rows="3" placeholder="Ide atau naskah caption…"></textarea>
           </div>
           <div class="form-group full">
             <label class="form-label">Hashtags</label>
-            <input type="text" class="form-control" id="ktnHashtags" placeholder="#BPJSKesehatan #Bengkulu �">
+            <input type="text" class="form-control" id="ktnHashtags" placeholder="#BPJSKesehatan #Bengkulu …">
           </div>
           <div class="form-group full">
             <label class="form-label">Link Media / Desain</label>
@@ -4594,7 +4594,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: METRIK KONTEN (FASE 4) --- -->
+  <!-- ═══ MODAL: METRIK KONTEN (FASE 4) ═══ -->
   <div class="modal-backdrop" id="modalMetrik">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -4630,7 +4630,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: CATAT PEMBERITAAN (FASE 4) --- -->
+  <!-- ═══ MODAL: CATAT PEMBERITAAN (FASE 4) ═══ -->
   <div class="modal-backdrop" id="modalBerita">
     <div class="modal">
       <div class="modal-header">
@@ -4656,7 +4656,7 @@
           </div>
           <div class="form-group full">
             <label class="form-label">Nama Media <span class="req">*</span></label>
-            <input type="text" class="form-control" id="brtMedia" placeholder="Bengkulu Ekspress, RRI, detik.com �">
+            <input type="text" class="form-control" id="brtMedia" placeholder="Bengkulu Ekspress, RRI, detik.com …">
           </div>
           <div class="form-group full">
             <label class="form-label">Judul Berita <span class="req">*</span></label>
@@ -4672,11 +4672,11 @@
           </div>
           <div class="form-group">
             <label class="form-label">Kategori</label>
-            <input type="text" class="form-control" id="brtKategori" placeholder="Layanan / program / kepesertaan �">
+            <input type="text" class="form-control" id="brtKategori" placeholder="Layanan / program / kepesertaan …">
           </div>
           <div class="form-group full">
             <label class="form-label">Link Berita</label>
-            <input type="url" class="form-control" id="brtLink" placeholder="https://�">
+            <input type="url" class="form-control" id="brtLink" placeholder="https://…">
           </div>
           <div class="form-group full">
             <label class="form-label">Ringkasan</label>
@@ -4691,7 +4691,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: PENGATURAN CETAK LAPORAN (V6.6) --- -->
+  <!-- ═══ MODAL: PENGATURAN CETAK LAPORAN (V6.6) ═══ -->
   <div class="modal-backdrop" id="modalCetak">
     <div class="modal" style="max-width:560px">
       <div class="modal-header">
@@ -4726,7 +4726,7 @@
             <label class="form-label">Orientasi</label>
             <select class="form-control" id="cetOrientasi">
               <option value="portrait" selected>Tegak (portrait)</option>
-              <option value="landscape">Mendatar (landscape) � tabel lebar</option>
+              <option value="landscape">Mendatar (landscape) — tabel lebar</option>
             </select>
           </div>
           <div class="form-group full">
@@ -4742,11 +4742,11 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Mengetahui � Jabatan</label>
+            <label class="form-label">Mengetahui — Jabatan</label>
             <input type="text" class="form-control" id="cetMengetahuiJab" placeholder="mis. Kepala Bagian SDMUK (KABAG)">
           </div>
           <div class="form-group">
-            <label class="form-label">Mengetahui � Nama</label>
+            <label class="form-label">Mengetahui — Nama</label>
             <input type="text" class="form-control" id="cetMengetahuiNama" placeholder="kosongkan bila tak perlu">
           </div>
           <p class="form-hint" style="grid-column:1/-1">Pengaturan tersimpan otomatis di perangkat ini dan dipakai lagi pada pencetakan berikutnya.</p>
@@ -4759,7 +4759,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: CATAT SERVIS KENDARAAN (V6.5) --- -->
+  <!-- ═══ MODAL: CATAT SERVIS KENDARAAN (V6.5) ═══ -->
   <div class="modal-backdrop" id="modalServis">
     <div class="modal" style="max-width:520px">
       <div class="modal-header">
@@ -4797,7 +4797,7 @@
           </div>
           <div class="form-group full">
             <label class="form-label">Catatan</label>
-            <textarea class="form-control" id="svcCatatan" rows="2" placeholder="Item yang dikerjakan�"></textarea>
+            <textarea class="form-control" id="svcCatatan" rows="2" placeholder="Item yang dikerjakan…"></textarea>
           </div>
         </div>
       </div>
@@ -4808,7 +4808,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: TINDAK LANJUT PEMBERITAAN (V6.3) --- -->
+  <!-- ═══ MODAL: TINDAK LANJUT PEMBERITAAN (V6.3) ═══ -->
   <div class="modal-backdrop" id="modalTindakLanjut">
     <div class="modal" style="max-width:520px">
       <div class="modal-header">
@@ -4828,7 +4828,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">Catatan tindak lanjut</label>
-          <textarea class="form-control" id="tlCatatan" rows="3" placeholder="Mis. sudah dikoordinasikan dengan media, hak jawab dikirim, rilis klarifikasi tayang�"></textarea>
+          <textarea class="form-control" id="tlCatatan" rows="3" placeholder="Mis. sudah dikoordinasikan dengan media, hak jawab dikirim, rilis klarifikasi tayang…"></textarea>
         </div>
       </div>
       <div class="modal-footer">
@@ -4838,7 +4838,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: SETUJUI KENDARAAN + PENUGASAN (FASE 4) --- -->
+  <!-- ═══ MODAL: SETUJUI KENDARAAN + PENUGASAN (FASE 4) ═══ -->
   <div class="modal-backdrop" id="modalApproveKnd">
     <div class="modal">
       <div class="modal-header">
@@ -4861,7 +4861,7 @@
           </div>
           <div class="form-group full">
             <label class="form-label">Catatan untuk Pemohon</label>
-            <input type="text" class="form-control" id="apkCatatan" placeholder="Opsional � ikut terkirim di notifikasi">
+            <input type="text" class="form-control" id="apkCatatan" placeholder="Opsional — ikut terkirim di notifikasi">
           </div>
         </div>
         <div id="apkNotif"></div>
@@ -4873,7 +4873,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: SETUJUI RUANGAN (FASE 4) --- -->
+  <!-- ═══ MODAL: SETUJUI RUANGAN (FASE 4) ═══ -->
   <div class="modal-backdrop" id="modalApproveRng">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -4886,7 +4886,7 @@
         <div id="aprJadwal" style="margin-bottom:12px"></div>
         <div class="form-group">
           <label class="form-label">Catatan untuk Pemohon</label>
-          <input type="text" class="form-control" id="aprCatatan" placeholder="Opsional � ikut terkirim di notifikasi">
+          <input type="text" class="form-control" id="aprCatatan" placeholder="Opsional — ikut terkirim di notifikasi">
         </div>
         <div id="aprNotif"></div>
       </div>
@@ -4897,7 +4897,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: SETUJUI ATK + PENYESUAIAN JUMLAH (FASE 4) --- -->
+  <!-- ═══ MODAL: SETUJUI ATK + PENYESUAIAN JUMLAH (FASE 4) ═══ -->
   <div class="modal-backdrop" id="modalApproveAtk">
     <div class="modal">
       <div class="modal-header">
@@ -4915,9 +4915,9 @@
         </div>
         <div class="form-group">
           <label class="form-label">Catatan untuk Pemohon</label>
-          <input type="text" class="form-control" id="apaCatatan" placeholder="Opsional � mis. alasan penyesuaian jumlah">
+          <input type="text" class="form-control" id="apaCatatan" placeholder="Opsional — mis. alasan penyesuaian jumlah">
         </div>
-        <p class="text-muted" style="font-size:11.5px">Kurangi jumlah bila stok terbatas � 0 berarti item tidak diberikan. Stok terpotong saat pemohon konfirmasi ambil.</p>
+        <p class="text-muted" style="font-size:11.5px">Kurangi jumlah bila stok terbatas — 0 berarti item tidak diberikan. Stok terpotong saat pemohon konfirmasi ambil.</p>
         <div id="apaNotif"></div>
       </div>
       <div class="modal-footer">
@@ -4927,7 +4927,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: KIRIM PESAN (FASE 4) --- -->
+  <!-- ═══ MODAL: KIRIM PESAN (FASE 4) ═══ -->
   <div class="modal-backdrop" id="modalKirimPesan">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -4943,7 +4943,7 @@
         </div>
         <div class="form-group" id="kpUserWrap" style="display:none">
           <label class="form-label">Pilih Penerima (dari database)</label>
-          <input type="search" class="form-control" id="kpUserSearch" placeholder="Ketik untuk mencari nama�" style="margin-bottom:6px">
+          <input type="search" class="form-control" id="kpUserSearch" placeholder="Ketik untuk mencari nama…" style="margin-bottom:6px">
           <select class="form-control" id="kpUser" size="6"></select>
           <div class="form-hint" id="kpUserHint"></div>
         </div>
@@ -4958,7 +4958,7 @@
         <div class="form-group">
           <label class="form-label">Template Cepat</label>
           <select class="form-control" id="kpTemplate"></select>
-          <div class="form-hint">Memilih template mengisi judul &amp; pesan � tinggal sesuaikan bagian dalam kurung.</div>
+          <div class="form-hint">Memilih template mengisi judul &amp; pesan — tinggal sesuaikan bagian dalam kurung.</div>
         </div>
         <div class="form-group">
           <label class="form-label">Judul</label>
@@ -4966,7 +4966,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">Isi Pesan <span class="req">*</span></label>
-          <textarea class="form-control" id="kpPesan" rows="4" placeholder="Tulis pesan�"></textarea>
+          <textarea class="form-control" id="kpPesan" rows="4" placeholder="Tulis pesan…"></textarea>
           <div class="form-hint" style="display:flex;justify-content:flex-end"><span id="kpCount">0 karakter</span></div>
         </div>
       </div>
@@ -4977,7 +4977,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: HUBUNGKAN TELEGRAM SAYA (FASE 5.1) --- -->
+  <!-- ═══ MODAL: HUBUNGKAN TELEGRAM SAYA (FASE 5.1) ═══ -->
   <div class="modal-backdrop" id="modalTelegramLink">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -4985,13 +4985,13 @@
         <button class="modal-close" data-close="modalTelegramLink"><svg data-icon="x" style="width:16px;height:16px"></svg></button>
       </div>
       <div class="modal-body">
-        <div class="alert alert-info mb-2" id="myTgStatus">Memuat status�</div>
+        <div class="alert alert-info mb-2" id="myTgStatus">Memuat status…</div>
         <a class="btn btn-primary btn-block hidden" id="myTgOpenBtn" href="#" target="_blank" rel="noopener">
           Buka Telegram &amp; Tekan START
         </a>
         <div class="text-muted text-center hidden" id="myTgWait" style="font-size:12px;margin-top:10px">
           <span class="spinner dark" style="display:inline-block;width:13px;height:13px;vertical-align:-2px;margin-right:6px"></span>
-          Menunggu konfirmasi dari Telegram�
+          Menunggu konfirmasi dari Telegram…
         </div>
         <p class="text-muted" style="font-size:11.5px;margin-top:12px">
           Dengan menghubungkan Telegram, notifikasi persetujuan &amp; informasi aplikasi
@@ -5001,7 +5001,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: DETAIL LAMARAN MAGANG (V6.8) --- -->
+  <!-- ═══ MODAL: DETAIL LAMARAN MAGANG (V6.8) ═══ -->
   <div class="modal-backdrop" id="modalLamaran">
     <div class="modal">
       <div class="modal-header">
@@ -5026,7 +5026,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: TAUTAN HALAMAN PUBLIK (FASE 4) --- -->
+  <!-- ═══ MODAL: TAUTAN HALAMAN PUBLIK (FASE 4) ═══ -->
   <div class="modal-backdrop" id="modalPublicLink">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -5035,7 +5035,7 @@
       </div>
       <div class="modal-body">
         <p class="text-muted" style="font-size:12.5px;margin-bottom:13px">
-          Bagikan tautan ini (atau jadikan QR) � halaman publik tidak butuh login.
+          Bagikan tautan ini (atau jadikan QR) — halaman publik tidak butuh login.
         </p>
         <div class="linkbox" id="plList"></div>
       </div>
@@ -5045,7 +5045,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: TOLAK PENGAJUAN (ALASAN) --- -->
+  <!-- ═══ MODAL: TOLAK PENGAJUAN (ALASAN) ═══ -->
   <div class="modal-backdrop" id="modalReject">
     <div class="modal modal-sm">
       <div class="modal-header">
@@ -5068,7 +5068,7 @@
     </div>
   </div>
 
-  <!-- --- MODAL: KONFIRMASI GENERIK --- -->
+  <!-- ═══ MODAL: KONFIRMASI GENERIK ═══ -->
   <div class="modal-backdrop" id="modalConfirm">
     <div class="modal modal-sm">
       <div class="modal-body text-center" style="padding:30px 26px 22px">
@@ -5098,10 +5098,12 @@
   <script src="/js/scripts-4-fase4-app.js"></script>
   <script src="/js/scripts-5-registrasi.js"></script>
   <script src="/js/scripts-6-tour.js"></script>
-  <script src="/js/realtime-notifications.js"></script>
-  <script src="/js/pwa-install.js"></script>
-  <script src="/js/pwa-ui-guard.js"></script>
 
-  <script src="/js/mobile-navigation.js?v=4"></script>
+  <script src="/js/pwa-version.js?v=2026.08.11.02"></script>
+  <script src="/js/realtime-notifications.js?v=2026.08.11.02"></script>
+  <script src="/js/pwa-install.js?v=2026.08.11.02"></script>
+  <script src="/js/pwa-ui-guard.js"></script>
+  <script src="/js/pwa-stability.js?v=2026.08.11.02"></script>
+  <script src="/js/mobile-navigation.js?v=5"></script>
 </body>
 </html>
