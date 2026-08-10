@@ -341,3 +341,56 @@
 .hidden {
   display: none !important;
 }
+/* HOTFIX V2 GESIT LOGIN FULL WIDTH
+   Memaksa kartu login tetap stabil pada layar lebar penuh.
+   Gejala: kartu/login glass melebar menjadi kotak besar saat viewport desktop penuh,
+   tetapi normal saat DevTools/Console membuka viewport lebih kecil.
+*/
+.login-page {
+  display: grid !important;
+  place-items: center !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  padding: 18px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.login-page::before,
+.login-page::after,
+.login-card::before,
+.login-card::after {
+  display: none !important;
+  content: none !important;
+}
+
+.login-page .login-card {
+  box-sizing: border-box !important;
+  width: min(400px, calc(100vw - 36px)) !important;
+  min-width: 0 !important;
+  max-width: calc(100vw - 36px) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: calc(100dvh - 36px) !important;
+  margin: 0 auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  background: rgba(13,24,41,.96) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  border-radius: 28px !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+  contain: none !important;
+}
+
+#loginCard:not(.hidden) {
+  display: block !important;
+}
+
+#registerCard.hidden,
+#tgConfirmCard.hidden,
+.login-card.hidden,
+.hidden {
+  display: none !important;
+}
