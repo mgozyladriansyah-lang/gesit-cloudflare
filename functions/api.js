@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 let modulesPromise = null;
 
@@ -173,6 +173,18 @@ async function handleRequest(context) {
 
   var body = parsed.value || {};
   var action = String(body.action || '').trim();
+
+  // GESIT_TASK2B_DIRECT_HEALTH
+  // Direct health endpoint agar /api tidak fallback ke backend lama/GAS.
+  if (action === 'health') {
+    return json(env, 200, {
+      success: true,
+      status: 'ok',
+      backend: 'cloudflare-pages-functions',
+      task: 'task2b-direct-health',
+      time: new Date().toISOString()
+    });
+  }
   var data = body.data && typeof body.data === 'object' ? body.data : {};
   var authHeader = String(request.headers.get('authorization') || '');
   var bearerToken = authHeader.toLowerCase().startsWith('bearer ') ? authHeader.slice(7).trim() : '';
@@ -225,3 +237,4 @@ export async function onRequest(context) {
     return json(context.env || {}, err.statusCode || 500, { success: false, error: safeErrorMessage(err) });
   }
 }
+
