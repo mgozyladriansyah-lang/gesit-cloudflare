@@ -173,6 +173,92 @@ async function handleRequest(context) {
 
   var body = parsed.value || {};
   var action = String(body.action || '').trim();
+  // GESIT_TASK3D_SAFE_CHECKSESSION
+  // Handler ini memastikan checkSession tidak pernah 500 setelah logout/revoked/expired.
+  // Output aman: success true, valid false untuk token kosong, token invalid, revoked, expired, atau query session bermasalah.
+  if (action === 'checkSession' || action === 'check_session') {
+    var safeToken = String(body.token || (body.data && body.data.token) || '').trim();
+    if (!safeToken) {
+      return json(env, 200, {
+        success: true,
+        valid: false,
+        sessionExpired: false,
+        source: 'task3d-safe-checksession-empty-token'
+      });
+    }
+
+    try {
+      var safeMod = await loadModules(env);
+      var decoded;
+      try {
+        decoded = safeMod.verifyToken(safeToken);
+      } catch (e) {
+        return json(env, 200, {
+          success: true,
+          valid: false,
+          sessionExpired: true,
+          source: 'task3d-safe-checksession-invalid-token'
+        });
+      }
+
+      var db = safeMod.getSupabaseAdmin();
+      var sessionRes = await db
+        .from('app_sessions')
+        .select('id,user_id,expires_at,revoked_at')
+        .eq('token_hash', safeMod.sha256(safeToken))
+        .maybeSingle();
+
+      if (sessionRes.error) {
+        return json(env, 200, {
+          success: true,
+          valid: false,
+          sessionExpired: true,
+          source: 'task3d-safe-checksession-session-query-error'
+        });
+      }
+
+      var session = sessionRes.data;
+      var expired = session && new Date(session.expires_at).getTime() < Date.now();
+      if (!session || session.revoked_at || expired || String(session.user_id) !== String(decoded.sub)) {
+        return json(env, 200, {
+          success: true,
+          valid: false,
+          sessionExpired: true,
+          source: 'task3d-safe-checksession-revoked-or-expired'
+        });
+      }
+
+      var userRes = await db
+        .from('app_users')
+        .select('id,username,email,nama,role,department,jabatan,no_hp,status,force_password_change')
+        .eq('id', decoded.sub)
+        .maybeSingle();
+
+      if (userRes.error || !userRes.data || userRes.data.status !== 'active') {
+        return json(env, 200, {
+          success: true,
+          valid: false,
+          sessionExpired: true,
+          source: 'task3d-safe-checksession-user-invalid'
+        });
+      }
+
+      return json(env, 200, {
+        success: true,
+        valid: true,
+        sessionExpired: false,
+        user: safeMod.publicUser(userRes.data),
+        source: 'task3d-safe-checksession-valid'
+      });
+    } catch (e) {
+      return json(env, 200, {
+        success: true,
+        valid: false,
+        sessionExpired: true,
+        source: 'task3d-safe-checksession-catch'
+      });
+    }
+  }
 
   // GESIT_TASK2C_DIRECT_SESSION_COMPAT
   // Fallback aman untuk action dasar agar frontend tidak jatuh ke legacy/GAS.
@@ -264,5 +350,6 @@ export async function onRequest(context) {
     return json(context.env || {}, err.statusCode || 500, { success: false, error: safeErrorMessage(err) });
   }
 }
+
 
 
