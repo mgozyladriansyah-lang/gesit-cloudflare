@@ -1,171 +1,55 @@
-/* GESIT V24 Final Mobile Card UI
-   Desktop tetap tabel. Mobile menjadi card/list.
-   Tidak ada banner fokus dan tidak ada tema warna role baru.
+/* GESIT V25 Final Mobile UI
+   Tanpa banner fokus, tanpa theme role baru. Mobile table menjadi card.
 */
 @media (max-width: 768px) {
-  body.gesit-mobile-shell .content {
-    padding-bottom: 118px !important;
-    background: linear-gradient(180deg, #eefaf8 0%, #ffffff 52%, #ffffff 100%) !important;
-  }
-
+  body.gesit-mobile-shell .content{padding-bottom:118px!important;background:linear-gradient(180deg,#eefaf8 0%,#fff 54%)!important;}
   body.gesit-mobile-shell .role-mobile-hub,
   body.gesit-mobile-shell .mobile-priority-banner,
   body.gesit-mobile-shell .gesit-mobile-priority,
   body.gesit-mobile-shell [data-mobile-priority],
-  body.gesit-mobile-shell [data-role-theme-hub] {
-    display: none !important;
-  }
+  body.gesit-mobile-shell [data-role-theme-hub]{display:none!important;}
 
-  #mobileBottomNav.gesit-mobile-bottom-nav {
-    position: fixed !important;
-    left: 12px !important;
-    right: 12px !important;
-    bottom: max(12px, env(safe-area-inset-bottom)) !important;
-    z-index: 5000 !important;
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: 6px !important;
-    padding: 8px !important;
-    border-radius: 26px !important;
-    background: rgba(255,255,255,.94) !important;
-    border: 1px solid rgba(15,143,134,.14) !important;
-    box-shadow: 0 18px 44px rgba(15,23,42,.16) !important;
-    backdrop-filter: blur(16px) !important;
-  }
-  #mobileBottomNav .gesit-mobile-nav-btn {
-    min-width: 0 !important;
-    min-height: 58px !important;
-    border: 0 !important;
-    background: transparent !important;
-    color: #64748b !important;
-    border-radius: 20px !important;
-    display: grid !important;
-    place-items: center !important;
-    gap: 3px !important;
-    font-size: 11px !important;
-    font-weight: 800 !important;
-  }
-  #mobileBottomNav .gesit-mobile-nav-btn svg { width: 21px !important; height: 21px !important; }
-  #mobileBottomNav .gesit-mobile-nav-btn span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  #mobileBottomNav .gesit-mobile-nav-btn.is-active {
-    color: #0f8f86 !important;
-    background: #ecfdf9 !important;
-    box-shadow: inset 0 0 0 1px rgba(20,184,166,.16) !important;
-  }
+  #mobileBottomNav.gesit-mobile-bottom-nav{position:fixed!important;left:12px!important;right:12px!important;bottom:max(12px,env(safe-area-inset-bottom))!important;z-index:5000!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important;padding:8px!important;border-radius:26px!important;background:rgba(255,255,255,.94)!important;border:1px solid rgba(15,143,134,.14)!important;box-shadow:0 18px 44px rgba(15,23,42,.16)!important;backdrop-filter:blur(16px)!important;}
+  #mobileBottomNav .gesit-mobile-nav-btn{min-width:0!important;min-height:58px!important;border:0!important;background:transparent!important;color:#64748b!important;border-radius:20px!important;display:grid!important;place-items:center!important;gap:3px!important;font-size:11px!important;font-weight:800!important;}
+  #mobileBottomNav .gesit-mobile-nav-btn svg{width:21px!important;height:21px!important;}
+  #mobileBottomNav .gesit-mobile-nav-btn span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  #mobileBottomNav .gesit-mobile-nav-btn.is-active{color:#0f8f86!important;background:#ecfdf9!important;box-shadow:inset 0 0 0 1px rgba(20,184,166,.16)!important;}
 
-  #mobileMenuBackdrop.gesit-mobile-sheet-backdrop {
-    position: fixed !important;
-    inset: 0 !important;
-    z-index: 5100 !important;
-    display: none !important;
-    background: rgba(15,23,42,.30) !important;
-    backdrop-filter: blur(3px) !important;
-  }
-  #mobileMenuBackdrop.is-open { display: block !important; }
-  #mobileMenuSheet.gesit-mobile-sheet {
-    position: fixed !important;
-    left: 12px !important;
-    right: 12px !important;
-    bottom: max(12px, env(safe-area-inset-bottom)) !important;
-    z-index: 5200 !important;
-    display: none !important;
-    max-height: 74vh !important;
-    overflow: auto !important;
-    padding: 14px !important;
-    border-radius: 28px !important;
-    background: #fff !important;
-    border: 1px solid rgba(15,143,134,.14) !important;
-    box-shadow: 0 24px 70px rgba(15,23,42,.22) !important;
-  }
-  #mobileMenuSheet.is-open { display: block !important; }
-  .gesit-mobile-sheet-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom: 12px; }
-  .gesit-mobile-sheet-head strong { display:block; font-size:18px; color:#0f172a; }
-  .gesit-mobile-sheet-head span { display:block; font-size:12px; color:#64748b; margin-top:3px; }
-  #mobileMenuClose { border:0; width:40px; height:40px; border-radius:14px; background:#f1f5f9; color:#334155; }
-  #mobileMenuClose svg { width:20px; height:20px; }
-  .gesit-mobile-menu-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:10px; }
-  .gesit-mobile-menu-item {
-    min-height: 74px;
-    border: 1px solid rgba(15,143,134,.13);
-    background: linear-gradient(135deg,#fff,#f8fffd);
-    border-radius: 20px;
-    color:#0f172a;
-    font-weight: 850;
-    display:grid;
-    grid-template-columns:auto 1fr;
-    align-items:center;
-    gap:10px;
-    padding:12px;
-    text-align:left;
-  }
-  .gesit-mobile-menu-item svg { width:22px; height:22px; color:#0f8f86; }
+  #mobileMenuBackdrop.gesit-mobile-sheet-backdrop{position:fixed!important;inset:0!important;z-index:5100!important;display:none!important;background:rgba(15,23,42,.30)!important;backdrop-filter:blur(3px)!important;}
+  #mobileMenuBackdrop.is-open{display:block!important;}
+  #mobileMenuSheet.gesit-mobile-sheet{position:fixed!important;left:12px!important;right:12px!important;bottom:max(12px,env(safe-area-inset-bottom))!important;z-index:5200!important;display:none!important;max-height:74vh!important;overflow:auto!important;padding:14px!important;border-radius:28px!important;background:#fff!important;border:1px solid rgba(15,143,134,.14)!important;box-shadow:0 24px 70px rgba(15,23,42,.22)!important;}
+  #mobileMenuSheet.is-open{display:block!important;}
+  .gesit-mobile-sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px;}
+  .gesit-mobile-sheet-head strong{display:block;font-size:18px;color:#0f172a;}
+  .gesit-mobile-sheet-head span{display:block;font-size:12px;color:#64748b;margin-top:3px;}
+  #mobileMenuClose{border:0;width:40px;height:40px;border-radius:14px;background:#f1f5f9;color:#334155;}
+  #mobileMenuClose svg{width:20px;height:20px;}
+  .gesit-mobile-menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+  .gesit-mobile-menu-item{min-height:74px;border:1px solid rgba(15,143,134,.13);background:linear-gradient(135deg,#fff,#f8fffd);border-radius:20px;color:#0f172a;font-weight:850;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:10px;padding:12px;text-align:left;}
+  .gesit-mobile-menu-item svg{width:22px;height:22px;color:#0f8f86;}
 
-  table.gesit-mobile-card-table,
-  table.gesit-mobile-card-table thead,
-  table.gesit-mobile-card-table tbody,
-  table.gesit-mobile-card-table tr,
-  table.gesit-mobile-card-table th,
-  table.gesit-mobile-card-table td {
-    display: block !important;
-    width: 100% !important;
-  }
-  table.gesit-mobile-card-table thead { display: none !important; }
-  table.gesit-mobile-card-table {
-    border: 0 !important;
-    background: transparent !important;
-    border-collapse: separate !important;
-    border-spacing: 0 !important;
-  }
-  table.gesit-mobile-card-table tbody { display: grid !important; gap: 12px !important; }
-  table.gesit-mobile-card-table tr {
-    border: 1px solid rgba(15,143,134,.13) !important;
-    border-radius: 22px !important;
-    overflow: hidden !important;
-    background: #fff !important;
-    box-shadow: 0 12px 30px rgba(15,23,42,.07) !important;
-  }
-  table.gesit-mobile-card-table td {
-    position: relative !important;
-    border: 0 !important;
-    border-bottom: 1px solid #edf2f7 !important;
-    min-height: 48px !important;
-    padding: 10px 12px 10px 45% !important;
-    white-space: normal !important;
-    text-align: left !important;
-    color: #0f172a !important;
-  }
-  table.gesit-mobile-card-table td:last-child { border-bottom: 0 !important; }
-  table.gesit-mobile-card-table td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 12px;
-    top: 10px;
-    width: 38%;
-    color: #94a3b8;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: .03em;
-    text-transform: uppercase;
-  }
-  table.gesit-mobile-card-table td .btn,
-  table.gesit-mobile-card-table td button,
-  table.gesit-mobile-card-table td a.btn {
-    width: auto !important;
-    min-height: 38px !important;
-    border-radius: 14px !important;
-    margin: 2px 4px 2px 0 !important;
-  }
+  table.gesit-mobile-card-table,table.gesit-mobile-card-table thead,table.gesit-mobile-card-table tbody,table.gesit-mobile-card-table tr,table.gesit-mobile-card-table th,table.gesit-mobile-card-table td{display:block!important;width:100%!important;}
+  table.gesit-mobile-card-table thead{display:none!important;}
+  table.gesit-mobile-card-table{border:0!important;background:transparent!important;border-collapse:separate!important;border-spacing:0!important;}
+  table.gesit-mobile-card-table tbody{display:grid!important;gap:12px!important;}
+  table.gesit-mobile-card-table tr{border:1px solid rgba(15,143,134,.13)!important;border-radius:22px!important;overflow:hidden!important;background:#fff!important;box-shadow:0 12px 30px rgba(15,23,42,.07)!important;}
+  table.gesit-mobile-card-table td{position:relative!important;border:0!important;border-bottom:1px solid #edf2f7!important;min-height:48px!important;padding:10px 12px 10px 45%!important;white-space:normal!important;text-align:left!important;color:#0f172a!important;}
+  table.gesit-mobile-card-table td:last-child{border-bottom:0!important;}
+  table.gesit-mobile-card-table td::before{content:attr(data-label);position:absolute;left:12px;top:10px;width:38%;color:#94a3b8;font-size:11px;font-weight:900;letter-spacing:.03em;text-transform:uppercase;}
+  table.gesit-mobile-card-table td .btn,table.gesit-mobile-card-table td button,table.gesit-mobile-card-table td a.btn{width:auto!important;min-height:38px!important;border-radius:14px!important;margin:2px 4px 2px 0!important;}
 
-  #gesitMobileSafeDrawer.gesit-mobile-safe-drawer { position: fixed; inset: 0; z-index: 7000; display: none; }
-  #gesitMobileSafeDrawer.is-open { display: block; }
-  .gmsd-scrim { position:absolute; inset:0; background:rgba(15,23,42,.28); backdrop-filter:blur(3px); }
-  .gmsd-card { position:absolute; left:12px; right:12px; bottom:max(12px, env(safe-area-inset-bottom)); max-height:78vh; overflow:auto; background:#fff; border-radius:26px; border:1px solid rgba(15,143,134,.14); box-shadow:0 24px 70px rgba(15,23,42,.24); }
-  .gmsd-head { position:sticky; top:0; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 16px; background:#fff; border-bottom:1px solid #edf2f7; }
-  .gmsd-head strong { font-size:18px; color:#0f172a; }
-  .gmsd-head button { border:0; width:40px; height:40px; border-radius:14px; background:#f1f5f9; color:#334155; }
-  .gmsd-head svg { width:20px; height:20px; }
-  .gmsd-body { padding: 8px 14px 16px; }
-  .gmsd-row { padding: 11px 0; border-bottom: 1px solid #edf2f7; }
-  .gmsd-row span { display:block; font-size:11px; color:#94a3b8; font-weight:900; letter-spacing:.03em; text-transform:uppercase; }
-  .gmsd-row strong { display:block; margin-top:3px; font-size:14px; color:#0f172a; line-height:1.4; }
+  .gesit-users-table-hidden-mobile{display:none!important;}
+  .gesit-mobile-user-list{display:grid;gap:12px;margin:12px 0 120px;}
+  .gesit-user-card{display:grid;grid-template-columns:46px minmax(0,1fr);gap:12px;align-items:start;background:#fff;border:1px solid rgba(15,143,134,.13);border-radius:22px;padding:14px;box-shadow:0 12px 30px rgba(15,23,42,.07);}
+  .guc-avatar{width:46px;height:46px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,#14b8a6,#0f8f86);color:#fff;font-weight:900;}
+  .guc-main{min-width:0;}
+  .guc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+  .guc-top strong{font-size:15px;color:#0f172a;line-height:1.25;}
+  .guc-sub{font-size:12px;color:#64748b;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .guc-status{flex:0 0 auto;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900;background:#f1f5f9;color:#64748b;}
+  .guc-status.is-active{background:#dcfce7;color:#16a34a;}
+  .guc-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;}
+  .guc-meta span{border-radius:999px;background:#f8fafc;border:1px solid #e2e8f0;color:#475569;font-size:11px;font-weight:800;padding:5px 8px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .guc-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .guc-actions button,.guc-actions .btn,.guc-actions a{min-height:36px;border-radius:12px;}
 }
