@@ -665,22 +665,6 @@ body,
 }
 
 
-/* ===========================================================================
-   GESIT V8 - ROOT SCROLL UNLOCK HOTFIX
-   Tujuan: memastikan layar bisa scroll walaupun body/html/main/content pernah
-   terkunci oleh overlay, bottom sheet, tour, PWA standalone, atau cache CSS lama.
-   =========================================================================== */
-:root { --gesit-scroll-guard: 1; }
-html:not(.gesit-modal-lock),
-body:not(.gesit-modal-lock) {
-  height: auto !important;
-  min-height: 100% !important;
-  max-height: none !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  -webkit-overflow-scrolling: touch !important;
-  touch-action: pan-y !important;
-}
 body:not(.has-modal-open):not(.has-sheet-open):not(.gesit-tour-active),
 html:not(.has-modal-open):not(.has-sheet-open):not(.gesit-tour-active) {
   position: static !important;
@@ -729,5 +713,182 @@ body.gesit-mobile-shell:not(.has-modal-open):not(.has-sheet-open):not(.gesit-tou
   html:not(.gesit-modal-lock), body:not(.gesit-modal-lock) { overflow-y: auto !important; }
   body:not(.has-modal-open):not(.has-sheet-open):not(.gesit-tour-active) .content {
     padding-bottom: calc(160px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+
+.app-shell.is-visible {
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  overflow: hidden !important;
+}
+.main {
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-height: 100vh !important;
+  max-height: 100dvh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-y: contain !important;
+  touch-action: pan-y !important;
+}
+.content {
+  overflow: visible !important;
+  min-height: calc(100dvh - var(--topbar-h, 64px)) !important;
+  padding-bottom: calc(170px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.view.is-active {
+  overflow: visible !important;
+  min-height: calc(100dvh - var(--topbar-h, 64px) - 24px) !important;
+}
+body.has-modal-open .main,
+body.has-sheet-open .main,
+body.gesit-tour-active .main {
+  overflow-y: hidden !important;
+}
+/* Elemen tersembunyi tidak boleh menangkap scroll/klik. */
+#mobileMenuBackdrop:not(.is-open),
+.modal-backdrop:not(.is-open),
+.sidebar-overlay:not(.is-visible),
+.gesit-notify-panel:not(.is-open),
+.pwa-version-box.hidden,
+.pwa-update-banner.hidden,
+#pwaInstallPrompt.hidden {
+  pointer-events: none !important;
+}
+/* TOUR: jangan sembunyikan spot/blocker saat tur aktif. V8 sempat membuat .tour-spot tidak tampil. */
+body.gesit-tour-active .tour-blocker,
+body.gesit-tour-active .tour-spot,
+body.gesit-tour-active .tour-tip {
+  display: block !important;
+  visibility: visible;
+}
+body.gesit-tour-active .tour-blocker {
+  pointer-events: auto !important;
+}
+body.gesit-tour-active .tour-spot {
+  pointer-events: none !important;
+  z-index: 13001 !important;
+}
+body.gesit-tour-active .tour-tip {
+  pointer-events: auto !important;
+  z-index: 13002 !important;
+}
+body:not(.gesit-tour-active) .tour-blocker,
+body:not(.gesit-tour-active) .tour-spot {
+  display: none !important;
+  pointer-events: none !important;
+}
+@media (max-width: 768px) {
+  .main { height: 100dvh !important; max-height: 100dvh !important; }
+  .content { padding-left: 14px !important; padding-right: 14px !important; }
+  .tour-tip.is-sheet { bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important; }
+  .tour-tip.is-sheet .tour-tip-body { max-height: 28vh !important; }
+}
+
+
+/* ===========================================================================
+   GESIT V10 - SCROLL + TOUR RECOVERY
+   Recovery patch: jangan kunci root/body/main/content. Halaman kembali memakai
+   document/body scroll normal seperti sebelum hotfix lock. Modal/sheet saja
+   yang boleh mengunci scroll sementara.
+   =========================================================================== */
+html,
+body {
+  height: auto !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+  overscroll-behavior-y: auto !important;
+}
+.app-shell.is-visible,
+.main,
+.content,
+.view.is-active {
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  overflow-y: visible !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+}
+.main {
+  margin-left: var(--sidebar-w);
+  display: flex !important;
+  flex-direction: column !important;
+}
+@media (max-width: 1024px) {
+  .main { margin-left: 0 !important; }
+}
+.content {
+  padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)) !important;
+}
+/* Lock hanya saat modal/sheet/menu benar-benar terbuka, bukan saat tour. */
+body.has-modal-open,
+body.has-sheet-open,
+body.sidebar-open {
+  overflow: hidden !important;
+}
+body.gesit-tour-active,
+body.gesit-tour-active html,
+body.gesit-tour-active .main,
+body.gesit-tour-active .content,
+body.gesit-tour-active .view.is-active {
+  overflow-y: auto !important;
+  touch-action: pan-y !important;
+}
+/* Overlay tersembunyi tidak boleh menangkap gesture. */
+#mobileMenuBackdrop:not(.is-open),
+.modal-backdrop:not(.is-open),
+.sidebar-overlay:not(.is-visible),
+.gesit-notify-panel:not(.is-open),
+.pwa-version-box.hidden,
+.pwa-update-banner.hidden,
+#pwaInstallPrompt.hidden {
+  pointer-events: none !important;
+}
+#mobileMenuBackdrop:not(.is-open),
+.modal-backdrop:not(.is-open),
+.sidebar-overlay:not(.is-visible) {
+  display: none !important;
+}
+/* Tour tetap menyorot elemen. Blocker tidak menahan scroll, hanya kartu tour yang menerima klik. */
+body.gesit-tour-active .tour-blocker {
+  display: block !important;
+  pointer-events: none !important;
+  z-index: 12999 !important;
+}
+body.gesit-tour-active .tour-spot {
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+  z-index: 13000 !important;
+}
+body.gesit-tour-active .tour-tip {
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  z-index: 13001 !important;
+}
+body:not(.gesit-tour-active) .tour-blocker,
+body:not(.gesit-tour-active) .tour-spot {
+  display: none !important;
+  pointer-events: none !important;
+}
+@media (max-width: 768px) {
+  .content { padding-bottom: calc(150px + env(safe-area-inset-bottom, 0px)) !important; }
+  .tour-tip.is-sheet {
+    bottom: calc(90px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .tour-tip.is-sheet .tour-tip-body {
+    max-height: 26vh !important;
+    overflow-y: auto !important;
   }
 }

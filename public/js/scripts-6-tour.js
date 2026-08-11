@@ -332,12 +332,13 @@ var TourGuide = {
       return;
     }
     TourGuide.aktif = true;
+    document.body.classList.add('gesit-tour-active');
     TourGuide.idx = 0;
 
     TourGuide._blocker = document.createElement('div');
-    TourGuide._blocker.className = 'tour-blocker';
+    TourGuide._blocker.className = 'tour-blocker is-active';
     TourGuide._spot = document.createElement('div');
-    TourGuide._spot.className = 'tour-spot';
+    TourGuide._spot.className = 'tour-spot is-active';
     TourGuide._tip = document.createElement('div');
     TourGuide._tip.className = 'tour-tip';
     // sembunyikan sampai posisi pertama terhitung — mencegah kedip di (0,0)
@@ -429,6 +430,7 @@ var TourGuide = {
       if (el && gulir && !TourGuide._inSidebar(el)) {
         try { el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
         catch (e) { el.scrollIntoView(); }
+        try { var sc=document.querySelector('.main'); if(sc){ var er=el.getBoundingClientRect(); var sr=sc.getBoundingClientRect(); sc.scrollTop += (er.top - sr.top) - (sr.height/2) + (er.height/2); } } catch(e) {}
         TourGuide._setelahDiam(el, function () { TourGuide._place(); });
       } else {
         TourGuide._place();
@@ -533,6 +535,8 @@ var TourGuide = {
 
   end: function () {
     TourGuide.aktif = false;
+    document.body.classList.remove('gesit-tour-active');
+    document.body.classList.remove('gesit-tour-active');
     TourGuide._tutupSidebarBilaPerlu();
     ['_blocker', '_spot', '_tip'].forEach(function (k) {
       if (TourGuide[k] && TourGuide[k].parentNode) TourGuide[k].parentNode.removeChild(TourGuide[k]);
