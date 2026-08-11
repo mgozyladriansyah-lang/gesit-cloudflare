@@ -404,11 +404,14 @@ body.gesit-tour-active .tour-tip-actions button {
       }
       if (role === 'admin' || role === 'super_admin' || role === 'kabag') {
         var third = MobileNav.can('approval') ? { type:'view', view:'approval', label:'Approval', icon:'inbox' } : { type:'view', view:'laporan', label:'Laporan', icon:'chart' };
+        var fourth = (role === 'admin' || role === 'super_admin') && MobileNav.can('users')
+          ? { type:'view', view:'users', label:'User', icon:'usercog' }
+          : { type:'profile', label:'Profil', icon:'user' };
         return [
           { type:'view', view:'dashboard', label:'Beranda', icon:'dashboard' },
           { type:'sheet', label:'Layanan', icon:'menu' },
           third,
-          { type:'profile', label:'Profil', icon:'user' }
+          fourth
         ].filter(function (it) { return !it.view || MobileNav.can(it.view); });
       }
       return [
