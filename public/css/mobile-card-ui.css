@@ -1,199 +1,182 @@
-
-/* GESIT V22 Mobile Card UI: mobile PWA differs from desktop tables. No banner, no role-theme override. */
+/* GESIT V23 Mobile Card UI
+   Desktop tetap table. Mobile berubah menjadi card/list yang lebih mudah dibaca.
+*/
 @media (max-width: 768px) {
-  body.gesit-mobile-shell #gesitMobilePriorityBanner,
-  body.gesit-mobile-shell #gesitRoleMobileHub {
-    display: none !important;
-  }
   body.gesit-mobile-shell .content {
-    padding-top: 10px !important;
+    padding-bottom: 118px !important;
+    background: linear-gradient(180deg, #eefaf8 0%, #ffffff 52%, #ffffff 100%) !important;
   }
-  body.gesit-mobile-shell .gesit-mobile-page-header,
-  body.gesit-mobile-shell .page-header {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 12px !important;
-    margin: 8px 14px 12px !important;
-    padding: 0 !important;
-  }
-  body.gesit-mobile-shell .page-title {
-    font-size: 22px !important;
-    line-height: 1.1 !important;
-    letter-spacing: -.02em !important;
-  }
-  body.gesit-mobile-shell .page-subtitle {
-    font-size: 13px !important;
-    line-height: 1.35 !important;
-    max-width: 100% !important;
-  }
-  body.gesit-mobile-shell .page-actions {
+
+  /* Bottom nav */
+  #mobileBottomNav.gesit-mobile-bottom-nav {
+    position: fixed !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: max(12px, env(safe-area-inset-bottom)) !important;
+    z-index: 5000 !important;
     display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 8px !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+    padding: 8px !important;
+    border-radius: 26px !important;
+    background: rgba(255,255,255,.94) !important;
+    border: 1px solid rgba(15,143,134,.14) !important;
+    box-shadow: 0 18px 44px rgba(15,23,42,.16) !important;
+    backdrop-filter: blur(16px) !important;
   }
-  body.gesit-mobile-shell .page-actions .btn {
-    min-height: 46px !important;
-    justify-content: center !important;
-    border-radius: 15px !important;
-  }
-  body.gesit-mobile-shell .card {
-    margin-inline: 12px !important;
-    border-radius: 24px !important;
-    box-shadow: 0 12px 34px rgba(15, 23, 42, .07) !important;
-  }
-  body.gesit-mobile-shell .card-body.flush {
-    padding: 10px !important;
-  }
-  body.gesit-mobile-shell .gesit-mobile-table-wrap,
-  body.gesit-mobile-shell .table-wrap {
-    overflow: visible !important;
-    max-height: none !important;
+  #mobileBottomNav .gesit-mobile-nav-btn {
+    min-width: 0 !important;
+    min-height: 58px !important;
     border: 0 !important;
     background: transparent !important;
-  }
-  body.gesit-mobile-shell table.gesit-mobile-card-table {
-    display: block !important;
-    width: 100% !important;
-    border-collapse: separate !important;
-    border-spacing: 0 !important;
-    background: transparent !important;
-  }
-  body.gesit-mobile-shell table.gesit-mobile-card-table thead {
-    display: none !important;
-  }
-  body.gesit-mobile-shell table.gesit-mobile-card-table tbody,
-  body.gesit-mobile-shell table.gesit-mobile-card-table tr,
-  body.gesit-mobile-shell table.gesit-mobile-card-table td {
-    display: block !important;
-    width: 100% !important;
-  }
-  body.gesit-mobile-shell table.gesit-mobile-card-table tr {
-    margin: 0 0 10px !important;
-    padding: 12px !important;
-    border: 1px solid rgba(15,23,42,.08) !important;
+    color: #64748b !important;
     border-radius: 20px !important;
-    background: #fff !important;
-    box-shadow: 0 8px 22px rgba(15,23,42,.05) !important;
-  }
-  body.gesit-mobile-shell table.gesit-mobile-card-table td {
-    min-height: 32px !important;
-    padding: 7px 0 !important;
-    border: 0 !important;
     display: grid !important;
-    grid-template-columns: minmax(86px, 34%) 1fr !important;
-    gap: 10px !important;
-    align-items: start !important;
-    font-size: 13px !important;
-    line-height: 1.35 !important;
-    white-space: normal !important;
-  }
-  body.gesit-mobile-shell table.gesit-mobile-card-table td::before {
-    content: attr(data-label) !important;
-    color: #94a3b8 !important;
+    place-items: center !important;
+    gap: 3px !important;
     font-size: 11px !important;
     font-weight: 800 !important;
-    text-transform: uppercase !important;
-    letter-spacing: .035em !important;
   }
-  body.gesit-mobile-shell table.gesit-mobile-card-table td.is-primary-cell {
-    grid-template-columns: auto 1fr !important;
-    align-items: center !important;
-    padding-bottom: 10px !important;
-    margin-bottom: 4px !important;
-    border-bottom: 1px solid rgba(15,23,42,.06) !important;
-    font-size: 14px !important;
-    font-weight: 900 !important;
+  #mobileBottomNav .gesit-mobile-nav-btn svg { width: 21px !important; height: 21px !important; }
+  #mobileBottomNav .gesit-mobile-nav-btn span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #mobileBottomNav .gesit-mobile-nav-btn.is-active {
+    color: #0f8f86 !important;
+    background: #ecfdf9 !important;
+    box-shadow: inset 0 0 0 1px rgba(20,184,166,.16) !important;
   }
-  body.gesit-mobile-shell table.gesit-mobile-card-table td.is-primary-cell::before {
+
+  /* Sheet */
+  #mobileMenuBackdrop.gesit-mobile-sheet-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 5100 !important;
     display: none !important;
+    background: rgba(15,23,42,.30) !important;
+    backdrop-filter: blur(3px) !important;
   }
-  body.gesit-mobile-shell table.gesit-mobile-card-table td.is-action-cell {
-    display: flex !important;
-    justify-content: flex-end !important;
-    gap: 8px !important;
-    flex-wrap: wrap !important;
-    padding-top: 10px !important;
-  }
-  body.gesit-mobile-shell table.gesit-mobile-card-table td.is-action-cell::before {
+  #mobileMenuBackdrop.is-open { display: block !important; }
+  #mobileMenuSheet.gesit-mobile-sheet {
+    position: fixed !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: max(12px, env(safe-area-inset-bottom)) !important;
+    z-index: 5200 !important;
     display: none !important;
-  }
-  body.gesit-mobile-shell table.gesit-mobile-card-table td.is-action-cell .btn,
-  body.gesit-mobile-shell table.gesit-mobile-card-table td.is-action-cell button,
-  body.gesit-mobile-shell table.gesit-mobile-card-table td.is-action-cell a {
-    min-height: 38px !important;
-    border-radius: 12px !important;
-  }
-  body.gesit-mobile-shell .mobile-users-tools {
-    margin: 0 12px 12px !important;
-    padding: 13px !important;
-    border: 1px solid rgba(15,23,42,.08) !important;
-    border-radius: 24px !important;
-    background: linear-gradient(180deg,#fff,rgba(248,250,252,.96)) !important;
-    box-shadow: 0 12px 30px rgba(15,23,42,.06) !important;
-  }
-  body.gesit-mobile-shell .mut-title {
-    display: flex !important;
-    gap: 11px !important;
-    align-items: center !important;
-    margin-bottom: 12px !important;
-  }
-  body.gesit-mobile-shell .mut-icon,
-  body.gesit-mobile-shell .mobile-row-avatar {
-    width: 42px !important;
-    height: 42px !important;
-    border-radius: 15px !important;
-    display: inline-grid !important;
-    place-items: center !important;
-    background: #0f766e !important;
-    color: #fff !important;
-    font-weight: 900 !important;
-    flex: 0 0 auto !important;
-  }
-  body.gesit-mobile-shell .mut-icon svg { width: 22px !important; height: 22px !important; }
-  body.gesit-mobile-shell .mut-title strong { display:block !important; font-size:16px !important; line-height:1.1 !important; color:#0f172a !important; }
-  body.gesit-mobile-shell .mut-title span { display:block !important; margin-top:3px !important; font-size:12px !important; color:#64748b !important; line-height:1.3 !important; }
-  body.gesit-mobile-shell .mut-search {
-    min-height: 46px !important;
-    border: 1px solid rgba(15,23,42,.10) !important;
-    border-radius: 16px !important;
+    max-height: 74vh !important;
+    overflow: auto !important;
+    padding: 14px !important;
+    border-radius: 28px !important;
     background: #fff !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 9px !important;
-    padding: 0 12px !important;
+    border: 1px solid rgba(15,143,134,.14) !important;
+    box-shadow: 0 24px 70px rgba(15,23,42,.22) !important;
   }
-  body.gesit-mobile-shell .mut-search svg { width: 18px !important; height: 18px !important; color:#64748b !important; }
-  body.gesit-mobile-shell .mut-search input {
+  #mobileMenuSheet.is-open { display: block !important; }
+  .gesit-mobile-sheet-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom: 12px; }
+  .gesit-mobile-sheet-head strong { display:block; font-size:18px; color:#0f172a; }
+  .gesit-mobile-sheet-head span { display:block; font-size:12px; color:#64748b; margin-top:3px; }
+  #mobileMenuClose { border:0; width:40px; height:40px; border-radius:14px; background:#f1f5f9; color:#334155; }
+  #mobileMenuClose svg { width:20px; height:20px; }
+  .gesit-mobile-menu-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:10px; }
+  .gesit-mobile-menu-item {
+    min-height: 74px;
+    border: 1px solid rgba(15,143,134,.13);
+    background: linear-gradient(135deg,#fff,#f8fffd);
+    border-radius: 20px;
+    color:#0f172a;
+    font-weight: 850;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    text-align:left;
+  }
+  .gesit-mobile-menu-item svg { width:22px; height:22px; color:#0f8f86; }
+
+  /* Tables become readable cards */
+  table.gesit-mobile-card-table,
+  table.gesit-mobile-card-table thead,
+  table.gesit-mobile-card-table tbody,
+  table.gesit-mobile-card-table tr,
+  table.gesit-mobile-card-table th,
+  table.gesit-mobile-card-table td {
+    display: block !important;
     width: 100% !important;
+  }
+  table.gesit-mobile-card-table thead { display: none !important; }
+  table.gesit-mobile-card-table {
     border: 0 !important;
-    outline: 0 !important;
-    font-size: 14px !important;
     background: transparent !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
   }
-  body.gesit-mobile-shell .mut-chips {
-    display:flex !important;
-    gap:8px !important;
-    overflow-x:auto !important;
-    padding-top:10px !important;
-  }
-  body.gesit-mobile-shell .mut-chips button {
-    border: 1px solid rgba(15,23,42,.10) !important;
-    border-radius: 999px !important;
-    min-height: 36px !important;
-    padding: 0 12px !important;
+  table.gesit-mobile-card-table tbody { display: grid !important; gap: 12px !important; }
+  table.gesit-mobile-card-table tr {
+    border: 1px solid rgba(15,143,134,.13) !important;
+    border-radius: 22px !important;
+    overflow: hidden !important;
     background: #fff !important;
-    color:#334155 !important;
-    font-weight:800 !important;
-    white-space: nowrap !important;
+    box-shadow: 0 12px 30px rgba(15,23,42,.07) !important;
   }
-  body.gesit-mobile-shell .mut-chips button.is-active {
-    background:#0f766e !important;
-    color:#fff !important;
-    border-color:#0f766e !important;
+  table.gesit-mobile-card-table td {
+    position: relative !important;
+    border: 0 !important;
+    border-bottom: 1px solid #edf2f7 !important;
+    min-height: 48px !important;
+    padding: 10px 12px 10px 45% !important;
+    white-space: normal !important;
+    text-align: left !important;
+    color: #0f172a !important;
   }
-  body.gesit-mobile-shell .mut-chips b { margin-left: 4px !important; }
-  body.gesit-mobile-shell #mobileBottomNav .gesit-mobile-nav-btn[data-view="users"] svg {
-    color:#0f766e !important;
+  table.gesit-mobile-card-table td:last-child { border-bottom: 0 !important; }
+  table.gesit-mobile-card-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 12px;
+    top: 10px;
+    width: 38%;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .03em;
+    text-transform: uppercase;
   }
+  table.gesit-mobile-card-table td .btn,
+  table.gesit-mobile-card-table td button,
+  table.gesit-mobile-card-table td a.btn {
+    width: auto !important;
+    min-height: 38px !important;
+    border-radius: 14px !important;
+    margin: 2px 4px 2px 0 !important;
+  }
+
+  /* Safe detail drawer */
+  #gesitMobileSafeDrawer.gesit-mobile-safe-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 7000;
+    display: none;
+  }
+  #gesitMobileSafeDrawer.is-open { display: block; }
+  .gmsd-scrim { position:absolute; inset:0; background:rgba(15,23,42,.28); backdrop-filter:blur(3px); }
+  .gmsd-card {
+    position:absolute;
+    left:12px;
+    right:12px;
+    bottom:max(12px, env(safe-area-inset-bottom));
+    max-height:78vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:26px;
+    border:1px solid rgba(15,143,134,.14);
+    box-shadow:0 24px 70px rgba(15,23,42,.24);
+  }
+  .gmsd-head { position:sticky; top:0; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 16px; background:#fff; border-bottom:1px solid #edf2f7; }
+  .gmsd-head strong { font-size:18px; color:#0f172a; }
+  .gmsd-head button { border:0; width:40px; height:40px; border-radius:14px; background:#f1f5f9; color:#334155; }
+  .gmsd-head svg { width:20px; height:20px; }
+  .gmsd-body { padding: 8px 14px 16px; }
+  .gmsd-row { padding: 11px 0; border-bottom: 1px solid #edf2f7; }
+  .gmsd-row span { display:block; font-size:11px; color:#94a3b8; font-weight:900; letter-spacing:.03em; text-transform:uppercase; }
+  .gmsd-row strong { display:block; margin-top:3px; font-size:14px; color:#0f172a; line-height:1.4; }
 }
