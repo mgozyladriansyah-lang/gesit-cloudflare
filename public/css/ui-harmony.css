@@ -80,3 +80,26 @@ body[data-current-view]:not([data-current-view="dashboard"]) #gesitRoleMobileHub
     box-shadow: 0 14px 34px rgba(15,23,42,.07) !important;
   }
 }
+
+
+/* GESIT V18 Stable Interaction Recovery CSS */
+#menuLogout {
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  cursor: pointer !important;
+}
+#userMenu:not(.is-open),
+.user-menu:not(.is-open),
+#mobileMenuSheet:not(.is-open),
+#mobileMenuBackdrop:not(.is-open) {
+  pointer-events: none !important;
+}
+body:not(.has-modal-open):not(.has-sheet-open):not(.gesit-tour-active),
+body:not(.has-modal-open):not(.has-sheet-open):not(.gesit-tour-active) .main,
+body:not(.has-modal-open):not(.has-sheet-open):not(.gesit-tour-active) .content,
+body:not(.has-modal-open):not(.has-sheet-open):not(.gesit-tour-active) .view.is-active {
+  pointer-events: auto !important;
+}
+body[data-current-view]:not([data-current-view="dashboard"]) #gesitRoleMobileHub {
+  display: none !important;
+}
