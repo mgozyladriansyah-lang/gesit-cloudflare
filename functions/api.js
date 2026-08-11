@@ -174,6 +174,33 @@ async function handleRequest(context) {
   var body = parsed.value || {};
   var action = String(body.action || '').trim();
 
+  // GESIT_TASK2C_DIRECT_SESSION_COMPAT
+  // Fallback aman untuk action dasar agar frontend tidak jatuh ke legacy/GAS.
+  if (action === 'checkSession' || action === 'check_session') {
+    var directToken = String(body.token || (body.data && body.data.token) || '').trim();
+    if (!directToken) {
+      return json(env, 200, {
+        success: true,
+        valid: false,
+        sessionExpired: false,
+        source: 'task2c-direct-session-empty-token'
+      });
+    }
+  }
+
+  if (action === 'login') {
+    var directLoginData = body.data && typeof body.data === 'object' ? body.data : {};
+    var directUsername = String(directLoginData.username || body.username || '').trim();
+    var directPassword = String(directLoginData.password || body.password || '');
+    if (!directUsername || !directPassword) {
+      return json(env, 200, {
+        success: false,
+        error: 'Username dan password wajib diisi.',
+        source: 'task2c-direct-login-empty'
+      });
+    }
+  }
+
   // GESIT_TASK2B_DIRECT_HEALTH
   // Direct health endpoint agar /api tidak fallback ke backend lama/GAS.
   if (action === 'health') {
@@ -237,4 +264,5 @@ export async function onRequest(context) {
     return json(context.env || {}, err.statusCode || 500, { success: false, error: safeErrorMessage(err) });
   }
 }
+
 
