@@ -1,0 +1,194 @@
+﻿@media (max-width: 768px) {
+  html, body {
+    min-height: 100dvh !important;
+  }
+
+  body.gesit-mobile-shell .main,
+  body.gesit-mobile-shell main.main {
+    height: 100dvh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-padding-top: 76px !important;
+    padding-bottom: 118px !important;
+  }
+
+  body.gesit-mobile-shell .content {
+    padding-top: 12px !important;
+    padding-bottom: 130px !important;
+    overflow: visible !important;
+  }
+
+  body.gesit-mobile-shell .topbar,
+  body.gesit-mobile-shell .app-topbar,
+  body.gesit-mobile-shell header.topbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 4900 !important;
+    background: rgba(255, 255, 255, .96) !important;
+    border-bottom: 1px solid rgba(20, 184, 166, .25) !important;
+    backdrop-filter: blur(14px) !important;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, .08) !important;
+  }
+
+  body.gesit-mobile-shell .role-mobile-hub,
+  body.gesit-mobile-shell .mobile-priority-banner,
+  body.gesit-mobile-shell .gesit-mobile-priority,
+  body.gesit-mobile-shell [data-mobile-priority],
+  body.gesit-mobile-shell [data-role-theme-hub] {
+    display: none !important;
+  }
+
+  table.gesit-mobile-card-table,
+  table.gesit-mobile-card-table thead,
+  table.gesit-mobile-card-table tbody,
+  table.gesit-mobile-card-table tr,
+  table.gesit-mobile-card-table th,
+  table.gesit-mobile-card-table td {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  table.gesit-mobile-card-table thead {
+    display: none !important;
+  }
+
+  table.gesit-mobile-card-table {
+    border: 0 !important;
+    background: transparent !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+  }
+
+  table.gesit-mobile-card-table tbody {
+    display: grid !important;
+    gap: 12px !important;
+  }
+
+  table.gesit-mobile-card-table tr {
+    border: 1px solid rgba(15, 143, 134, .13) !important;
+    border-radius: 22px !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, .07) !important;
+  }
+
+  table.gesit-mobile-card-table td {
+    position: relative !important;
+    border: 0 !important;
+    border-bottom: 1px solid #edf2f7 !important;
+    min-height: 48px !important;
+    padding: 10px 12px 10px 44% !important;
+    white-space: normal !important;
+    text-align: left !important;
+    color: #0f172a !important;
+  }
+
+  table.gesit-mobile-card-table td:last-child {
+    border-bottom: 0 !important;
+  }
+
+  table.gesit-mobile-card-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 12px;
+    top: 10px;
+    width: 36%;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
+
+  .gesit-users-table-hidden-mobile {
+    display: none !important;
+  }
+
+  .gesit-mobile-user-list {
+    display: grid;
+    gap: 12px;
+    margin: 12px 0 132px;
+  }
+
+  .gesit-user-card {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    background: #fff;
+    border: 1px solid rgba(15, 143, 134, .13);
+    border-radius: 22px;
+    padding: 14px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, .07);
+  }
+
+  .guc-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #14b8a6, #0f8f86);
+    color: #fff;
+    font-weight: 900;
+  }
+
+  .guc-main {
+    min-width: 0;
+  }
+
+  .guc-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .guc-top strong {
+    font-size: 15px;
+    color: #0f172a;
+    line-height: 1.25;
+  }
+
+  .guc-sub {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .guc-status {
+    flex: 0 0 auto;
+    border-radius: 999px;
+    padding: 5px 9px;
+    font-size: 11px;
+    font-weight: 900;
+    background: #f1f5f9;
+    color: #64748b;
+  }
+
+  .guc-status.is-active {
+    background: #dcfce7;
+    color: #16a34a;
+  }
+
+  .guc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 9px;
+  }
+
+  .guc-meta span {
+    border-radius: 999px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 5px 8px;
+  }
+}
