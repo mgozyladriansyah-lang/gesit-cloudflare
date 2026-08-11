@@ -1,0 +1,82 @@
+
+/* GESIT V17 UI Harmony Layer
+   Natural, selaras, dan minim tabrakan visual. Layer ini tidak mengubah alur bisnis. */
+:root {
+  --gesit-brand: #0f8f86;
+  --gesit-brand-2: #14b8a6;
+  --gesit-brand-soft: #eefcf9;
+  --gesit-surface: #ffffff;
+  --gesit-canvas: #f7fafc;
+  --gesit-ink: #172033;
+  --gesit-muted: #64748b;
+  --gesit-border: #dbe7ef;
+  --gesit-shadow: 0 14px 36px rgba(15,23,42,.08);
+  --gesit-radius: 18px;
+}
+body.gesit-mobile-shell .content,
+body .content {
+  background: linear-gradient(180deg, #f7fbfc 0%, #ffffff 320px) !important;
+}
+.card, .stat-card, .summary-card, .approval-item, .kpi-card, .table-wrap, .modal {
+  border-color: var(--gesit-border) !important;
+  border-radius: var(--gesit-radius) !important;
+  box-shadow: var(--gesit-shadow) !important;
+}
+.btn-primary, .btn-success,
+body.gesit-mobile-shell .btn-primary,
+body.gesit-mobile-shell .btn-success {
+  background: linear-gradient(135deg, var(--gesit-brand-2), var(--gesit-brand)) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+.btn-outline, .btn-ghost {
+  border-color: var(--gesit-border) !important;
+}
+.badge, .chip, .pill {
+  border-radius: 999px !important;
+}
+.user-menu {
+  border: 1px solid var(--gesit-border) !important;
+  box-shadow: 0 24px 50px rgba(15,23,42,.14) !important;
+}
+#menuLogout {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+}
+#modalConfirm.modal-backdrop.is-open {
+  display: flex !important;
+  z-index: 2147483300 !important;
+  pointer-events: auto !important;
+}
+#modalConfirm.modal-backdrop.is-open .modal {
+  z-index: 2147483301 !important;
+  pointer-events: auto !important;
+}
+#mobileMenuBackdrop:not(.is-open), #mobileMenuSheet:not(.is-open), #userMenu:not(.is-open), .user-menu:not(.is-open) {
+  pointer-events: none !important;
+}
+body[data-current-view]:not([data-current-view="dashboard"]) #gesitRoleMobileHub {
+  display: none !important;
+}
+@media (max-width: 768px) {
+  body.gesit-mobile-shell .topbar {
+    background: rgba(255,255,255,.96) !important;
+    border-bottom: 1px solid rgba(15,143,134,.14) !important;
+  }
+  #mobileBottomNav.gesit-mobile-bottom-nav {
+    border-radius: 24px !important;
+    border-color: rgba(15,143,134,.18) !important;
+    box-shadow: 0 18px 44px rgba(15,23,42,.16) !important;
+  }
+  #mobileBottomNav .gesit-mobile-nav-btn.is-active {
+    color: var(--gesit-brand) !important;
+    background: linear-gradient(180deg,#ffffff,var(--gesit-brand-soft)) !important;
+    transform: translateY(-4px) !important;
+  }
+  #gesitRoleMobileHub {
+    margin-bottom: 12px !important;
+    border: 1px solid rgba(15,143,134,.14) !important;
+    box-shadow: 0 14px 34px rgba(15,23,42,.07) !important;
+  }
+}
