@@ -1,9 +1,20 @@
 {
-  "current": "2026.08.11.08",
+  "current": "2026.08.11.09",
   "updated_at": "2026-08-11 08:07 GMT+7",
   "history": [
     {
-      "version": "2026.08.11.08",
+      "version": "2026.08.11.09",
+      "date": "2026-08-11",
+      "title": "Approval vehicle modal footer safe area",
+      "items": [
+        "Menyembunyikan bottom navigation saat modal approval terbuka.",
+        "Menaikkan modal approval di atas bottom navigation.",
+        "Membuat footer modal approval sticky dan aman dari safe-area bawah.",
+        "Menambahkan guard pointer/touch untuk tombol Setujui & Kirim pada approval kendaraan, ruangan, dan ATK."
+      ]
+    },
+    {
+      "version": "2026.08.11.09",
       "date": "2026-08-11",
       "title": "Confirm logout popup click fix",
       "items": [
@@ -14,7 +25,7 @@
       ]
     },
     {
-      "version": "2026.08.11.08",
+      "version": "2026.08.11.09",
       "date": "2026-08-11",
       "title": "Scroll recovery and tour spotlight rollback",
       "items": [
@@ -25,7 +36,7 @@
       ]
     },
     {
-      "version": "2026.08.11.08",
+      "version": "2026.08.11.09",
       "date": "2026-08-11",
       "title": "Main scroll container and tour spotlight fix",
       "items": [
@@ -36,18 +47,18 @@
       ]
     },
     {
-      "version": "2026.08.11.08",
+      "version": "2026.08.11.09",
       "date": "2026-08-11",
       "title": "Root scroll unlock and CSS cache busting",
       "items": [
         "Menambahkan folder public/css di patch karena index memakai /css/*.css.",
-        "Menambahkan cache buster ?v=2026.08.11.08 untuk CSS agar PWA tidak memakai CSS lama.",
+        "Menambahkan cache buster ?v=2026.08.11.09 untuk CSS agar PWA tidak memakai CSS lama.",
         "Memaksa html/body/main/content/view kembali menjadi scrollable jika tidak ada modal, sheet, atau tour aktif.",
         "Menambahkan window.GESIT_FORCE_UNLOCK_SCROLL() sebagai helper darurat jika diperlukan."
       ]
     },
     {
-      "version": "2026.08.11.08",
+      "version": "2026.08.11.09",
       "date": "2026-08-11",
       "title": "Emergency interaction and scroll unlock hotfix",
       "items": [
@@ -58,7 +69,7 @@
       ]
     },
     {
-      "version": "2026.08.11.08",
+      "version": "2026.08.11.09",
       "date": "2026-08-11",
       "title": "In-app notification center and PWA notification tools",
       "items": [
@@ -70,7 +81,7 @@
       ]
     },
     {
-      "version": "2026.08.11.08",
+      "version": "2026.08.11.09",
       "date": "2026-08-11",
       "title": "PWA stability, tour overlay, and notification sound hotfix",
       "items": [
@@ -82,7 +93,7 @@
       ]
     },
     {
-      "version": "2026.08.11.08",
+      "version": "2026.08.11.09",
       "date": "2026-08-11",
       "title": "PWA update manager + sound notification",
       "items": [

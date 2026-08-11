@@ -935,3 +935,114 @@ body.confirm-modal-open .tour-blocker,
 body.confirm-modal-open .tour-spot {
   pointer-events: none !important;
 }
+
+
+/* ===========================================================================
+   GESIT V12 - APPROVAL MODAL FOOTER SAFE AREA
+   Masalah: tombol Setujui & Kirim modal approval kendaraan tertutup bottom nav.
+   Solusi: modal selalu di atas bottom nav, bottom nav disembunyikan saat modal,
+   footer modal sticky dan aman dari safe-area bawah.
+   =========================================================================== */
+body.has-modal-open #mobileBottomNav,
+body.modal-open #mobileBottomNav,
+body.approval-modal-open #mobileBottomNav,
+body.approval-modal-open #mobileMenuSheet,
+body.approval-modal-open #mobileMenuBackdrop {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+.modal-backdrop.is-open {
+  z-index: 2147482000 !important;
+  pointer-events: auto !important;
+}
+.modal-backdrop.is-open .modal {
+  z-index: 2147482001 !important;
+  pointer-events: auto !important;
+}
+#modalApproveKnd.modal-backdrop.is-open,
+#modalApproveRng.modal-backdrop.is-open,
+#modalApproveAtk.modal-backdrop.is-open,
+#modalReject.modal-backdrop.is-open {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 12px !important;
+  z-index: 2147482100 !important;
+}
+#modalApproveKnd.modal-backdrop.is-open .modal,
+#modalApproveRng.modal-backdrop.is-open .modal,
+#modalApproveAtk.modal-backdrop.is-open .modal,
+#modalReject.modal-backdrop.is-open .modal {
+  width: min(560px, calc(100vw - 24px)) !important;
+  max-height: calc(100dvh - 24px) !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+#modalApproveKnd .modal-body,
+#modalApproveRng .modal-body,
+#modalApproveAtk .modal-body,
+#modalReject .modal-body {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding-bottom: 18px !important;
+}
+#modalApproveKnd .modal-footer,
+#modalApproveRng .modal-footer,
+#modalApproveAtk .modal-footer,
+#modalReject .modal-footer {
+  position: sticky !important;
+  bottom: 0 !important;
+  z-index: 2147482102 !important;
+  background: var(--bg-surface, #fff) !important;
+  padding: 12px 16px calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+  box-shadow: 0 -10px 24px rgba(15, 23, 42, .10) !important;
+  pointer-events: auto !important;
+}
+#modalApproveKnd .modal-footer .btn,
+#modalApproveRng .modal-footer .btn,
+#modalApproveAtk .modal-footer .btn,
+#modalReject .modal-footer .btn,
+#apkSubmit,
+#aprSubmit,
+#apaSubmit,
+#rejectSubmit {
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  position: relative !important;
+  z-index: 2147482103 !important;
+}
+@media (max-width: 768px) {
+  #modalApproveKnd.modal-backdrop.is-open,
+  #modalApproveRng.modal-backdrop.is-open,
+  #modalApproveAtk.modal-backdrop.is-open,
+  #modalReject.modal-backdrop.is-open {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+  #modalApproveKnd.modal-backdrop.is-open .modal,
+  #modalApproveRng.modal-backdrop.is-open .modal,
+  #modalApproveAtk.modal-backdrop.is-open .modal,
+  #modalReject.modal-backdrop.is-open .modal {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    max-height: calc(100dvh - 8px) !important;
+    border-radius: 18px 18px 0 0 !important;
+    margin: 0 !important;
+  }
+  #modalApproveKnd .modal-footer,
+  #modalApproveRng .modal-footer,
+  #modalApproveAtk .modal-footer,
+  #modalReject .modal-footer {
+    gap: 10px !important;
+    padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  #modalApproveKnd .modal-footer .btn,
+  #modalApproveRng .modal-footer .btn,
+  #modalApproveAtk .modal-footer .btn,
+  #modalReject .modal-footer .btn {
+    min-height: 46px !important;
+    flex: 1 1 0 !important;
+  }
+}
