@@ -1,9 +1,20 @@
 {
-  "current": "2026.08.11.15",
+  "current": "2026.08.11.16",
   "updated_at": "2026-08-11 08:07 GMT+7",
   "history": [
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
+      "date": "2026-08-11",
+      "title": "Safe public link and mobile UX refine",
+      "items": [
+        "Mengganti modal Halaman Publik dengan panel ringan safe-public-link.js agar klik tidak membuat mobile freeze.",
+        "Panel tautan publik tidak memakai Modal.open, MutationObserver, setInterval, iframe, atau API tambahan.",
+        "Memperbaiki UI mobile Beranda: aksi utama lebih jelas, panel tautan publik bottom-sheet, spacing dan area sentuh lebih proper.",
+        "Menambahkan mobile-ux-refine.css sebagai layer final tanpa mengubah fungsi bisnis."
+      ]
+    },
+    {
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "Stable interaction recovery",
       "items": [
@@ -14,7 +25,7 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "Flow and UI consolidation",
       "items": [
@@ -25,7 +36,7 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "Logout menu click fix",
       "items": [
@@ -36,7 +47,7 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "Overlay state auto-close fix",
       "items": [
@@ -47,7 +58,7 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "Role-based mobile UI/UX optimization",
       "items": [
@@ -58,7 +69,7 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "Compatibility guard for V2-V12 patches",
       "items": [
@@ -69,7 +80,7 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "Approval vehicle modal footer safe area",
       "items": [
@@ -80,7 +91,7 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "Confirm logout popup click fix",
       "items": [
@@ -91,7 +102,7 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "Scroll recovery and tour spotlight rollback",
       "items": [
@@ -102,7 +113,7 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "Main scroll container and tour spotlight fix",
       "items": [
@@ -113,18 +124,18 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "Root scroll unlock and CSS cache busting",
       "items": [
         "Menambahkan folder public/css di patch karena index memakai /css/*.css.",
-        "Menambahkan cache buster ?v=2026.08.11.15 untuk CSS agar PWA tidak memakai CSS lama.",
+        "Menambahkan cache buster ?v=2026.08.11.16 untuk CSS agar PWA tidak memakai CSS lama.",
         "Memaksa html/body/main/content/view kembali menjadi scrollable jika tidak ada modal, sheet, atau tour aktif.",
         "Menambahkan window.GESIT_FORCE_UNLOCK_SCROLL() sebagai helper darurat jika diperlukan."
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "Emergency interaction and scroll unlock hotfix",
       "items": [
@@ -135,7 +146,7 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "In-app notification center and PWA notification tools",
       "items": [
@@ -147,7 +158,7 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "PWA stability, tour overlay, and notification sound hotfix",
       "items": [
@@ -159,7 +170,7 @@
       ]
     },
     {
-      "version": "2026.08.11.15",
+      "version": "2026.08.11.16",
       "date": "2026-08-11",
       "title": "PWA update manager + sound notification",
       "items": [
