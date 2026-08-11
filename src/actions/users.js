@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
@@ -18,7 +18,7 @@ const STATUS_MAP = Object.freeze({
   deleted: 'deleted'
 });
 
-const USER_SELECT = 'id,username,email,nama,role,department,bagian,jabatan,no_hp,telegram_chat_id,status,last_login_at,created_at,updated_at,force_password_change,login_attempts,locked_until,magang_id';
+const USER_SELECT = 'id,username,email,nama,role,department,jabatan,no_hp,status,last_login_at,created_at,updated_at,force_password_change';
 const FULL_USER_SELECT = USER_SELECT + ',password_hash';
 
 function cleanText(value, max = 255) {
@@ -371,3 +371,4 @@ async function changePassword(data = {}, context = {}) {
 }
 
 module.exports = { getUsers, createUser, updateUser, resetUserPassword, deleteUser, changePassword };
+
