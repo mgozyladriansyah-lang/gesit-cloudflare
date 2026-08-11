@@ -1,0 +1,102 @@
+
+/* GESIT V20 Professional role theme and mobile priority */
+:root {
+  --role-primary: #0f8f86;
+  --role-secondary: #14b8a6;
+  --role-soft: #ecfdf9;
+  --role-surface: #ffffff;
+  --role-border: rgba(15,143,134,.16);
+  --role-text: #122034;
+}
+body.gesit-theme-role-super-admin, body.gesit-theme-role-admin,
+body.gesit-role-super-admin, body.gesit-role-admin {
+  --role-primary:#0f8f86; --role-secondary:#14b8a6; --role-soft:#ecfdf9; --role-border:rgba(15,143,134,.18);
+}
+body.gesit-theme-role-kabag, body.gesit-role-kabag {
+  --role-primary:#2563eb; --role-secondary:#60a5fa; --role-soft:#eff6ff; --role-border:rgba(37,99,235,.18);
+}
+body.gesit-theme-role-staff, body.gesit-role-staff {
+  --role-primary:#059669; --role-secondary:#34d399; --role-soft:#ecfdf5; --role-border:rgba(5,150,105,.18);
+}
+body.gesit-theme-role-magang, body.gesit-role-magang {
+  --role-primary:#7c3aed; --role-secondary:#a78bfa; --role-soft:#f5f3ff; --role-border:rgba(124,58,237,.18);
+}
+body.gesit-theme-role-driver, body.gesit-theme-role-cso, body.gesit-theme-role-tad,
+body.gesit-role-driver, body.gesit-role-cso, body.gesit-role-tad {
+  --role-primary:#c2410c; --role-secondary:#fb923c; --role-soft:#fff7ed; --role-border:rgba(194,65,12,.18);
+}
+body.gesit-theme-role-security, body.gesit-role-security {
+  --role-primary:#0f172a; --role-secondary:#64748b; --role-soft:#f8fafc; --role-border:rgba(15,23,42,.18);
+}
+body.gesit-mobile-shell .topbar,
+body.gesit-mobile-shell #mobileBottomNav.gesit-mobile-bottom-nav,
+body.gesit-mobile-shell #gesitRoleMobileHub,
+body.gesit-mobile-shell .gesit-mobile-sheet,
+body.gesit-mobile-shell .gesit-public-link-panel .gpl-card {
+  border-color: var(--role-border) !important;
+}
+body.gesit-mobile-shell .mtb-logo,
+body.gesit-mobile-shell #userChip .avatar,
+body.gesit-mobile-shell .gesit-role-hub-pill,
+body.gesit-mobile-shell .btn-primary,
+body.gesit-mobile-shell .gpl-open {
+  background: linear-gradient(135deg,var(--role-secondary),var(--role-primary)) !important;
+}
+body.gesit-mobile-shell .page-title,
+body.gesit-mobile-shell .card-title,
+body.gesit-mobile-shell .gpl-kicker,
+body.gesit-mobile-shell .gesit-role-hub-kicker,
+body.gesit-mobile-shell .gesit-mobile-nav-btn.is-active,
+body.gesit-mobile-shell .gesit-role-action svg,
+body.gesit-mobile-shell .gpl-ico svg,
+body.gesit-mobile-shell #gesitMobilePriorityBanner svg {
+  color: var(--role-primary) !important;
+}
+body.gesit-mobile-shell .gesit-mobile-nav-btn.is-active::before,
+body.gesit-mobile-shell .gesit-role-hub-head::after {
+  background: linear-gradient(90deg,var(--role-secondary),var(--role-primary)) !important;
+}
+body.gesit-mobile-shell .btn-outline,
+body.gesit-mobile-shell .gesit-role-action,
+body.gesit-mobile-shell .gpl-item,
+body.gesit-mobile-shell .pd-pulse > *,
+body.gesit-mobile-shell .pd-kpi-grid > *,
+body.gesit-mobile-shell .card {
+  border-color: var(--role-border) !important;
+}
+body.gesit-mobile-shell .btn-outline:active,
+body.gesit-mobile-shell .gesit-role-action:active,
+body.gesit-mobile-shell .gesit-mobile-menu-item:active {
+  background: var(--role-soft) !important;
+}
+#gesitMobilePriorityBanner { display:none; }
+@media (max-width: 768px) {
+  body.gesit-mobile-shell .content { padding-top: 12px !important; }
+  #gesitMobilePriorityBanner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 2px 14px 12px;
+    padding: 13px 14px;
+    border: 1px solid var(--role-border);
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(255,255,255,.96), var(--role-soft));
+    box-shadow: 0 14px 34px rgba(15,23,42,.07);
+  }
+  #gesitMobilePriorityBanner .gmpb-icon {
+    width: 42px; height: 42px; display:grid; place-items:center;
+    border-radius: 15px; background:#fff; border:1px solid var(--role-border);
+  }
+  #gesitMobilePriorityBanner svg { width:22px; height:22px; }
+  #gesitMobilePriorityBanner .gmpb-kicker { font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:.04em; color:var(--role-primary); }
+  #gesitMobilePriorityBanner strong { display:block; color:#0f172a; font-size:15px; line-height:1.15; }
+  #gesitMobilePriorityBanner span { display:block; color:#64748b; font-size:12px; line-height:1.3; margin-top:2px; }
+  body.gesit-mobile-shell[data-mobile-priority]:not([data-mobile-priority="home"]) #gesitRoleMobileHub { display:none !important; }
+  body.gesit-mobile-shell[data-mobile-priority="services"] .view.is-active .page-actions { order: -1; }
+  body.gesit-mobile-shell[data-mobile-priority="approval"] .view.is-active .page-header,
+  body.gesit-mobile-shell[data-mobile-priority="profile"] .view.is-active .page-header,
+  body.gesit-mobile-shell[data-mobile-priority="reports"] .view.is-active .page-header { margin-bottom: 12px !important; }
+  body.gesit-mobile-shell .page-actions .btn svg,
+  body.gesit-mobile-shell .gpl-close svg,
+  body.gesit-mobile-shell .tg-hero svg { width:22px !important; height:22px !important; }
+}
