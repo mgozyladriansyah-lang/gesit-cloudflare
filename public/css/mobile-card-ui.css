@@ -1,5 +1,6 @@
-/* GESIT V23 Mobile Card UI
-   Desktop tetap table. Mobile berubah menjadi card/list yang lebih mudah dibaca.
+/* GESIT V24 Final Mobile Card UI
+   Desktop tetap tabel. Mobile menjadi card/list.
+   Tidak ada banner fokus dan tidak ada tema warna role baru.
 */
 @media (max-width: 768px) {
   body.gesit-mobile-shell .content {
@@ -7,7 +8,14 @@
     background: linear-gradient(180deg, #eefaf8 0%, #ffffff 52%, #ffffff 100%) !important;
   }
 
-  /* Bottom nav */
+  body.gesit-mobile-shell .role-mobile-hub,
+  body.gesit-mobile-shell .mobile-priority-banner,
+  body.gesit-mobile-shell .gesit-mobile-priority,
+  body.gesit-mobile-shell [data-mobile-priority],
+  body.gesit-mobile-shell [data-role-theme-hub] {
+    display: none !important;
+  }
+
   #mobileBottomNav.gesit-mobile-bottom-nav {
     position: fixed !important;
     left: 12px !important;
@@ -45,7 +53,6 @@
     box-shadow: inset 0 0 0 1px rgba(20,184,166,.16) !important;
   }
 
-  /* Sheet */
   #mobileMenuBackdrop.gesit-mobile-sheet-backdrop {
     position: fixed !important;
     inset: 0 !important;
@@ -93,7 +100,6 @@
   }
   .gesit-mobile-menu-item svg { width:22px; height:22px; color:#0f8f86; }
 
-  /* Tables become readable cards */
   table.gesit-mobile-card-table,
   table.gesit-mobile-card-table thead,
   table.gesit-mobile-card-table tbody,
@@ -150,27 +156,10 @@
     margin: 2px 4px 2px 0 !important;
   }
 
-  /* Safe detail drawer */
-  #gesitMobileSafeDrawer.gesit-mobile-safe-drawer {
-    position: fixed;
-    inset: 0;
-    z-index: 7000;
-    display: none;
-  }
+  #gesitMobileSafeDrawer.gesit-mobile-safe-drawer { position: fixed; inset: 0; z-index: 7000; display: none; }
   #gesitMobileSafeDrawer.is-open { display: block; }
   .gmsd-scrim { position:absolute; inset:0; background:rgba(15,23,42,.28); backdrop-filter:blur(3px); }
-  .gmsd-card {
-    position:absolute;
-    left:12px;
-    right:12px;
-    bottom:max(12px, env(safe-area-inset-bottom));
-    max-height:78vh;
-    overflow:auto;
-    background:#fff;
-    border-radius:26px;
-    border:1px solid rgba(15,143,134,.14);
-    box-shadow:0 24px 70px rgba(15,23,42,.24);
-  }
+  .gmsd-card { position:absolute; left:12px; right:12px; bottom:max(12px, env(safe-area-inset-bottom)); max-height:78vh; overflow:auto; background:#fff; border-radius:26px; border:1px solid rgba(15,143,134,.14); box-shadow:0 24px 70px rgba(15,23,42,.24); }
   .gmsd-head { position:sticky; top:0; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 16px; background:#fff; border-bottom:1px solid #edf2f7; }
   .gmsd-head strong { font-size:18px; color:#0f172a; }
   .gmsd-head button { border:0; width:40px; height:40px; border-radius:14px; background:#f1f5f9; color:#334155; }

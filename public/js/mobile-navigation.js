@@ -1,12 +1,13 @@
-/* GESIT V23 Mobile Navigation
-   Tujuan:
-   - Desain mobile tidak disamakan dengan desktop.
-   - Bottom nav super_admin/admin mengganti Profil menjadi Manajemen User.
-   - Tidak memakai DOM observer, tidak memakai periodic timer, tidak patch Router.
+/* GESIT V24 Final Mobile Navigation Baseline
+   Fokus:
+   - Tidak membuat banner fokus/role.
+   - Tidak mengubah warna tema role.
+   - Super Admin/Admin: Profil diganti User.
+   - Tanpa DOM observer, tanpa periodic timer, tanpa patch Router.
 */
 (function () {
   'use strict';
-  var VER = '2026.08.11.23';
+  var VER = '2026.08.11.24';
   var mq = window.matchMedia ? window.matchMedia('(max-width: 768px)') : null;
 
   function isMobile() { return mq ? mq.matches : window.innerWidth <= 768; }
@@ -28,6 +29,20 @@
   }
   function currentView() { return (window.Router && Router.current) || document.body.getAttribute('data-current-view') || 'dashboard'; }
   function setCurrentView(view) { try { document.body.setAttribute('data-current-view', view || currentView()); } catch (e) {} }
+
+  function safeUnlock() {
+    var activeModal = Array.prototype.some.call(document.querySelectorAll('.modal-backdrop.is-open,.modal.show,.modal[open]'), function (m) {
+      var r = m.getBoundingClientRect();
+      var cs = getComputedStyle(m);
+      return r.width > 10 && r.height > 10 && cs.display !== 'none' && cs.visibility !== 'hidden';
+    });
+    if (!activeModal && !document.querySelector('#mobileMenuSheet.is-open')) {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.body.classList.remove('modal-open','has-modal-open','approval-modal-open','confirm-modal-open','public-link-panel-open','has-sheet-open','user-menu-open');
+    }
+  }
+
   function go(view) {
     if (!view) return;
     safeUnlock();
@@ -151,6 +166,14 @@
     refreshActive();
   }
 
+  function iconFor(view) {
+    var m = {dashboard:'dashboard',digitamu:'users',kendaraan:'car',ruangan:'door',atk:'box',approval:'inbox',magang:'grad','magang-self':'grad',tad:'clock','tad-self':'clock',security:'shield',eco:'leaf',laporan:'chart',users:'usercog',pengaturan:'settings',agenda:'calendar'};
+    return m[view] || 'dashboard';
+  }
+  function labelFor(view) {
+    var m = {digitamu:'DIGITAMU',kendaraan:'Kendaraan',ruangan:'Ruangan',atk:'ATK',magang:'Magang',approval:'Approval',laporan:'Laporan',users:'Manajemen User',pengaturan:'Pengaturan',eco:'Eco Office'};
+    return m[view] || view;
+  }
   function menuRows() {
     var rows = [];
     var seen = {};
@@ -169,14 +192,6 @@
     }
     return rows;
   }
-  function iconFor(view) {
-    var m = {dashboard:'dashboard',digitamu:'users',kendaraan:'car',ruangan:'door',atk:'box',approval:'inbox',magang:'grad','magang-self':'grad',tad:'clock','tad-self':'clock',security:'shield',eco:'leaf',laporan:'chart',users:'usercog',pengaturan:'settings',agenda:'calendar'};
-    return m[view] || 'dashboard';
-  }
-  function labelFor(view) {
-    var m = {digitamu:'DIGITAMU',kendaraan:'Kendaraan',ruangan:'Ruangan',atk:'ATK',magang:'Magang',approval:'Approval',laporan:'Laporan',users:'Manajemen User',pengaturan:'Pengaturan',eco:'Eco Office'};
-    return m[view] || view;
-  }
   function renderSheet() {
     var grid = byId('mobileMenuGrid');
     if (!grid) return;
@@ -189,18 +204,6 @@
   }
   function openSheet() { renderSheet(); byId('mobileMenuSheet').classList.add('is-open'); byId('mobileMenuBackdrop').classList.add('is-open'); document.body.style.overflow = 'hidden'; }
   function closeSheet() { var s=byId('mobileMenuSheet'), b=byId('mobileMenuBackdrop'); if(s) s.classList.remove('is-open'); if(b) b.classList.remove('is-open'); safeUnlock(); }
-  function safeUnlock() {
-    // hanya membuka lock jika tidak ada modal aktif yang benar-benar terlihat.
-    var activeModal = Array.prototype.some.call(document.querySelectorAll('.modal-backdrop.is-open,.modal.show,.modal[open]'), function (m) {
-      var r = m.getBoundingClientRect();
-      return r.width > 10 && r.height > 10 && getComputedStyle(m).display !== 'none' && getComputedStyle(m).visibility !== 'hidden';
-    });
-    if (!activeModal && !document.querySelector('#mobileMenuSheet.is-open')) {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-      document.body.classList.remove('modal-open','has-modal-open','approval-modal-open','confirm-modal-open','public-link-panel-open');
-    }
-  }
   function refreshActive() {
     var cur = currentView();
     document.querySelectorAll('#mobileBottomNav [data-mnav], #mobileMenuGrid [data-mview]').forEach(function (el) {
@@ -217,7 +220,7 @@
     document.addEventListener('click', function () { setTimeout(function () { safeUnlock(); refreshActive(); }, 700); }, true);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeSheet(); safeUnlock(); } }, true);
     window.GESITMobileNav = { version: VER, refresh: refresh, go: go, goTab: goTab, safeUnlock: safeUnlock };
-    try { document.documentElement.setAttribute('data-gesit-mobile-nav-v23', VER); } catch (e) {}
+    try { document.documentElement.setAttribute('data-gesit-mobile-nav-v24', VER); } catch (e) {}
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

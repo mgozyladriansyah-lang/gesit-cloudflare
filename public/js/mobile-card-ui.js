@@ -1,13 +1,12 @@
-/* GESIT V23 Mobile Card UI
-   Tujuan:
-   - Desktop tetap memakai table.
-   - Mode mobile memakai card/list dari table yang sudah ada.
-   - Freeze guard mencegah UI terkunci setelah klik detail/modal.
-   - Tidak memakai DOM observer, tidak memakai loop interval.
+/* GESIT V24 Mobile Card UI
+   - Desktop tetap tabel.
+   - Mobile memakai card/list dari tabel.
+   - Safe drawer untuk detail table agar tidak freeze karena modal desktop.
+   - Tidak memakai observer berat atau timer loop.
 */
 (function () {
   'use strict';
-  var VER = '2026.08.11.23';
+  var VER = '2026.08.11.24';
   var busy = false;
   function isMobile() { return window.matchMedia ? window.matchMedia('(max-width: 768px)').matches : window.innerWidth <= 768; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
@@ -15,9 +14,7 @@
   function visible(el) { if (!el) return false; var cs = getComputedStyle(el); var r = el.getBoundingClientRect(); return cs.display !== 'none' && cs.visibility !== 'hidden' && r.width > 10 && r.height > 10; }
   function activeRoot() { return document.querySelector('.view.is-active,[data-view-panel].is-active,.page.is-active') || document.querySelector('.content') || document.body; }
 
-  function headersFor(table) {
-    return Array.prototype.map.call(table.querySelectorAll('thead th'), function (th) { return th.textContent.trim(); });
-  }
+  function headersFor(table) { return Array.prototype.map.call(table.querySelectorAll('thead th'), function (th) { return th.textContent.trim(); }); }
   function labelCells(table) {
     var headers = headersFor(table);
     if (!headers.length) return;
@@ -70,12 +67,13 @@
 
   function unlockFreeze() {
     var visibleModal = Array.prototype.some.call(document.querySelectorAll('.modal-backdrop.is-open,.modal.show,.modal[open]'), visible);
-    var visibleDrawer = visible(document.getElementById('gesitMobileSafeDrawer')) && document.getElementById('gesitMobileSafeDrawer').classList.contains('is-open');
+    var d = document.getElementById('gesitMobileSafeDrawer');
+    var visibleDrawer = d && d.classList.contains('is-open') && visible(d);
     var visibleSheet = document.querySelector('#mobileMenuSheet.is-open');
     if (!visibleModal && !visibleDrawer && !visibleSheet) {
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
-      document.body.classList.remove('modal-open','has-modal-open','approval-modal-open','confirm-modal-open','public-link-panel-open');
+      document.body.classList.remove('modal-open','has-modal-open','approval-modal-open','confirm-modal-open','public-link-panel-open','has-sheet-open','user-menu-open');
       document.querySelectorAll('.modal-backdrop:not(.is-open):not(.show), .overlay.is-stale, .tour-blocker.is-stale').forEach(function (x) { x.remove(); });
     }
   }
@@ -86,7 +84,6 @@
     var detail = t.closest('[data-detail], [data-action="detail"], .btn-detail, .js-detail, button[title*="Detail"], a[title*="Detail"], button[aria-label*="Detail"], a[aria-label*="Detail"]');
     if (detail && !detail.dataset.allowDesktopModal) {
       var tr = detail.closest('tr');
-      // Jika detail berasal dari table, tampilkan safe drawer supaya tidak tergantung modal desktop.
       if (tr && openDrawerFromRow(tr)) {
         e.preventDefault();
         e.stopPropagation();
@@ -113,7 +110,7 @@
     window.addEventListener('resize', function () { setTimeout(refresh, 80); }, { passive:true });
     window.addEventListener('orientationchange', function () { setTimeout(refresh, 140); }, { passive:true });
     window.GESITMobileCardUI = { version: VER, refresh: refresh, unlock: unlockFreeze, openDrawerFromRow: openDrawerFromRow };
-    try { document.documentElement.setAttribute('data-gesit-mobile-card-ui-v23', VER); } catch (e) {}
+    try { document.documentElement.setAttribute('data-gesit-mobile-card-ui-v24', VER); } catch (e) {}
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
