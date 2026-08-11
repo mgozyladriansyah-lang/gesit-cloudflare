@@ -1,0 +1,99 @@
+﻿/* TASK 4B: Mobile topbar + scroll root stabil
+   Scope: hanya aktif di layar mobile <= 768px.
+   Tujuan: topbar tetap terlihat saat scroll, konten tetap bisa scroll sampai bawah,
+   dan bottom navigation tidak menutup konten terakhir.
+*/
+
+@media (max-width: 768px) {
+  :root {
+    --gesit-mobile-topbar-h: 66px;
+    --gesit-mobile-bottomnav-h: 86px;
+  }
+
+  body.gesit-mobile-shell {
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background: #f6faf9;
+  }
+
+  body.gesit-mobile-shell .app-shell,
+  body.gesit-mobile-shell #appShell {
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  body.gesit-mobile-shell .topbar,
+  body.gesit-mobile-shell header.topbar,
+  body.gesit-mobile-shell .app-topbar,
+  body.gesit-mobile-shell .mobile-topbar,
+  body.gesit-mobile-shell .app-header,
+  body.gesit-mobile-shell header.app-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 6500 !important;
+    min-height: var(--gesit-mobile-topbar-h) !important;
+    background: rgba(255, 255, 255, 0.97) !important;
+    border-bottom: 1px solid rgba(15, 143, 134, 0.18) !important;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+  }
+
+  body.gesit-mobile-shell .main,
+  body.gesit-mobile-shell main.main,
+  body.gesit-mobile-shell .content,
+  body.gesit-mobile-shell main.content {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
+  body.gesit-mobile-shell .main,
+  body.gesit-mobile-shell main.main {
+    min-height: 100dvh !important;
+    padding-top: var(--gesit-mobile-topbar-h) !important;
+    padding-bottom: calc(var(--gesit-mobile-bottomnav-h) + env(safe-area-inset-bottom, 0px) + 18px) !important;
+  }
+
+  body.gesit-mobile-shell .content {
+    padding-top: 12px !important;
+    padding-bottom: calc(var(--gesit-mobile-bottomnav-h) + env(safe-area-inset-bottom, 0px) + 28px) !important;
+  }
+
+  body.gesit-mobile-shell .view.is-active,
+  body.gesit-mobile-shell [data-view-panel].is-active {
+    overflow: visible !important;
+    min-height: auto !important;
+  }
+
+  body.gesit-mobile-shell .card,
+  body.gesit-mobile-shell .panel,
+  body.gesit-mobile-shell .table-wrap,
+  body.gesit-mobile-shell .table-responsive,
+  body.gesit-mobile-shell form,
+  body.gesit-mobile-shell .form-grid,
+  body.gesit-mobile-shell .grid,
+  body.gesit-mobile-shell .grid-2,
+  body.gesit-mobile-shell .grid-3 {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  body.gesit-mobile-shell table {
+    max-width: 100% !important;
+  }
+
+  body.gesit-mobile-shell .bottom-nav,
+  body.gesit-mobile-shell .mobile-bottom-nav,
+  body.gesit-mobile-shell #mobileBottomNav {
+    z-index: 6000 !important;
+  }
+
+  body.gesit-mobile-shell .modal-backdrop.is-open,
+  body.gesit-mobile-shell .modal.show,
+  body.gesit-mobile-shell .modal[open] {
+    z-index: 7000 !important;
+  }
+}
