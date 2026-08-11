@@ -1,7 +1,7 @@
 /* GESIT Service Worker - versioned update manager */
 'use strict';
 
-const GESIT_PWA_VERSION = '2026.08.11.12';
+const GESIT_PWA_VERSION = '2026.08.11.13';
 const CACHE_STATIC = 'gesit-static-' + GESIT_PWA_VERSION;
 const CACHE_RUNTIME = 'gesit-runtime-' + GESIT_PWA_VERSION;
 const CORE_ASSETS = [
@@ -9,7 +9,7 @@ const CORE_ASSETS = [
   '/pwa-changelog.json?v=' + GESIT_PWA_VERSION,
   '/js/pwa-version.js?v=' + GESIT_PWA_VERSION,
   '/js/pwa-install.js?v=' + GESIT_PWA_VERSION,
-  '/js/mobile-navigation.js?v=5', '/js/pwa-stability.js?v=' + GESIT_PWA_VERSION, '/css/styles-1-dasar.css?v=' + GESIT_PWA_VERSION, '/css/styles-2-komponen.css?v=' + GESIT_PWA_VERSION, '/css/styles-3-halaman.css?v=' + GESIT_PWA_VERSION, '/css/styles-4-lanjutan.css?v=' + GESIT_PWA_VERSION, '/css/styles-5-registrasi.css?v=' + GESIT_PWA_VERSION, '/css/pwa.css?v=' + GESIT_PWA_VERSION, '/js/notification-center.js?v=' + GESIT_PWA_VERSION, '/js/interaction-unlock.js?v=' + GESIT_PWA_VERSION, '/js/scripts-5-registrasi.js?v=' + GESIT_PWA_VERSION, '/js/scripts-4-fase4-app.js?v=' + GESIT_PWA_VERSION, '/js/scripts-3-fase3.js?v=' + GESIT_PWA_VERSION, '/js/scripts-2-helper-fase2.js?v=' + GESIT_PWA_VERSION, '/js/scripts-1-inti-fase1.js?v=' + GESIT_PWA_VERSION, '/js/confirm-modal-fix.js?v=' + GESIT_PWA_VERSION, '/js/approval-modal-fix.js?v=' + GESIT_PWA_VERSION, '/js/compatibility-guard.js?v=' + GESIT_PWA_VERSION, '/js/role-mobile-ux.js?v=' + GESIT_PWA_VERSION, '/js/overlay-state-fix.js?v=' + GESIT_PWA_VERSION, '/js/scripts-6-tour.js?v=' + GESIT_PWA_VERSION, '/css/pwa.css',
+  '/js/mobile-navigation.js?v=5', '/js/pwa-stability.js?v=' + GESIT_PWA_VERSION, '/css/styles-1-dasar.css?v=' + GESIT_PWA_VERSION, '/css/styles-2-komponen.css?v=' + GESIT_PWA_VERSION, '/css/styles-3-halaman.css?v=' + GESIT_PWA_VERSION, '/css/styles-4-lanjutan.css?v=' + GESIT_PWA_VERSION, '/css/styles-5-registrasi.css?v=' + GESIT_PWA_VERSION, '/css/pwa.css?v=' + GESIT_PWA_VERSION, '/js/notification-center.js?v=' + GESIT_PWA_VERSION, '/js/interaction-unlock.js?v=' + GESIT_PWA_VERSION, '/js/scripts-5-registrasi.js?v=' + GESIT_PWA_VERSION, '/js/scripts-4-fase4-app.js?v=' + GESIT_PWA_VERSION, '/js/scripts-3-fase3.js?v=' + GESIT_PWA_VERSION, '/js/scripts-2-helper-fase2.js?v=' + GESIT_PWA_VERSION, '/js/scripts-1-inti-fase1.js?v=' + GESIT_PWA_VERSION, '/js/confirm-modal-fix.js?v=' + GESIT_PWA_VERSION, '/js/approval-modal-fix.js?v=' + GESIT_PWA_VERSION, '/js/compatibility-guard.js?v=' + GESIT_PWA_VERSION, '/js/role-mobile-ux.js?v=' + GESIT_PWA_VERSION, '/js/overlay-state-fix.js?v=' + GESIT_PWA_VERSION, '/js/logout-menu-fix.js?v=' + GESIT_PWA_VERSION, '/js/scripts-6-tour.js?v=' + GESIT_PWA_VERSION, '/css/pwa.css',
   '/notification/notify.mp3', '/notifications/notify.mp3', '/sound/notify.mp3', '/sounds/notify.mp3'
 ];
 
