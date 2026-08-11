@@ -173,6 +173,38 @@ async function handleRequest(context) {
 
   var body = parsed.value || {};
   var action = String(body.action || '').trim();
+  // GESIT_TASK3D_FIX3_HYBRID_CHECKSESSION
+  // Transitional guard: login saat ini masih mengembalikan token legacy 64 hex.
+  // Token legacy tidak boleh diverifikasi sebagai JWT. Delegasikan ke legacy GAS bila tersedia.
+  // Token JWT tetap divalidasi oleh handler modern di bawahnya.
+  if (action === 'checkSession' || action === 'check_session') {
+    var hybridToken = String(body.token || (body.data && body.data.token) || '').trim();
+
+    if (!hybridToken) {
+      return json(env, 200, {
+        success: true,
+        valid: false,
+        sessionExpired: false,
+        source: 'task3d-fix3-empty-token'
+      });
+    }
+
+    var looksLikeJwt = hybridToken.split('.').length === 3;
+    var looksLikeLegacyHex = /^[a-f0-9]{64}$/i.test(hybridToken);
+
+    if (!looksLikeJwt || looksLikeLegacyHex) {
+      if (env.GAS_WEB_APP_URL) {
+        return fallbackToLegacyGas(env, request, action);
+      }
+
+      return json(env, 200, {
+        success: true,
+        valid: false,
+        sessionExpired: true,
+        source: 'task3d-fix3-legacy-token-no-gas-fallback'
+      });
+    }
+  }
   // GESIT_TASK3D_FIX2_CHECKSESSION_PRIORITY
   // Priority handler: token valid harus valid=true, token logout/revoked/expired harus valid=false tanpa 500.
   if (action === 'checkSession' || action === 'check_session') {
@@ -453,6 +485,7 @@ export async function onRequest(context) {
     return json(context.env || {}, err.statusCode || 500, { success: false, error: safeErrorMessage(err) });
   }
 }
+
 
 
 
