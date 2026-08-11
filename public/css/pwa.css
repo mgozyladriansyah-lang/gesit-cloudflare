@@ -1223,3 +1223,35 @@ body.gesit-role-security { --role-accent:#0f172a; --role-accent-2:#475569; --rol
   .gesit-role-actions { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
   .gesit-role-action { min-height:58px !important; grid-template-columns:auto 1fr !important; justify-items:start !important; text-align:left !important; padding-inline:10px !important; }
 }
+
+
+/* ===========================================================================
+   GESIT V15 - OVERLAY STATE & AUTO CLOSE FIX
+   Masalah: menu sheet dan user menu bisa terbuka bersamaan sehingga body tetap
+   has-sheet-open dan aplikasi tidak merespon aktivitas berikutnya.
+   =========================================================================== */
+#mobileMenuBackdrop:not(.is-open),
+#mobileMenuSheet:not(.is-open),
+#userMenu:not(.is-open),
+.user-menu:not(.is-open) {
+  pointer-events: none !important;
+}
+body:not(.has-sheet-open) #mobileMenuBackdrop,
+body:not(.has-sheet-open) #mobileMenuSheet:not(.is-open) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+body.gesit-mobile-shell:not(.has-modal-open):not(.has-sheet-open):not(.gesit-tour-active) .main,
+body.gesit-mobile-shell:not(.has-modal-open):not(.has-sheet-open):not(.gesit-tour-active) .content,
+body.gesit-mobile-shell:not(.has-modal-open):not(.has-sheet-open):not(.gesit-tour-active) .view.is-active {
+  pointer-events: auto !important;
+}
+.user-menu.is-open {
+  z-index: 2147482600 !important;
+  pointer-events: auto !important;
+}
+body.has-sheet-open #userMenu.is-open,
+body.has-sheet-open .user-menu.is-open {
+  pointer-events: none !important;
+}

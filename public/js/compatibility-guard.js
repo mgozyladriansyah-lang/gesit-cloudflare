@@ -1,7 +1,7 @@
 /* GESIT V13 Compatibility Guard for V2-V12 patches */
 (function(){
   'use strict';
-  var VER='2026.08.11.10';
+  var VER='2026.08.11.12';
   var WRAPPED=false;
   var LAST={};
   function q(s){ return document.querySelector(s); }
@@ -13,6 +13,7 @@
   function syncClasses(){
     var modal=openModalCount()>0;
     document.body.classList.toggle('has-modal-open', modal);
+    document.body.classList.toggle('has-sheet-open', !!document.querySelector('#mobileMenuSheet.is-open,#mobileMenuBackdrop.is-open'));
     document.body.classList.toggle('approval-modal-open', approvalOpen());
     document.body.classList.toggle('confirm-modal-open', confirmOpen());
     document.body.classList.toggle('gesit-tour-active', tourOpen());
