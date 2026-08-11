@@ -1,9 +1,20 @@
 {
-  "current": "2026.08.11.10",
+  "current": "2026.08.11.11",
   "updated_at": "2026-08-11 08:07 GMT+7",
   "history": [
     {
-      "version": "2026.08.11.10",
+      "version": "2026.08.11.11",
+      "date": "2026-08-11",
+      "title": "Role-based mobile UI/UX optimization",
+      "items": [
+        "Menambahkan tema warna mobile per role: admin, kabag, staff, magang, driver/CSO/TAD, dan security.",
+        "Menambahkan role mobile hub berisi 4 pintasan utama yang mengikuti akses tiap role.",
+        "Merapikan topbar, bottom nav, kartu, form, tombol, dan menu sheet di layar HP.",
+        "Dimuat setelah compatibility guard V13 agar tidak bentrok dengan patch modal/tour/approval."
+      ]
+    },
+    {
+      "version": "2026.08.11.11",
       "date": "2026-08-11",
       "title": "Compatibility guard for V2-V12 patches",
       "items": [
@@ -14,7 +25,7 @@
       ]
     },
     {
-      "version": "2026.08.11.10",
+      "version": "2026.08.11.11",
       "date": "2026-08-11",
       "title": "Approval vehicle modal footer safe area",
       "items": [
@@ -25,7 +36,7 @@
       ]
     },
     {
-      "version": "2026.08.11.10",
+      "version": "2026.08.11.11",
       "date": "2026-08-11",
       "title": "Confirm logout popup click fix",
       "items": [
@@ -36,7 +47,7 @@
       ]
     },
     {
-      "version": "2026.08.11.10",
+      "version": "2026.08.11.11",
       "date": "2026-08-11",
       "title": "Scroll recovery and tour spotlight rollback",
       "items": [
@@ -47,7 +58,7 @@
       ]
     },
     {
-      "version": "2026.08.11.10",
+      "version": "2026.08.11.11",
       "date": "2026-08-11",
       "title": "Main scroll container and tour spotlight fix",
       "items": [
@@ -58,18 +69,18 @@
       ]
     },
     {
-      "version": "2026.08.11.10",
+      "version": "2026.08.11.11",
       "date": "2026-08-11",
       "title": "Root scroll unlock and CSS cache busting",
       "items": [
         "Menambahkan folder public/css di patch karena index memakai /css/*.css.",
-        "Menambahkan cache buster ?v=2026.08.11.10 untuk CSS agar PWA tidak memakai CSS lama.",
+        "Menambahkan cache buster ?v=2026.08.11.11 untuk CSS agar PWA tidak memakai CSS lama.",
         "Memaksa html/body/main/content/view kembali menjadi scrollable jika tidak ada modal, sheet, atau tour aktif.",
         "Menambahkan window.GESIT_FORCE_UNLOCK_SCROLL() sebagai helper darurat jika diperlukan."
       ]
     },
     {
-      "version": "2026.08.11.10",
+      "version": "2026.08.11.11",
       "date": "2026-08-11",
       "title": "Emergency interaction and scroll unlock hotfix",
       "items": [
@@ -80,7 +91,7 @@
       ]
     },
     {
-      "version": "2026.08.11.10",
+      "version": "2026.08.11.11",
       "date": "2026-08-11",
       "title": "In-app notification center and PWA notification tools",
       "items": [
@@ -92,7 +103,7 @@
       ]
     },
     {
-      "version": "2026.08.11.10",
+      "version": "2026.08.11.11",
       "date": "2026-08-11",
       "title": "PWA stability, tour overlay, and notification sound hotfix",
       "items": [
@@ -104,7 +115,7 @@
       ]
     },
     {
-      "version": "2026.08.11.10",
+      "version": "2026.08.11.11",
       "date": "2026-08-11",
       "title": "PWA update manager + sound notification",
       "items": [
