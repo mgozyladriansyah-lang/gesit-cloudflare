@@ -173,6 +173,147 @@ async function handleRequest(context) {
 
   var body = parsed.value || {};
   var action = String(body.action || '').trim();
+  // GESIT_TASK3D_FIX4_LEGACY_SESSION_SAFE
+  // Guard paling awal untuk token legacy 64 hex.
+  // Tujuan:
+  // - checkSession token legacy valid boleh fallback ke GAS bila perlu.
+  // - checkSession setelah logout tidak boleh 500, harus success=true valid=false.
+  // - logout token legacy selalu aman walaupun fallback error.
+  if (action === 'checkSession' || action === 'check_session' || action === 'logout') {
+    var fix4Token = String(body.token || (body.data && body.data.token) || '').trim();
+    var fix4LooksLikeJwt = fix4Token.split('.').length === 3;
+    var fix4LooksLikeLegacyHex = /^[a-f0-9]{64}$/i.test(fix4Token);
+
+    if (!fix4Token && (action === 'checkSession' || action === 'check_session')) {
+      return json(env, 200, {
+        success: true,
+        valid: false,
+        sessionExpired: false,
+        source: 'task3d-fix4-empty-token'
+      });
+    }
+
+    if (fix4Token && (!fix4LooksLikeJwt || fix4LooksLikeLegacyHex)) {
+      try {
+        var fix4Mod = await loadModules(env);
+        var fix4Db = fix4Mod.getSupabaseAdmin();
+        var fix4Hash = fix4Mod.sha256(fix4Token);
+
+        if (action === 'logout') {
+          try {
+            await fix4Db
+              .from('app_sessions')
+              .update({ revoked_at: new Date().toISOString() })
+              .or('token_hash.eq.' + fix4Token + ',token_hash.eq.' + fix4Hash)
+              .is('revoked_at', null);
+          } catch (e) {}
+
+          if (env.GAS_WEB_APP_URL) {
+            try {
+              await fallbackToLegacyGas(env, request, action);
+            } catch (e) {}
+          }
+
+          return json(env, 200, {
+            success: true,
+            source: 'task3d-fix4-legacy-logout-safe'
+          });
+        }
+
+        if (action === 'checkSession' || action === 'check_session') {
+          var fix4SessionRes = await fix4Db
+            .from('app_sessions')
+            .select('id,user_id,expires_at,revoked_at')
+            .or('token_hash.eq.' + fix4Token + ',token_hash.eq.' + fix4Hash)
+            .limit(1);
+
+          if (!fix4SessionRes.error && fix4SessionRes.data && fix4SessionRes.data.length) {
+            var fix4Session = fix4SessionRes.data[0];
+            var fix4Expired = fix4Session && new Date(fix4Session.expires_at).getTime() < Date.now();
+
+            if (!fix4Session || fix4Session.revoked_at || fix4Expired) {
+              return json(env, 200, {
+                success: true,
+                valid: false,
+                sessionExpired: true,
+                source: 'task3d-fix4-legacy-db-revoked-expired'
+              });
+            }
+
+            var fix4UserRes = await fix4Db
+              .from('app_users')
+              .select('id,username,email,nama,role,department,jabatan,no_hp,status,force_password_change')
+              .eq('id', fix4Session.user_id)
+              .maybeSingle();
+
+            if (!fix4UserRes.error && fix4UserRes.data && fix4UserRes.data.status === 'active') {
+              var fix4User = fix4UserRes.data;
+
+              return json(env, 200, {
+                success: true,
+                valid: true,
+                sessionExpired: false,
+                user: {
+                  id: fix4User.id,
+                  username: fix4User.username,
+                  email: fix4User.email || '',
+                  nama: fix4User.nama || '',
+                  nama_lengkap: fix4User.nama || '',
+                  role: fix4User.role,
+                  department: fix4User.department || '',
+                  jabatan: fix4User.jabatan || '',
+                  no_hp: fix4User.no_hp || '',
+                  status: fix4User.status,
+                  force_password_change: Boolean(fix4User.force_password_change)
+                },
+                source: 'task3d-fix4-legacy-db-valid'
+              });
+            }
+
+            return json(env, 200, {
+              success: true,
+              valid: false,
+              sessionExpired: true,
+              source: 'task3d-fix4-legacy-db-user-invalid'
+            });
+          }
+        }
+      } catch (e) {}
+
+      if (action === 'checkSession' || action === 'check_session') {
+        if (env.GAS_WEB_APP_URL) {
+          try {
+            var fix4GasResponse = await fallbackToLegacyGas(env, request, action);
+
+            if (fix4GasResponse.status >= 400) {
+              return json(env, 200, {
+                success: true,
+                valid: false,
+                sessionExpired: true,
+                source: 'task3d-fix4-gas-error-normalized'
+              });
+            }
+
+            return fix4GasResponse;
+          } catch (e) {
+            return json(env, 200, {
+              success: true,
+              valid: false,
+              sessionExpired: true,
+              source: 'task3d-fix4-gas-catch-normalized'
+            });
+          }
+        }
+
+        return json(env, 200, {
+          success: true,
+          valid: false,
+          sessionExpired: true,
+          source: 'task3d-fix4-legacy-no-gas-normalized'
+        });
+      }
+    }
+  }
   // GESIT_TASK3D_FIX3_HYBRID_CHECKSESSION
   // Transitional guard: login saat ini masih mengembalikan token legacy 64 hex.
   // Token legacy tidak boleh diverifikasi sebagai JWT. Delegasikan ke legacy GAS bila tersedia.
@@ -485,6 +626,7 @@ export async function onRequest(context) {
     return json(context.env || {}, err.statusCode || 500, { success: false, error: safeErrorMessage(err) });
   }
 }
+
 
 
 
