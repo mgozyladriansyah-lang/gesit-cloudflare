@@ -173,6 +173,109 @@ async function handleRequest(context) {
 
   var body = parsed.value || {};
   var action = String(body.action || '').trim();
+  // GESIT_TASK3D_FIX2_CHECKSESSION_PRIORITY
+  // Priority handler: token valid harus valid=true, token logout/revoked/expired harus valid=false tanpa 500.
+  if (action === 'checkSession' || action === 'check_session') {
+    var fix2Token = String(body.token || (body.data && body.data.token) || '').trim();
+
+    if (!fix2Token) {
+      return json(env, 200, {
+        success: true,
+        valid: false,
+        sessionExpired: false,
+        source: 'task3d-fix2-empty-token'
+      });
+    }
+
+    try {
+      var fix2Mod = await loadModules(env);
+
+      var fix2Decoded;
+      try {
+        fix2Decoded = fix2Mod.verifyToken(fix2Token);
+      } catch (e) {
+        return json(env, 200, {
+          success: true,
+          valid: false,
+          sessionExpired: true,
+          source: 'task3d-fix2-invalid-token'
+        });
+      }
+
+      var db = fix2Mod.getSupabaseAdmin();
+
+      var fix2SessionRes = await db
+        .from('app_sessions')
+        .select('id,user_id,expires_at,revoked_at')
+        .eq('token_hash', fix2Mod.sha256(fix2Token))
+        .maybeSingle();
+
+      if (fix2SessionRes.error) {
+        return json(env, 200, {
+          success: true,
+          valid: false,
+          sessionExpired: true,
+          source: 'task3d-fix2-session-query-error'
+        });
+      }
+
+      var fix2Session = fix2SessionRes.data;
+      var fix2Expired = fix2Session && new Date(fix2Session.expires_at).getTime() < Date.now();
+
+      if (!fix2Session || fix2Session.revoked_at || fix2Expired || String(fix2Session.user_id) !== String(fix2Decoded.sub)) {
+        return json(env, 200, {
+          success: true,
+          valid: false,
+          sessionExpired: true,
+          source: 'task3d-fix2-revoked-expired-or-missing'
+        });
+      }
+
+      var fix2UserRes = await db
+        .from('app_users')
+        .select('id,username,email,nama,role,department,jabatan,no_hp,status,force_password_change')
+        .eq('id', fix2Decoded.sub)
+        .maybeSingle();
+
+      if (fix2UserRes.error || !fix2UserRes.data || fix2UserRes.data.status !== 'active') {
+        return json(env, 200, {
+          success: true,
+          valid: false,
+          sessionExpired: true,
+          source: 'task3d-fix2-user-invalid'
+        });
+      }
+
+      var u = fix2UserRes.data;
+
+      return json(env, 200, {
+        success: true,
+        valid: true,
+        sessionExpired: false,
+        user: {
+          id: u.id,
+          username: u.username,
+          email: u.email || '',
+          nama: u.nama || '',
+          nama_lengkap: u.nama || '',
+          role: u.role,
+          department: u.department || '',
+          jabatan: u.jabatan || '',
+          no_hp: u.no_hp || '',
+          status: u.status,
+          force_password_change: Boolean(u.force_password_change)
+        },
+        source: 'task3d-fix2-valid'
+      });
+    } catch (e) {
+      return json(env, 200, {
+        success: true,
+        valid: false,
+        sessionExpired: true,
+        source: 'task3d-fix2-catch'
+      });
+    }
+  }
   // GESIT_TASK3D_SAFE_CHECKSESSION
   // Handler ini memastikan checkSession tidak pernah 500 setelah logout/revoked/expired.
   // Output aman: success true, valid false untuk token kosong, token invalid, revoked, expired, atau query session bermasalah.
@@ -350,6 +453,7 @@ export async function onRequest(context) {
     return json(context.env || {}, err.statusCode || 500, { success: false, error: safeErrorMessage(err) });
   }
 }
+
 
 
 
