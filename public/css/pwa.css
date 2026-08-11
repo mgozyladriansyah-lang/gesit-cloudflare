@@ -1046,3 +1046,67 @@ body.approval-modal-open #mobileMenuBackdrop {
     flex: 1 1 0 !important;
   }
 }
+
+
+/* ===========================================================================
+   GESIT V13 - COMPATIBILITY GUARD V2-V12
+   Tujuan: menjaga patch PWA/mobile/modal/tour/approval tidak saling menutup.
+   Layer z-index final:
+   - mobile bottom nav: 11000 saat tidak ada modal
+   - tour: 13000
+   - normal modal: 2147482000
+   - approval modal: 2147482100
+   - confirm/logout modal: 2147483000
+   =========================================================================== */
+:root {
+  --gesit-z-mobile-nav: 11000;
+  --gesit-z-tour: 13000;
+  --gesit-z-modal: 2147482000;
+  --gesit-z-approval-modal: 2147482100;
+  --gesit-z-confirm-modal: 2147483000;
+}
+/* Elemen tersembunyi tidak boleh menangkap klik/scroll. */
+#mobileBottomNav[style*="visibility: hidden"],
+#mobileMenuBackdrop:not(.is-open),
+#mobileMenuSheet:not(.is-open),
+.modal-backdrop:not(.is-open),
+.sidebar-overlay:not(.is-visible),
+.gesit-notify-panel:not(.is-open),
+.pwa-version-box.hidden,
+.pwa-update-banner.hidden,
+#pwaInstallPrompt.hidden {
+  pointer-events: none !important;
+}
+/* Saat modal apapun terbuka, bottom nav tidak boleh berada di atas footer modal. */
+body.has-modal-open #mobileBottomNav,
+body.modal-open #mobileBottomNav,
+body.approval-modal-open #mobileBottomNav,
+body.confirm-modal-open #mobileBottomNav {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+/* Approval modal tetap di bawah confirm modal, tapi di atas nav/tour. */
+body.approval-modal-open #modalApproveKnd.modal-backdrop.is-open,
+body.approval-modal-open #modalApproveRng.modal-backdrop.is-open,
+body.approval-modal-open #modalApproveAtk.modal-backdrop.is-open,
+body.approval-modal-open #modalReject.modal-backdrop.is-open {
+  z-index: var(--gesit-z-approval-modal) !important;
+}
+/* Confirm/logout selalu menang bila muncul bersamaan dengan overlay lain. */
+#modalConfirm.modal-backdrop.is-open {
+  z-index: var(--gesit-z-confirm-modal) !important;
+}
+#modalConfirm.modal-backdrop.is-open .modal {
+  z-index: calc(var(--gesit-z-confirm-modal) + 1) !important;
+}
+/* Tombol kritis tidak boleh kehilangan pointer event karena parent overlay. */
+#apkSubmit,
+#aprSubmit,
+#apaSubmit,
+#rejectSubmit,
+#confirmOk,
+#confirmCancel {
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+}
