@@ -477,16 +477,16 @@ var Toast = {
 var Modal = {
   open: function (id) {
     var m = document.getElementById(id);
-    if (m) { m.classList.add('is-open'); document.body.style.overflow = 'hidden'; }
+    if (m) { m.classList.add('is-open'); if (id === 'modalConfirm') document.body.classList.add('confirm-modal-open'); document.body.style.overflow = 'hidden'; }
   },
   close: function (id) {
     var m = document.getElementById(id);
-    if (m) m.classList.remove('is-open');
-    if (!$('.modal-backdrop.is-open')) document.body.style.overflow = '';
+    if (m) m.classList.remove('is-open'); if (id === 'modalConfirm') document.body.classList.remove('confirm-modal-open');
+    if (!$('.modal-backdrop.is-open')) document.body.classList.remove('confirm-modal-open'); document.body.style.overflow = '';
   },
   closeAll: function () {
     $all('.modal-backdrop.is-open').forEach(function (m) { m.classList.remove('is-open'); });
-    document.body.style.overflow = '';
+    document.body.classList.remove('confirm-modal-open'); document.body.style.overflow = '';
   }
 };
 
