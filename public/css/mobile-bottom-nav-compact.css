@@ -1,0 +1,147 @@
+﻿/* TASK 4C: Compact mobile bottom navigation
+   Tujuan:
+   - ikon bottom nav tidak membesar
+   - label tidak saling tabrakan
+   - bottom nav tetap rapi di mobile
+   - floating notification tidak menutup menu
+*/
+
+@media (max-width: 768px) {
+  :root {
+    --gesit-mobile-bottomnav-h: 78px;
+  }
+
+  body.gesit-mobile-shell .mobile-bottom-nav,
+  body.gesit-mobile-shell .bottom-nav,
+  body.gesit-mobile-shell #mobileBottomNav,
+  body.gesit-mobile-shell [data-mobile-bottom-nav] {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 8px) !important;
+    height: var(--gesit-mobile-bottomnav-h) !important;
+    min-height: var(--gesit-mobile-bottomnav-h) !important;
+    max-height: var(--gesit-mobile-bottomnav-h) !important;
+    z-index: 6000 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 8px !important;
+    border-radius: 24px !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    border: 1px solid rgba(15, 143, 134, 0.14) !important;
+    box-shadow: 0 16px 34px rgba(15, 23, 42, 0.14) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  body.gesit-mobile-shell .mobile-bottom-nav > *,
+  body.gesit-mobile-shell .bottom-nav > *,
+  body.gesit-mobile-shell #mobileBottomNav > *,
+  body.gesit-mobile-shell [data-mobile-bottom-nav] > *,
+  body.gesit-mobile-shell .mobile-bottom-nav button,
+  body.gesit-mobile-shell .bottom-nav button,
+  body.gesit-mobile-shell #mobileBottomNav button,
+  body.gesit-mobile-shell .mobile-bottom-nav a,
+  body.gesit-mobile-shell .bottom-nav a,
+  body.gesit-mobile-shell #mobileBottomNav a {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 58px !important;
+    min-height: 58px !important;
+    max-height: 58px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    padding: 4px 2px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 18px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #64748b !important;
+    font-size: 10.5px !important;
+    font-weight: 800 !important;
+    line-height: 1.05 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    box-sizing: border-box !important;
+  }
+
+  body.gesit-mobile-shell .mobile-bottom-nav .is-active,
+  body.gesit-mobile-shell .bottom-nav .is-active,
+  body.gesit-mobile-shell #mobileBottomNav .is-active,
+  body.gesit-mobile-shell .mobile-bottom-nav .active,
+  body.gesit-mobile-shell .bottom-nav .active,
+  body.gesit-mobile-shell #mobileBottomNav .active,
+  body.gesit-mobile-shell .mobile-bottom-nav [aria-current="page"],
+  body.gesit-mobile-shell .bottom-nav [aria-current="page"],
+  body.gesit-mobile-shell #mobileBottomNav [aria-current="page"] {
+    background: rgba(20, 184, 166, 0.12) !important;
+    color: #0f8f86 !important;
+  }
+
+  body.gesit-mobile-shell .mobile-bottom-nav svg,
+  body.gesit-mobile-shell .bottom-nav svg,
+  body.gesit-mobile-shell #mobileBottomNav svg,
+  body.gesit-mobile-shell [data-mobile-bottom-nav] svg,
+  body.gesit-mobile-shell .mobile-bottom-nav img,
+  body.gesit-mobile-shell .bottom-nav img,
+  body.gesit-mobile-shell #mobileBottomNav img,
+  body.gesit-mobile-shell .mobile-bottom-nav .icon,
+  body.gesit-mobile-shell .bottom-nav .icon,
+  body.gesit-mobile-shell #mobileBottomNav .icon,
+  body.gesit-mobile-shell .mobile-bottom-nav i,
+  body.gesit-mobile-shell .bottom-nav i,
+  body.gesit-mobile-shell #mobileBottomNav i {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    max-width: 22px !important;
+    max-height: 22px !important;
+    display: block !important;
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    object-fit: contain !important;
+  }
+
+  body.gesit-mobile-shell .mobile-bottom-nav span,
+  body.gesit-mobile-shell .bottom-nav span,
+  body.gesit-mobile-shell #mobileBottomNav span,
+  body.gesit-mobile-shell [data-mobile-bottom-nav] span {
+    display: block !important;
+    max-width: 100% !important;
+    font-size: 10.5px !important;
+    line-height: 1.05 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  body.gesit-mobile-shell .content,
+  body.gesit-mobile-shell main.content,
+  body.gesit-mobile-shell .main,
+  body.gesit-mobile-shell main.main {
+    padding-bottom: calc(var(--gesit-mobile-bottomnav-h) + env(safe-area-inset-bottom, 0px) + 34px) !important;
+  }
+
+  body.gesit-mobile-shell .notification-center-button,
+  body.gesit-mobile-shell #notificationCenterButton,
+  body.gesit-mobile-shell .notify-center-button,
+  body.gesit-mobile-shell .notify-fab,
+  body.gesit-mobile-shell [data-notification-center] {
+    bottom: calc(var(--gesit-mobile-bottomnav-h) + env(safe-area-inset-bottom, 0px) + 18px) !important;
+    right: 16px !important;
+    z-index: 6100 !important;
+  }
+}
